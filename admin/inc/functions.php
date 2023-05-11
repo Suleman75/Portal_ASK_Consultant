@@ -145,29 +145,6 @@ function deleteData($table="", $data=array(), $where="") {
     //echo $db->last_query();
     
     return $update;
-    // global $db, $dbPrefix, $list;
-    
-    // if ($table == "" || count($data) == 0) {
-    //     return false;
-    // }
-    
-    // $columns = array();
-    // $values = array_values($data);
-    // foreach ($data as $key=>$value) {
-    //     $columns[] = $key . ' = ?';
-    // }
-    // $columns = implode(' AND ', $columns);
-    
-    // $sql = 'DELETE FROM ' . $dbPrefix . $table . ' WHERE ' . $columns;
-    // // echo $sql; 
-    // if ($where != "") {
-    //     $sql .= ' WHERE ' . $where; 
-    // }
-    // $db->query($sql, $values);
-    // //echo $db->last_query();
-    
-    // $insert_id = $db->insert_id();
-    // return $insert_id;
 }
 
 function updateData($table="", $data=array(), $where="") {
@@ -194,6 +171,32 @@ function updateData($table="", $data=array(), $where="") {
     
     return $update;
 }
+
+function disableData($table="", $data=array(), $where="") {
+    global $db, $dbPrefix, $list;
+    
+    if ($table == "" || count($data) == 0) {
+        return false;
+    }
+    
+    $columns = array();
+    $values = array_values($data);
+    foreach ($data as $key=>$value) {
+        $columns[] = $key . ' = ?';
+    }
+    $columns = implode(', ', $columns);
+    
+    $sql = 'UPDATE ' . $dbPrefix . $table . ' SET ' . $columns;
+    
+    if ($where != "") {
+        $sql .= ' WHERE ' . $where; 
+    }
+    $update = $db->query($sql, $values);
+    //echo $db->last_query();
+    
+    return $update;
+}
+
 
 function uploadImage($data=array()) {
     
@@ -834,10 +837,28 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+// function get_all_data()
+// {
+//     global $db, $dbPrefix, $list;
+//     $query="SELECT users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id;";
+//     $result=$db->query($query);
+//     $row=$result->result_array();
+//     fix_arrays($row);
+//     return $row;
+// }
+// function get_single_user_data($id)
+// {
+//     global $db, $dbPrefix, $list;
+//     $query="SELECT users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id where users.id=$id;";
+//     $result=$db->query($query);
+//     $row=$result->result_array();
+//     fix_arrays($row);
+//     return $row;
+// }
 function get_all_data()
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id;";
+    $query="SELECT users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id WHERE users.enabled=1;";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;
@@ -845,7 +866,15 @@ function get_all_data()
 function get_single_user_data($id)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id where users.id=$id;";
+    $query="SELECT users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id where users.id=$id AND users.enabled=1;";
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
+function get_all_follow_up()
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,outcome.outcome_name,actions.action_name from follow_up_info as follow INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.enabled=1;";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;
@@ -853,9 +882,42 @@ function get_single_user_data($id)
 function get_single_follow_up($id)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,outcome.outcome_name,actions.action_name from follow_up_info as follow INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.user_id=$id;";
+    $query="SELECT follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,outcome.outcome_name,actions.action_name from follow_up_info as follow INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.user_id=$id AND follow.enabled=1;";
     $result=$db->query($query);
     $row=$result->result_array();
+    return $row;
+}
+function selectData($table="",$where="", $data=array()) {
+    global $db, $dbPrefix, $list;
+    
+    if ($table == "") {
+        return false;
+    }
+    if($data!=null)
+    {
+        $columns = array();
+        $values = array_values($data);
+        foreach ($data as $key=>$value) {
+            $columns[] = $key . ' = ?';
+        }
+        $columns = implode(', ', $columns);
+    }
+    $sql = 'SELECT * FROM ' . $dbPrefix . $table;
+    
+    if ($where != "") {
+        $sql .= ' WHERE ' . $where; 
+    }
+    if($data==null)
+    {
+        $update = $db->query($sql);
+    }
+    else
+    {
+        $update = $db->query($sql, $values);
+    }
+    
+    //echo $db->last_query();
+    $row=$update->result_array();
     return $row;
 }
 ?>
