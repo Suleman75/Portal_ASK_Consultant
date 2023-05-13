@@ -122,6 +122,18 @@ function insertData($table="", $data=array()) {
     return $insert_id;
 }
 
+function insertDataExtra($table="",$name="")
+{
+    global $db, $dbPrefix, $list;
+    
+    $sql = 'INSERT INTO ' . $dbPrefix . $table . " VALUES (NULL, '$name', 1)";
+    $db->query($sql);
+    //echo $db->last_query();
+    
+    $insert_id = $db->insert_id();
+    return $insert_id;
+}
+
 function deleteData($table="", $data=array(), $where="") {
     global $db, $dbPrefix, $list;
     
