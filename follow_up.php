@@ -40,7 +40,7 @@ if(isset($_POST["follow"]))
                     <td><?php echo $rows["action_name"]  ?></td>
                     <td><?php echo $rows["staff_member"]  ?></td>
                     <?php
-                    echo "<td><form method='POST' action='update_followup.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
+                    echo "<td><form method='POST' action='update_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
                     echo "<td><form method='POST' action='delete_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
 
                     ?>
