@@ -1,8 +1,35 @@
 <?php
 require("header.php");
 require("menu.php");
-$user_data=get_all_data();
-$user_follow_up_data=get_all_follow_up();
+if(!isset($_POST["min"]) || !isset($_POST["max"]))
+{
+    $_POST["min"]=1;
+    $_POST["max"]=1000;
+}
+if(isset($_POST["pagenumber"]))
+{
+    for($i=1;$i<$_POST["pagenumber"];$i++)
+    {
+        $_POST["min"]=$_POST["min"]+1000;
+        $_POST["max"]=$_POST["max"]+1000;
+    }
+    
+}
+$min=$_POST["min"];
+$max=$_POST["max"];
+$user_data=get_all_data($min,$max);
+
+
+
+$max_id=get_max_id("user_info");
+for($i=1;$i<=ceil($max_id/1000);$i++)
+{
+    echo "<form method='POST' style='display:inline;'><input type='submit' name='pagenumber' value=$i></form>&nbsp;&nbsp;&nbsp;";
+}
+?>
+<br><br><br>
+<?php
+
 
 // $i=0;
 // $old_id=0;
@@ -57,7 +84,11 @@ foreach($user_data as $rows)
 
     
 }
-
 echo "</table>";
+
+
+
+
+
 require("footer.php");
 ?>

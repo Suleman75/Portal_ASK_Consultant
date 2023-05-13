@@ -895,6 +895,32 @@ function get_single_follow_up_for_one($id)
     $row=$result->result_array();
     return $row;
 }
+function get_user_row_count($table="")
+{
+    global $db,$dbPrefix,$list;
+    $query="SELECT COUNT(*) as rowcount FROM ".$table;
+    $result=$db->query($query);
+    $row=$result->result_array();
+    $count=0;
+    foreach($row as $rows)
+    {
+        $count=$rows["rowcount"];
+    }
+    return $count;
+}
+function get_max_id($table="")
+{
+    global $db,$dbPrefix,$list;
+    $query="SELECT MAX(Id) as maxid FROM ".$table;
+    $result=$db->query($query);
+    $row=$result->result_array();
+    $count=0;
+    foreach($row as $rows)
+    {
+        $count=$rows["maxid"];
+    }
+    return $count;
+}
 function selectData($table="",$where="", $data=array()) {
     global $db, $dbPrefix, $list;
     
