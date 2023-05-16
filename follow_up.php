@@ -13,7 +13,8 @@ if(isset($_POST["follow"]))
     
     $user_data=get_single_user_data($_POST["follow"]);    
     $user_follow_up_data=get_single_follow_up($_POST["follow"]);
-    
+    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor") || checkPrivilage($_SESSION["user_type"],"case_admin"))
+    {
     ?>
     <label>S.No: </label><?php echo $_POST["follow"]; ?><br>
     <label>Full Name: </label><?php echo $user_data[0]["full_name"]; ?><br>
@@ -25,8 +26,15 @@ if(isset($_POST["follow"]))
             <th>Additional Comments</th>
             <th>Follow Up Action</th>
             <th>Staff Member</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <?php  
+            if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+            { 
+            ?>
+                <th>Update</th>
+                <th>Delete</th>
+            <?php   
+            } 
+            ?>
         </tr>
         <?php
             foreach($user_follow_up_data as $rows)
@@ -40,9 +48,11 @@ if(isset($_POST["follow"]))
                     <td><?php echo $rows["action_name"]  ?></td>
                     <td><?php echo $rows["staff_member"]  ?></td>
                     <?php
-                    echo "<td><form method='POST' action='update_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
-                    echo "<td><form method='POST' action='delete_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
-
+                    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+                    {
+                        echo "<td><form method='POST' action='update_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
+                        echo "<td><form method='POST' action='delete_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
+                    }
                     ?>
                 </tr>
 
@@ -52,6 +62,11 @@ if(isset($_POST["follow"]))
     </table>
 
     <?php
+    }
+    else
+    {
+        header("Location:show_inprocess.php");
+    }
 }
 
 

@@ -34,7 +34,8 @@ for($i=1;$i<=ceil($max_id/1000);$i++)
 ?>
 <br><br><br>
 <?php
-
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor") || checkPrivilage($_SESSION["user_type"],"case_admin"))
+{
 
 // $i=0;
 // $old_id=0;
@@ -53,8 +54,11 @@ echo "<th>Consultant</th>";
 echo "<th>Qualification</th>";
 echo "<th>Comments/Inquiry</th>";
 echo "<th>Expected Budget</th>";
-echo "<th>Update</th>";
-echo "<th>Delete</th>";
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+{
+    echo "<th>Update</th>";
+    echo "<th>Delete</th>";
+}
 echo "<th>Follow Up Data</th>";
 echo "</tr>";
 
@@ -80,8 +84,11 @@ foreach($user_data as $rows)
     echo "<td>".$rows['qualification']."</td>";
     echo "<td>".$rows['comments']."</td>";
     echo "<td>".$rows['budget']."</td>";
-    echo "<td><form method='POST' action='update_user.php'><input type='hidden' name='update' value='".$rows['main_id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
-    echo "<td><form method='POST' action='delete_user.php'><input type='hidden' name='delete' value='".$rows['main_id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
+    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+    {
+        echo "<td><form method='POST' action='update_user.php'><input type='hidden' name='update' value='".$rows['main_id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
+        echo "<td><form method='POST' action='delete_user.php'><input type='hidden' name='delete' value='".$rows['main_id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
+    }
     echo "<td><form method='POST' action='follow_up.php'><input type='hidden' name='follow' value='".$rows['main_id']."'><input type='submit' name='follow_btn' value='Follow Up'></form></td>";
     echo "</tr>";
 
@@ -91,7 +98,11 @@ foreach($user_data as $rows)
 }
 echo "</table>";
 
-
+}
+else
+{
+    header("Location:show_inprocess.php");
+}
 
 
 

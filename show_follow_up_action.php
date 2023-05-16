@@ -4,6 +4,8 @@ require("menu.php");
 ?>
 
 <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
 $outcome=selectData("follow_up_action","enabled=1");
 
 echo "<table>";
@@ -27,6 +29,11 @@ foreach($outcome as $rows)
 
 
 echo "</table>";
+}
+else
+{
+    header("Location:show_inprocess.php");
+}
 ?>
 
 

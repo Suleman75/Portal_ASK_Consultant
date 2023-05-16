@@ -32,14 +32,11 @@ foreach($outcome as $rows)
     echo "<td><form method='POST' action='delete_admin.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
     echo "</tr>";
 }
-
-
-
 echo "</table>";
 }
 else
 {
-    header("Location:show_data.php");
+    header("Location:show_inprocess.php");
 }
 
 

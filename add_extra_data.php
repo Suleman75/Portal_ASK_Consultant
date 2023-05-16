@@ -9,7 +9,11 @@ require("menu.php");
     }
 ?>
 
+<?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
 
+?>
 <form method="POST">
 <label>Enter Value: </label><br>
 <input type="text" name="extra_value"><br>
@@ -27,7 +31,13 @@ require("menu.php");
 </select><br><br>
 <input type="submit" name="submit" value="Save">
 </form>
-
+<?php
+}
+else
+{
+    header("Location:show_inprocess.php");
+}
+?>
 
 
 

@@ -10,6 +10,12 @@ if(isset($_POST["add_done"]))
     header("Location:show_users.php");
 }
 ?>
+
+<?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+
+?>
 <form method="POST">
 <label>User Type:</label><br>
     <select name="user_type">
@@ -23,3 +29,36 @@ if(isset($_POST["add_done"]))
     <label>Full Name:</label><br><input type="text" name="full_name"><br><br>
     <input type="submit" value="Insert" name="add_done">
 </form>
+<?php
+}
+else
+{
+    header("Location:show_inprocess.php");
+}
+
+
+
+?>
+
+
+
+
+
+
+
+<?php
+require("footer.php")
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
