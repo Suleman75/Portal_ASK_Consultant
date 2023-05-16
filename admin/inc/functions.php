@@ -966,4 +966,54 @@ function selectData($table="",$where="", $data=array()) {
     $row=$update->result_array();
     return $row;
 }
+function selectNumRows($table="",$where="", $data=array()) {
+    global $db, $dbPrefix, $list;
+    
+    if ($table == "") {
+        return false;
+    }
+    if($data!=null)
+    {
+        $columns = array();
+        $values = array_values($data);
+        foreach ($data as $key=>$value) {
+            $columns[] = $key . ' = ?';
+        }
+        $columns = implode(', ', $columns);
+    }
+    $sql = 'SELECT * FROM ' . $dbPrefix . $table;
+    
+    if ($where != "") {
+        $sql .= ' WHERE ' . $where; 
+    }
+    if($data==null)
+    {
+        $update = $db->query($sql);
+    }
+    else
+    {
+        $update = $db->query($sql, $values);
+    }
+    
+    return $update->num_rows();
+}
+function checkPrivilage($check="",$required="")
+{
+    if(isset($_SESSION["username"]))
+    {
+        if($check==$required)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        header("Location:login.php");
+    }
+    return false;
+}
 ?>
