@@ -1016,4 +1016,17 @@ function checkPrivilage($check="",$required="")
     }
     return false;
 }
+function checkLoggedin()
+{
+    if(isset($_SESSION["username"]))
+    {
+        return true;
+    }
+    else
+    {
+        header("Location:login.php");
+        return false;
+    }
+    return false;
+}
 ?>
