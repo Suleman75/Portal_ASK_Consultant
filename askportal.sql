@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2023 at 09:12 AM
+-- Generation Time: May 18, 2023 at 01:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,9 +32,23 @@ CREATE TABLE `admin_info` (
   `user_type` text NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
-  `full_name` int(11) NOT NULL,
-  `enabled` int(11) NOT NULL
+  `full_name` text NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_info`
+--
+
+INSERT INTO `admin_info` (`id`, `user_type`, `username`, `password`, `full_name`, `enabled`) VALUES
+(4, 'admin', 'umer', 'ziakhan1198@', 'Umer', 1),
+(5, 'accounts', 'Accounts', 'accounts123', 'Accountant', 1),
+(6, 'case_admin', 'abdullah', 'abdullah123', 'Abdullah', 1),
+(7, 'case_admin', 'jannat', 'jannat123', 'Jannat', 1),
+(8, 'counsellor', 'counsellor1', 'counsellor1', 'Counsellor', 1),
+(9, 'counsellor', 'counsellor2', 'counsellor2', 'Counsellor', 1),
+(10, 'counsellor', 'counsellor3', 'counsellor3', 'Counsellor', 1),
+(11, 'admin', 'zia', 'ziakhan1198@', 'Zia ur Rehman Khan', 1);
 
 -- --------------------------------------------------------
 
@@ -53,7 +67,7 @@ CREATE TABLE `call_outcome` (
 --
 
 INSERT INTO `call_outcome` (`id`, `outcome_name`, `enabled`) VALUES
-(1, 'unattended 1', 1),
+(1, 'unattended 12', 1),
 (2, 'Power off', 1),
 (3, '', 1),
 (4, 'Call attended', 1),
@@ -151,6 +165,130 @@ INSERT INTO `call_outcome` (`id`, `outcome_name`, `enabled`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `completed`
+--
+
+CREATE TABLE `completed` (
+  `id` int(11) NOT NULL,
+  `date` text DEFAULT NULL,
+  `full_name` text DEFAULT NULL,
+  `phone` text DEFAULT NULL,
+  `country` text DEFAULT NULL,
+  `course` text DEFAULT NULL,
+  `university` text DEFAULT NULL,
+  `consultant` text DEFAULT NULL,
+  `brand` text DEFAULT NULL,
+  `intake` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `visa_status` text DEFAULT NULL,
+  `comments` text DEFAULT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `completed`
+--
+
+INSERT INTO `completed` (`id`, `date`, `full_name`, `phone`, `country`, `course`, `university`, `consultant`, `brand`, `intake`, `notes`, `visa_status`, `comments`, `enabled`) VALUES
+(1, 'Mar-19', 'Abdul Rehman Kirmani', 'Pakistan', '', 'Master of Tech', 'Federation university', 'Umer ', 'SI', '30/01/2019', 'CoE Recvd ', 'onshore ', '', 1),
+(2, 'May-19', 'RAJA Kashif ', 'Australia ', '', 'DIploma / Adv Diploma Mgt', 'Aus Ideal College ', 'Umer ', 'Apollo', 'Jul-19', 'CoE Recvd ', 'Visa Granted ', '', 1),
+(3, '16/07/2019', 'Taimoor Iqbal ', '3436721327', '', 'Master enviorenmental sci', 'UNSW', 'Umer', 'ASK-HR', 'Sep-19', 'CoE Recvd ', 'Visa Granted ', '', 1),
+(4, '24/7/20192019', 'Narain Sagar ', '3123841914', '', 'Master Computer Engineering ', 'Salento Uni', 'ED LNK', 'ASK - ED Link', 'Sep-19', 'Admission  confirmed', 'Visa Granted ', '', 1),
+(5, '24/08/2019', 'Syed Ali Naqvi', '', '', 'uoW ', 'Masters', 'Sobiya ', 'Apollo- Geo', '', 'CoE Recvd', 'Visa Granted ', '', 1),
+(6, '', 'Muhammad Salman Khan ', '3437310099', '', 'Masters Advertising ', 'UNSW', 'Umer', 'ASK-HR', 'Feb-20', 'CoE Recvd', 'Visa Granted ', '', 1),
+(7, '30/09/2019', 'Hammad ', 'Australia ', 'Australia', 'Diploma ', 'Dip Mgt', 'Umer', 'ASK Apollo ', 'Oct-19', 'CoE Recvd', 'Visa Granted ', '', 1),
+(8, '30/10/2019', 'Syed Faizan Hasnain', '3422751096', 'Australia', 'MPH', 'UoW', 'Umer', 'ASK-HS', 'Mar-20', 'CoE Recvd', 'Visa Granted ', '', 1),
+(9, '30/10/2019', 'Syed Jawad Ahmed', '', 'Australia', 'MIT', 'KOI', 'Sobiya ', 'GEo-ASK', 'Nov-19', 'CoE Recvd', 'Visa Granted ', '', 1),
+(10, '', 'Tauseef ', '334-3153822', 'Holland', 'Bachlors', 'webster ', 'Asad', 'ASK', 'Jan-20', 'CoE Recvd', 'Visa Granted ', '', 1),
+(11, '27/11/2019', 'Mohammad Ali', '3162974400', 'Australia', 'D2D Engineering', 'ECU College ', 'Umer', 'ASK-HS', 'Mar-20', 'CoE Recvd', 'Visa Granted ', '', 1),
+(12, '28/09/2019', 'Hasan Rafae ', '3333575516', 'UK', 'MS Computer Science ', 'UWS', 'Asad', 'ASK', 'Jan-20', 'CoE Recvd', 'Visa Granted ', '', 1),
+(13, '26/02/2020', 'Azad Darwaish ', '3222549550', 'Turkey', '', '', '', '', '', '', 'Visa Granted ', '', 1),
+(14, '24/10/2020', 'Danish Khan ', '3022556943', 'Italy', 'master ot Technology ', 'BRescia Uni ', 'Umer', 'ASK', 'Sep-20', 'Admission recvd', 'Visa Granted ', '', 1),
+(15, '28/10/2020', 'Naveed Ullah', '3112699377/03003343554/03433655610', 'Italy', 'Master Business Entreprenershup ', 'Cassino Uni', 'Umer', 'ASK', 'Sep-20', 'Admissn recvd', 'Visa Granted ', '', 1),
+(16, '31/12/2020', 'Hasan Rahim Bilgrami', '3341324967', 'UK', 'Masters elec Enginer', 'Glasgow Caledonian Uni ', 'Umer', 'HS', 'Jan 21 intake ', 'CAS recvd', 'Visa Granted ', '', 1),
+(17, '02/02/2021', 'Shahla Shoaib', '03202929385 UAE Whatsapp ', 'Australia', 'MCS', 'UoW', 'Umer', 'HS', 'MArch 21 intake', 'CoE recvd', 'Visa Granted ', '', 1),
+(18, '09/02/2021', 'Humza Rizwan', '', 'UK', 'Msc ', 'Coventry Uni ', 'Umer', 'Appybaord ', 'Jan 21 intake ', 'CAS issued ', 'Visa Granted ', '', 1),
+(19, '09/02/2021', 'Minha ', '', 'Australia', 'Msc ', 'UoW ', 'Geo', 'HS', 'Feb 21 intake ', 'CoE recvd', 'Visa Granted ', '', 1),
+(20, '27/03/2021', 'Rose Merry ', '03040166816/03003755654', 'UK', '', '', 'Umer', '', '', '', 'Visa Granted ', '', 1),
+(21, '19/05/2021', 'Daniyal Masoud ', '3242345717', 'Australia', 'BBA', 'KOI', 'Umer', 'ASK', 'Mar-21', 'CoE Recvd', 'Visa Granted ', '', 1),
+(22, '25/06/2021', 'Arib Siddiqui', '3472365898', 'UK', 'Founaiton ', 'Kingstonn Uni ', 'Umer', '', '', '', 'Visa Granted ', '', 1),
+(499, '02/10/2021', 'Faizan Manzer', '3343751861', 'UK', 'msc', 'Law ', 'Umer', 'AB', 'Sep-21', 'CAS issued ', 'Visa Granted ', '', 1),
+(519, '14/10/2022', 'Syed Usama Zafar ', '3312166167', 'Italy', 'Msc', '', '', 'Italy', 'Sep-22', '', 'Visa Granted', '', 1),
+(547, '25/01/2022', 'Kishore Kumar', '3335939955', 'UK', 'Msc', 'USW', '', 'AB', 'Jan-22', 'CAS issued ', 'Visa Granted ', '', 1),
+(662, '21/06/2022', 'Vinay Kumar', '', 'USA', 'Msc', 'UIC', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(822, '03/01/2023', 'Syed Waqas Haider ', '3142178131', 'Australia ', 'Msc', 'CQU', '', 'HS', 'Feb-23', '', 'Visa Granted', '', 1),
+(1214, '07/09/2022', 'Muhammd Sayem', '', 'UK', 'Msc', 'Northampton', '', 'Northampton', 'Sep-22', '', 'Visa Granted', '', 1),
+(1231, '25/02/2022', 'Ali Gohar Shar', '3337258473', 'Germany', 'Msc', 'GISMA', '', 'GUs', 'Jan-22', '', 'Visa Granted ', '', 1),
+(1543, '05/12/2021', 'Syed Kazim A. Zaidi\n', '3332279506, 03040534853 whatsapp', 'UK', 'Msc', 'Kingston uni ', '', 'AB', 'Jan-22', 'CAS issued ', 'Visa Granted ', '', 1),
+(1590, '13/09/2021', 'syed Ali Hasnain', '3363043153', 'UK', 'MSc', 'Glasgow Caledonian Uni ', 'Umer', 'HS', 'Sep-21', 'CAS issued ', 'Visa Granted ', '', 1),
+(1594, '13/05/2022', 'Arsalan Hussain Zaidi', '3030664474', 'Australia', 'Msc', 'Curtin', '', 'HS', 'Jul-22', '', 'Visa Granted ', '', 1),
+(1645, '', 'Shajih biag ', '3342220787', 'Australia', 'Bachelors', 'KOI', '', 'KOI', '', 'CoE Issued', 'Visa Granted ', '', 1),
+(1648, '01/06/2022', 'Bilal Farooqi', '3433097050', 'UK', 'Msc', 'UoN', '', '', 'May-22', 'CAS ', 'Visa Granted', '', 1),
+(1884, '26/09/2022', 'Abdul Quddose', '', 'UK', 'Msc', 'GCU', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(2112, '17/05/2022', 'Muhammad Shayan Abid (Brigadior Tusawwar) ', '3200500890', 'Australia', 'Bachelors', 'KOI', '', '', 'Jul-22', '', 'Visa Granted ', '', 1),
+(2262, '23/10/2021', 'Abdul Rauf', '', 'Italy', 'Msc', 'Italy ', '', '', 'Sep-21', '', 'Visa Granted ', '', 1),
+(2470, '20/09/2021', 'Faisal Butt', '3312949245', 'Germany', 'MSc', 'GISMA', 'Umer', 'GUS', 'Sep-21', 'Invoice issued', 'Visa Granted ', '', 1),
+(2552, '02/10/2021', 'Shah Alam Saleem', '3342450791 / father 03332470920', 'UK', 'LLB', 'Roehampton', 'Umer', 'ideal', 'Sep-21', 'CAS issued ', 'Visa Granted ', '', 1),
+(2767, '24/12/2021', 'Abbas Ali ', '3362635252', 'Australia', 'Diploma +Elicos', 'AIBT', '', 'AIBT ', 'Nov-21', 'CoE Issued', 'Visa Granted ', '', 1),
+(2788, '', 'Atif Ali', '3462202926', 'Italy', 'Msc', 'Spenzia ', '', 'direct ', 'Sep-21', 'Admission', 'Visa Granted ', '', 1),
+(2832, '20/12/2022', 'Sabika (Mehdi Wife)', ' 347 808 8562', 'UK', 'Master', 'Kingston ', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(2833, '05/01/2022', 'Syed Mehdi Haider', '3322150155', 'Italy', 'Msc', '', '', '', 'Sep-21', '', 'Visa Granted ', '', 1),
+(3012, '06/12/2022', 'Emmad Ahmed', '3462286107', 'Canada', 'Master', 'Memorial Uni NF', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(3126, '20/09/2022', 'Ahad', '', 'Italy', 'Msc', '', '', '', 'Sep-22', '', 'Visa Granted', '', 1),
+(3478, '19/12/2022', 'Saim Adnan', '3370334628', 'Australia', 'Master', 'UoW', '', 'HS', 'Mar-23', '', 'Visa Granted', '', 1),
+(3566, '13/09/2021', 'Syed M Mubashir Javed', '3032290671', 'UK', 'MSc', 'Glasgow Caledonian Uni ', 'Umer', 'HS', 'Sep-21', 'CAS issued ', 'Visa Granted ', '', 1),
+(3591, '15/06/2022', 'Umar Shamim', '3333138334', 'USA', 'Msc', 'California East Bay', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(3840, '31/08/2021', 'Muhammad Ahsan', '3133042448', 'UK', 'MSc', 'HeriotWatt ', 'Umer', 'ASK ', 'Sep-21', 'CAS issued ', 'Visa Granted ', '', 1),
+(4030, '4030', 'Azhar Ali', '3353851181', 'UK', 'Msc', 'uni of Law', '', 'AB', 'Sep-21', 'CAS issued ', 'Visa Granted ', '', 1),
+(4048, '02/02/2022', 'Saad Ahmed Khan', '3313636264', 'UK', 'Msc', 'roehampton', '', 'Ideal', 'Jan-22', 'CAS issued ', 'Visa Granted ', '', 1),
+(4074, '20/01/2022', 'Shariq Hassan', '3313665309', 'UK', 'Msc', 'GCU', '', 'GCU', 'Jan-22', 'CAS issued ', 'Visa Granted ', '', 1),
+(4075, '10/01/2022', 'Heeba Hasan', '3363222291', 'UK', 'Msc', 'GCU', '', 'GCU', 'Jan-22', 'CAS issued ', 'Visa Granted ', '', 1),
+(4140, '20/12/2021', 'Muhammad Talha', '3202081770', 'Italy', 'Msc', 'Politc torino', '', 'AIBT ', 'Sep-21', '', 'Visa Granted ', '', 1),
+(4176, '19/10/2022', 'Akbar Abdullah', '3312260465', 'Italy', 'Msc', '', '', 'Italy', 'Sep-22', '', 'Visa Granted', '', 1),
+(4177, '20/09/2022', 'syed Zain ', '', 'Italy', 'Msc', '', '', '', 'Sep-22', '', 'Visa Granted', '', 1),
+(4276, '06/10/2022', 'Hamza Ahmed', '315 1224787/321 1199373', 'Australia', 'Bachelors', 'UoW', '', 'Hs', 'Mar-23', '', 'Visa Granted', '', 1),
+(4363, '28/06/2022', 'Danial Nawab ', '3352479422', 'UK', 'Msc', 'Kingstonw ', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(4451, '07/01/2023', 'Abdul Hanan', '3070256141', 'UK', 'Msc', 'DMU', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(4928, '12/12/2022', 'Mohammad Usama', '3043200832', 'UK', 'Master', 'Coventry', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(4939, '16/09/2022', 'Muhammad Bilal ', '3436986390', 'Australia', 'Bachelors', 'KOI', '', 'KOI', 'Nov-22', '', 'Visa Granted', '', 1),
+(4962, '15/04/2022', 'Yumna Ahmed', '3363668111', 'US', 'Msc', 'UIUC', '', 'UIUC', 'Aug-22', '', 'Visa Granted ', '', 1),
+(4971, '20/12/2022', 'Syed Jazeel Hassan', '336 2266941', 'Australia', 'Master', 'RMIT', '', 'AB', 'Feb-23', '', 'Visa Granted', '', 1),
+(5220, '15/06/2022', 'Ali Nathani', '3013307908', 'USA', 'Bachelors', 'Southwest mennisota', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(5226, '26/10/2022', 'Faraz Hussain', '3149771660', 'UK', 'Master', 'GCU', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(5288, '22/08/2022', 'Furqan Hashim', '3112163943', 'UK', 'Msc', 'GCU', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(5299, '25/05/2022', 'Komal', '', 'UK', 'Msc', 'UoN', '', '', 'May-22', 'CAS ', 'Visa Granted', '', 1),
+(5308, '20/09/2022', 'Hamza Karamat', '', 'Italy', 'Msc', '', '', '', 'Sep-22', '', 'Visa Granted', '', 1),
+(5327, '20/09/2022', 'Omer Zameer', '', 'Italy', 'Msc', '', '', '', 'Sep-22', '', 'Visa Granted', '', 1),
+(5429, '20/09/2022', 'Hassam Fakhar', '', 'Italy', 'Msc', '', '', '', 'Sep-22', '', 'Visa Granted', '', 1),
+(5707, '07/09/2022', 'Waqar Akhtar Shah', '3332136242', 'UK', 'Msc', 'GCU', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(5716, '30/09/2022', 'Akash', '3322730446', 'UK', 'Msc', 'Essex', '', 'AB', 'Sep-22', '', 'Visa Granted', '', 1),
+(5723, '20/12/2022', 'Shumaila Zulfiqar', '3055977751', 'UK', 'Master', 'Bradford', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(5733, '24/01/2023', 'Muhammad Naveed Usmany', '3368911240', 'UK', 'Msc', 'GCU', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(5762, '12/12/2022', 'Shoaib Ayaz', '333 0254565', 'UK', 'Master', 'GCU', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(5764, '20/10/2022', 'Anish Kumar', '3153567317', 'Australia', 'Bachelors', 'KOI', '', 'KOI', 'Mar-23', '', 'Visa Granted', '', 1),
+(5767, '26/04/2023', 'Syed Rameez Hassan', '3312471352', 'Australia', 'Master', 'Swinburne', '', 'Advuntus', 'Jul-23', '', 'Visa Granted', '', 1),
+(5831, '22/01/2023', 'Marium/Jameel', '3352634735', 'UK', 'Msc', 'Staffordshire ', '', 'Edvoy', 'Jan-23', '', 'Visa Granted', '', 1),
+(6019, '23/12/2022', 'Muhammad Abdul Rehman', '3352635393', 'UK', 'Bachelors', 'BPP', '', 'Ideal', 'Jan-23', '', 'Visa Granted', '', 1),
+(6274, '21/02/2023', 'Avaiz', '336 8561660', 'australia', 'BBA', 'KOI', '', '', 'Mar-23', '', 'Visa Granted', '', 1),
+(6301, '02/01/2023', 'Faria Ali Shaikh', '300 3400682', 'UK', 'Msc', 'GCU', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(6662, '22/03/2023', 'Wamiq baig', '3342228456', 'Australia', 'BIT', 'KOI', '', '', 'Jul-23', '', 'Visa Granted', '', 1),
+(6769, '24/01/2023', 'Ashar Ahmed', '3323399540', 'UK', 'Msc', 'Greenwich', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(6791, '11/01/2023', 'Atif ', '3312277429', 'UK', 'Msc', 'GCU', '', 'AB', 'Jan-23', '', 'Visa Granted', '', 1),
+(7354, '17/04/2023', 'Muhammad Bilal Nizam', '3368285102', 'Australia', 'MIT', 'CQU', '', 'AB', 'Jul-23', '', 'Visa Granted', '', 1),
+(7355, '18/04/2023', 'Aakash Mahajan', '', 'Australia', 'diploma', 'AIBT', '', 'AIBT', 'Mar-23', '', 'Visa Granted', '', 1),
+(7356, '02/01/2023', 'Waqar Wikcy ', '', 'UK', 'Msc', 'UoN', '', 'UoN', 'Jan-23', '', 'Visa Granted', '', 1),
+(7357, '01/09/2022', 'Mostasim Ali ', '3334444373', 'UK', 'Msc', 'Staffordshire', '', 'Edvoy', 'Sep-22', '', 'Visa Granted', '', 1),
+(7366, '19/12/2022', 'Muhammad Abdullah ', '3370397752', 'UK', 'Master', 'Northampton', '', 'Direct', 'Jan-23', '', 'Visa Granted', 'Admission withdrawn after Visa ', 1),
+(7398, '27/03/2023', 'Jiyad Ur rehman', '3009277588', 'USA', 'BSCS', 'Southwest minnesota Uni', '', 'AB', 'Aug-23', '', 'Refused', '', 1),
+(7800, '02/10/2021', 'Hasan Rafae ', '3333575516', 'UK', 'MSc', 'HW', 'Umer', 'HS', 'Sep-21', 'CAS issued ', 'Visa Granted ', '', 1),
+(7801, '05/12/2022', 'Muhammad Imran Awan', '300 2532856', 'UK', 'Master', 'Staffordshire ', '', 'Edvoy', 'Jan-23', '', 'Visa Granted', '', 1),
+(7802, '', 'Shahbaz Hussain Baloch', '', 'Australia', '', 'Swinburne- ECA', '', 'ECA', 'Jul-23', '', '', '', 1),
+(7803, '20/04/2023', 'Mrs Furqan Hashim', '', 'UK ', '', 'Spouse', '', '', '', '', 'Visa Granted', '', 1),
+(7804, 'today', 'Zia-ur-Rehman Khan', '+923355081198', 'Pakistan', '', '', '', '', '', '', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `config`
 --
 
@@ -226,7 +364,8 @@ INSERT INTO `consultant` (`id`, `consultant_name`, `enabled`) VALUES
 (13, 'Admin', 1),
 (14, 'Michelle', 1),
 (15, 'Ali', 1),
-(16, 'Nadir', 1);
+(16, 'Nadir', 1),
+(18, 'zia test', 1);
 
 -- --------------------------------------------------------
 
@@ -282,7 +421,8 @@ INSERT INTO `country` (`id`, `country_name`, `enabled`) VALUES
 (35, 'UK, Aus', 1),
 (36, 'Norway', 1),
 (37, 'NZ', 1),
-(38, ' UK', 1);
+(38, ' UK', 1),
+(39, 'Pakistan', 1);
 
 -- --------------------------------------------------------
 
@@ -442,21 +582,21 @@ CREATE TABLE `follow_up_info` (
 --
 
 INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_date`, `follow_up_outcome_id`, `additional_comment`, `follow_up_action_id`, `staff_member`, `enabled`) VALUES
-(1, 4, 1, 'WILL APPLY ON 2021 W.app sent', 1, '', 1, 'Bisma', 1),
+(1, 4, 1, 'WILL APPLY ON 2021 W.app sent', 6, 'wwwwwwwwwwww', 6, 'Bisma', 1),
 (2, 4, 2, '02/03/2021', 1, 'follow 23/2/2021', 1, 'Mahdia', 1),
 (3, 4, 3, '11/06/2021', 2, 'followED 11/6/2021', 2, 'Iqra', 1),
 (4, 4, 4, '', 3, 'already in germany ', 3, '', 1),
 (5, 4, 5, '', 3, '', 3, '', 1),
 (6, 4, 6, '', 3, '', 3, '', 1),
 (7, 5, 1, 'not attend the call w.app sent', 3, '', 3, 'no follow ', 1),
-(8, 5, 2, '', 3, '', 3, '', 1),
+(8, 5, 2, '5555555', 6, 'yyyyyyy', 2, 'Zia', 1),
 (9, 5, 3, '', 3, '', 3, '', 1),
 (10, 5, 4, '', 3, '', 3, '', 1),
 (11, 5, 5, '', 3, '', 3, '', 1),
 (12, 5, 6, '', 3, '', 3, '', 1),
 (13, 8, 1, 'not atttend the call 18 months work permit msg sent', 3, '', 3, '', 1),
 (14, 8, 2, '', 3, '', 3, '', 1),
-(15, 8, 3, '', 3, '', 3, '', 1),
+(15, 8, 3, 'ffffffff', 4, 'wwwwwwwwwwww', 7, 'Zia', 1),
 (16, 8, 4, '', 3, '', 3, '', 1),
 (17, 8, 5, '', 3, '', 3, '', 1),
 (18, 8, 6, '', 3, '', 3, '', 1),
@@ -1437,10 +1577,10 @@ INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_da
 (993, 312, 3, '', 3, '', 3, '', 1),
 (994, 312, 4, '', 3, '', 3, '', 1),
 (995, 312, 5, '', 3, '', 3, '', 1),
-(996, 312, 6, '', 3, '', 3, '', 1),
-(997, 313, 1, 'facing some issues will apply on 2021', 3, '', 3, '', 1),
-(998, 313, 2, '', 3, '', 3, '', 1);
+(996, 312, 6, '', 3, '', 3, '', 1);
 INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_date`, `follow_up_outcome_id`, `additional_comment`, `follow_up_action_id`, `staff_member`, `enabled`) VALUES
+(997, 313, 1, 'facing some issues will apply on 2021', 3, '', 3, '', 1),
+(998, 313, 2, '', 3, '', 3, '', 1),
 (999, 313, 3, '', 3, '', 3, '', 1),
 (1000, 313, 4, '', 3, '', 3, '', 1),
 (1001, 313, 5, '', 3, '', 3, '', 1),
@@ -2446,9 +2586,9 @@ INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_da
 (2001, 660, 3, '', 3, '', 3, '', 1),
 (2002, 660, 4, '', 3, '', 3, '', 1),
 (2003, 660, 5, '', 3, '', 3, '', 1),
-(2004, 660, 6, '', 3, '', 3, '', 1),
-(2005, 663, 1, 'will apply on 2021', 22, 'no responce', 3, 'Adeel', 1);
+(2004, 660, 6, '', 3, '', 3, '', 1);
 INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_date`, `follow_up_outcome_id`, `additional_comment`, `follow_up_action_id`, `staff_member`, `enabled`) VALUES
+(2005, 663, 1, 'will apply on 2021', 22, 'no responce', 3, 'Adeel', 1),
 (2006, 663, 2, '04/01/2021', 2, 'power off follow 4/1/2021', 1, 'Mahdia', 1),
 (2007, 663, 3, '29/01/2021', 1, 'follow 29/1/2021', 1, 'Bisma', 1),
 (2008, 663, 4, '11/02/2021', 4, 'follow 11/2/2021', 4, 'Bisma', 1),
@@ -26299,7 +26439,7 @@ INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_da
 INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_date`, `follow_up_outcome_id`, `additional_comment`, `follow_up_action_id`, `staff_member`, `enabled`) VALUES
 (25820, 8382, 2, '', 3, '', 3, '', 1),
 (25821, 8382, 3, '', 3, '', 3, '', 1),
-(25822, 8382, 4, '', 3, '', 3, '', 1),
+(25822, 8382, 4, 'no', 4, 'no', 2, 'no', 1),
 (25823, 8382, 5, '', 3, '', 3, '', 1),
 (25824, 8382, 6, '', 3, '', 3, '', 1),
 (25825, 8383, 1, 'followed 27/4/2023 number not showing on whtsapp txt sent ', 1, '', 117, 'Mishaal', 1),
@@ -26493,6 +26633,273 @@ INSERT INTO `inquiry_form_location` (`id`, `inquiry_location`, `enabled`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `in_process`
+--
+
+CREATE TABLE `in_process` (
+  `id` int(11) NOT NULL,
+  `case_assign_date` text DEFAULT NULL,
+  `name` text DEFAULT NULL,
+  `phone` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `destination_1` text DEFAULT NULL,
+  `counselor` text DEFAULT NULL,
+  `comments` text DEFAULT NULL,
+  `fee_status` text DEFAULT NULL,
+  `admin` text DEFAULT NULL,
+  `university_1` text DEFAULT NULL,
+  `outcome_destination_1` text DEFAULT NULL,
+  `case_status_1` text DEFAULT NULL,
+  `destination_2` text DEFAULT NULL,
+  `case_handler_2` text DEFAULT NULL,
+  `university_2` text DEFAULT NULL,
+  `outcome_destination_2` text DEFAULT NULL,
+  `case_status_2` text DEFAULT NULL,
+  `course` text DEFAULT NULL,
+  `intake` text DEFAULT NULL,
+  `missing_docs` text DEFAULT NULL,
+  `final_comments` text DEFAULT NULL,
+  `enabled` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `in_process`
+--
+
+INSERT INTO `in_process` (`id`, `case_assign_date`, `name`, `phone`, `email`, `destination_1`, `counselor`, `comments`, `fee_status`, `admin`, `university_1`, `outcome_destination_1`, `case_status_1`, `destination_2`, `case_handler_2`, `university_2`, `outcome_destination_2`, `case_status_2`, `course`, `intake`, `missing_docs`, `final_comments`, `enabled`) VALUES
+(3, '07/02/2023', 'Habib Ahmed', '', '', 'Australia', '3rd Party', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(17, '08/06/2020', 'Zaka Ur Rehman', '3343273985', '', 'Australia', 'Umer', '', '', 'Umer', 'Deakin Uni ', 'On hold', 'Pending documents before OL', '', '', '', '', '', 'Master Mechaatronics Eng ', 'Sep-20', '', '', 1),
+(208, '14/12/2019', 'Noman Sarwar', '3123461675', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', 'Umer', '', '', '', '', '', '', '', '', 'MIT', 'Mar-20', '', '', 1),
+(320, '03/03/2023', 'Moiz rizwan', '3363871972, 03092896746', '', 'Australia', '', 'AIH', 'Paid 15000', '', 'AIH, APIC, ', '', '', '', '', '', '', '', '', '', '', '', 1),
+(368, '24/03/2021', 'Mohammad Faizan Khan\n\n', '3333134288', '', 'Italy', 'Umer', '', '', 'Umer', 'Italy', 'On hold', 'Awaiting our Fee', '', '', '', '', '', '', '', '', '', 1),
+(505, '02/11/2019', 'Samraz ', '3332343087', '', 'Australia ', 'Umer', '', '', 'Umer', 'UniSa/Uow ', 'Follow up from Student', 'Pending documents after OL', '', '', '', '', '', 'MBA', 'Jul-20', 'Englsh test ', '', 1),
+(538, '21/12/2019', 'Amir Irfan', '3327332163', '', 'Australia/Other', 'Umer', '', 'Fee Paid (Partial)', 'Umer', 'Australia 476 Visa applied ', 'Applied', 'Visa in process', 'Italy', 'Umer', 'Italy ( Messina Uni ) ', 'in-process', 'Visa in process', 'MEM', 'Sep-21', '', 'Need to ask if he wants to only stick with 476 Visa or wish to apply for Italy admission as well? ', 1),
+(549, '23/10/2019', 'Saquib Hesham ', '3463141873', '', 'Australia ', 'Umer', '', '', 'Umer', 'ECU', 'On hold', '', '', '', '', '', '', 'MBA', 'Feb-20', 'pending GTE', '', 1),
+(622, '21/04/2022', 'shehriyar  zaidi', '3323226474', '', 'USA', 'Umer', '', 'Fee Paid (Partial)', 'Admin', 'DePaul', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(664, '30/06/2022', 'Hamza Haider', '3472429158', '', 'UK', 'Umer', '', 'Pay After OL', 'Admin', 'GCU London ', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', 'Jan-23', '', '', 1),
+(666, '01/11/2019', 'Abdul Rehman Umoodi ', '3363080142', '', 'Italy', 'Umer', '', 'Will pay After OL', 'Admin', 'Curtin Australia', '', 'Visa in process', '', '', '', '', '', 'MPM', 'Jul-20', '', '', 1),
+(757, '16/04/2021', 'Tufail ', '3004461643', '', 'UK', 'Umer', '', '', 'Umer', 'Uni of Law ', 'Follow up from Uni', 'Awaiting for OL', '', '', '', '', '', '', 'Sep-22', '', '', 1),
+(989, '06/03/2020', 'Syed Muhamd Hasnain Taqvi', '3116228410', '', 'USA', 'Umer', '', '', 'Soha', 'Texas A&M University - Corpus Christi', 'in-process', 'Pending documents after OL', '', '', '', '', '', 'Master of Science - Computer Science - Professional ', 'Jan-22', 'updated passport', '', 1),
+(1513, '28/03/2020', 'syed Minhaj shahid', '3112120559/03330338685', '', 'Australia', 'Umer', 'Disappeared', '', 'Admin', 'Curtin', 'Follow up from Student', 'Pending documents after OL', '', '', '', '', '', 'MCom ( Supply Chain ) ', 'Jul-20', 'pending GTE finance', '', 1),
+(1514, '28/03/2020', 'syed Minhaj shahid', '3112120559/03330338685', '', 'Australia', 'Umer', 'Disappeared', '', 'Admin', 'Curtin', 'Follow up from Student', 'Pending documents after OL', '', '', '', '', '', 'MCom ( Supply Chain ) ', 'Jul-20', 'pending GTE finance', '', 1),
+(1518, '17/11/2020', 'Kashaf Iqbal', '3152059023', '', 'USA/Other', 'Umer', '', '', 'Umer', 'Westcliff Uni ', 'Applied', 'Visa Refused', '', '', '', '', '', 'MCS', 'Oct-21', '', 'follow 30/8/2021', 1),
+(1704, '18/11/2020', 'Noman Riaz', '3112926975', '', 'USA', 'Umer', '', '', 'Umer', 'iGlobal ', 'Applied', 'Visa in process', '', '', '', '', '', '', '', '', '', 1),
+(1935, '10/06/2020', 'Hussain Abbas ', '3022144140', 'abbas_hussain1993@hotmail.com', 'UK/Other', 'Umer', '', '', 'Umer', 'Italy', 'Applied', 'Awaiting for OL', 'UK', 'Umer', 'Heriot Watt Uni ', 'Applied', 'Awaiting tuition fee', 'Master', '', '', '', 1),
+(2013, '05/01/2021', 'Hammad Anwar', '3412111456', '', 'Australia', 'Umer', '', '', 'Umer', 'AIBT GLOBAL ', 'Applied', 'Visa in process', '', '', '', '', '', '', '', '', '', 1),
+(2343, '06/11/2020', 'Muhammad Suleman', '3321377594', '', 'USA', 'Umer', '', '', 'Umer', 'serching ', 'Searching for options', '', '', '', '', '', '', '', '', '', '', 1),
+(2368, '09/03/2021', 'Farhan Khalique Awan', '03162802341/03436134986', '', 'Italy', 'Umer', '', '', 'Umer', 'Genevo Uni ', 'Pending Docs', 'Pending documents before OL', 'USA', 'Umer', 'cleveland, montana Bay ', 'in-process', '', '', 'jan intake 2022', 'no follow ', '', 1),
+(2409, '12/09/2021', 'Tariq Khan', '3323994445', '', 'UK', 'Umer', '', '', 'Soha', 'UWS, Brighton', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(2451, '30/06/2021', 'Jameel Khan ', '3478547698', '', 'Australia', 'Umer', 'preivous CQU Visa refused, waitng to Re-apply', 'Fee Paid (Partial)', 'Soha', 'CQU', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(2486, '11/10/2022', 'Hamid Khan', '3003564639', '', 'UK', 'Umer', 'for Sept 23 intake', 'Refunded', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(2529, '03/03/2023', 'Adeel ahmed', '3003004440', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(2871, '20/06/2021', 'Sultan ', '3448821657', '', 'Italy', 'Umer', '', '', 'Umer', 'Uni of Pavia ', 'Applied', 'Visa in process', 'Italy', 'Umer', 'Palermo University ', 'Applied', 'OL Issued', '', 'Sep-21', '', 'gathering Visa documents ', 1),
+(2879, '30/12/2020', 'Sana Zehra ', '9647735432932/3222328439', 'sanazehra67@gmail.com', 'UK', 'Umer', '', '', 'Umer', 'Notingham Trent (january 2022 intake)', 'On hold', 'Awaiting for OL', 'UK', 'Umer', 'Brighton university ', 'Applied', 'Awaiting for OL', '', 'Jan-22', '', '', 1),
+(2963, '16/04/2022', 'Asfandyar ', '321111993', '', 'UK', 'Umer', '', '', 'Jannat', 'Uni of Law', '', '', '', '', '', '', '', '', '', '', '', 1),
+(2964, '19/01/2021', 'Asfandyar Khan ', '321111993', '', 'UK', 'Umer', '', '', 'Umer', 'Uni of Law ', 'Searching for options', 'Awaiting for OL', '', '', '', '', '', '', 'Sep-21', 'our Fee', 'follow 7/7/2021', 1),
+(2969, '19/01/2021', 'Saad Iqbal', '3312321846', '', 'Italy', 'Umer', '', '', 'Umer', 'Italy ', 'Applied', 'Visa in process', '', '', '', '', '', '', '', '', '', 1),
+(3066, '14/09/2022', 'Syed Hamza Arif ', '333 2885158', '', 'USA', 'Umer', 'West Right (confirmation in process)', 'Paid 10000', 'Admin', '', 'On hold', '', '', '', '', '', '', '', '', '', '', 1),
+(3292, '19/01/2021', 'Fahad Iqbal', '3182277702', '', 'Italy', 'Umer', '', '', 'Umer', 'Italy ', 'Applied', 'Visa in process', '', '', '', '', '', '', 'Sep-21', 'Our Fee', 'follow 6/7/2021', 1),
+(3303, '29/07/2022', 'Kashif Ali', '3353308607', '', 'UK', 'Umer', 'GCU Glasgow', 'Paid 15000', 'Admin', 'GCU/USW/Coventry', 'Applied', 'Awaiting CoE/CAS/Invoice/i20', '', '', '', '', '', '', '', '', '', 1),
+(3478, '27/03/2023', 'Saim Adnan', '', '', 'Australia', 'Jannat', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(3561, '27/09/2021', 'Akrima ', '3162804692', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', 'Soha', 'greenwich, bradford,bournemouth,teesside', 'On hold', '', '', '', '', '', '', '', '', '', '', 1),
+(3567, '27/09/2021', 'Daniyal Shahid', '3062313281', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', 'Soha', 'greenwich, bradford,bournemouth,teesside', 'On hold', '', '', '', '', '', '', '', '', '', '', 1),
+(3612, '16/02/2021', 'Farrukh  Rasheed ', '3462020106', '', 'Italy', 'Umer', '', '', 'Umer', 'Italy ', 'Applied', 'Visa in process', '', '', '', '', '', '', '', '', '', 1),
+(3681, '11/12/2021', 'Muhammad Haider', '3224588742', '', 'UK', 'Umer', '', '', 'Soha', 'UTS', 'Applied', 'Visa in process', 'UK', 'Soha', '', '', '', '', '', '', '', 1),
+(3704, '03/03/2021', 'Fawad Hasan', '3432689443', '', 'Poland', 'Vishal', '', '', 'Umer', 'Lodz Univrsity of Technology', 'Applied', 'Awaiting for Interview appointment', 'Poland', 'Vishal', 'Poznan University of Technology ', 'Applied', 'Awaiting for Interview appointment', 'Bachelor in International Marketing ', 'Sep-21', '', '', 1),
+(3764, '27/03/2023', 'Inshal', '3353449843', '', 'Italy', 'Umer', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(3841, '10/04/2021', 'Zafar', '3456424143', '', 'Italy', 'Umer', '', '', 'Umer', 'Genova Italy ', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(3890, '06/12/2021', 'Muhammad Ahmed Kazi', '3332629007', '', 'UK', 'Umer', '', 'Unpaid', 'Soha', 'Ulaw(project management)', '', '', '', '', '', '', '', '', '', '', '', 1),
+(3937, '30/06/2021', 'Muhammad Uzair', '3002929044', '', 'UK', 'Umer', '', '', 'Soha', 'Chester university', 'Applied', 'Admission Declined', '', 'Umer', '', '', '', '', '', '', 'student withdrawn admission ', 1),
+(3938, '08/07/2021', 'Naseem Mehdi', '3182858387', '', 'Australia', 'Umer', '', '', 'Soha', 'Flinders Uni ., ', 'Searching for options', '', 'UK', 'Soha', 'Coventry', 'Applied', 'Awaiting for OL', '', '', '', '', 1),
+(3954, '15/03/2021', 'Shahbaz hussain ', '3232000393', '', 'Australia', 'Umer', '', 'Unpaid', 'Umer', 'Italy ', 'Applied', 'Visa in process', '', '', '', '', '', '', '', '', '', 1),
+(3990, '20/05/2021', 'Muhammad Raza', '3320398329', '', 'Russia', 'Umer', '', '', 'Umer', 'National Research University (hgiher School of Economics)', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(4000, '25/03/2021', 'Abdul Khaliq', '3323004332', '', 'Italy', 'Umer', '', '', 'Umer', 'Italy', 'On hold', 'Awaiting our Fee', '', '', '', '', '', '', '', '', '', 1),
+(4040, '02/07/2021', 'Qasim Raza', '3232532749', '', 'USA', 'Umer', 'Awaiting for Updated Bank Statement; Deferred payment', 'Fee Paid (Partial)', 'Nadir', 'Westcliff university; Missouri University', 'Follow up from Student', 'Pending documents before OL', 'USA', 'Soha', 'Ohio  Dominican University', 'Applied', 'Awaiting CoE/CAS/Invoice', ' Master of Business Administration', 'Sep-21', '', '', 1),
+(4070, '26/04/2021', 'Tauseef', '3453105352', '', 'Canada', 'Umer', '', '', 'Umer', 'Fanshaw ', 'On hold', 'OL Issued', '', '', '', '', '', '', 'Jan-22', '', 'Financial diffculties , case on HOLD ', 1),
+(4097, '24/05/2021', 'Sanober Kafeel ', '3228732834', '', 'Europe /Other', 'Umer', '', 'Fee Paid (Partial)', 'Umer', 'Verona Uni Italy ', 'Applied', 'Awaiting for OL', '', '', '', '', '', 'PHD ', '', '', '', 1),
+(4172, '15/06/2021', 'Hammad ', '3362570845', '', 'Italy', 'Umer', '', '', 'Umer', 'Mesina ', 'Applied', 'Awaiting our Fee', '', '', '', '', '', '', '', '', '', 1),
+(4216, '28/06/2021', 'Nisar', '3463131036', '', 'Italy', 'Umer', '', '', 'Soha', 'Uni of PAdua, ', 'Applied', 'Visa in process', 'Italy', 'Soha', 'Palermo University ', 'Applied', 'Awaiting for OL', 'electornics Engieering ', 'Sep-21', '', 'will apply 29/6/2021', 1),
+(4237, '06/12/2021', 'MUZAFARUDIN', '3048442949', '', 'UK', 'Soha', '', 'Fee Paid (Partial)', 'Soha', 'BPP, uni of Law', '', '', '', '', '', '', '', '', '', '', '', 1),
+(4282, '12/07/2021', 'Amna Naqvi', '', '', 'Germany', 'Umer', '', '', 'Soha', 'gisma', 'On hold', 'Pending documents after OL', '', '', '', '', '', '', '', '', '', 1),
+(4332, '26/10/2021', 'Hamdan Jawed', '3353938729', '', 'UK', 'Mahdia', '', '', 'Soha', 'BPP, Roehampton,Uni of Law, Coventry', 'Applied', '', '', '', '', '', '', '', '', '', '', 1),
+(4376, '02/08/2021', 'Adeel siddiqui', '3322256119', '', 'USA', 'Umer', '', 'Fee Paid (Partial)', 'Soha', 'adelphi, Texas A&M, SNHU', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(4398, '10/03/2022', 'Faizan Sayani', '3352088664', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', 'Admin', '', '', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(4399, '01/09/2022', 'Usama', '3442070126', '', 'UK', 'Umer', '', 'Paid 10000', 'Admin', 'Coventry/Teeside/LMU (OL)', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(4419, '18/10/2021', 'Zeeshan Younus', '3122989778', '', 'UK', 'Umer', '', '', 'Soha', 'GCU,Demont fort, Law, Greenwich, Teesside, UWS ', '', '', '', '', '', '', '', '', '', '', '', 1),
+(4440, '08/10/2021', 'Akshay', '3003291444', '', 'USA', 'Umer', '', '', 'Soha', 'Westcliff, Gannon', 'Applied', '', '', '', '', '', '', '', '', '', '', 1),
+(4442, '03/09/2021', 'Ijlal Rizvi', '3312844686', '', 'USA', 'Umer', '', 'Fee Paid (Partial)', 'Soha', 'Michigan Uni, Claremont', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(4444, '25/08/2021', 'Muaaz Ali Siddiqui', '3329262023', '', 'USA', 'Umer', 'UIC', 'Fee Paid (Partial)', 'Soha', 'Trent University', 'Follow up from Student', 'Visa in process', '', '', '', '', '', '', '', '', '', 1),
+(4455, '05/08/2022', 'Hammad ', '3368007570', '', 'UK', 'Umer', 'USW', 'Paid 5000', 'Admin', 'GCU london/USW(OL)/Essex/DMU(OL)/Liverpool hope/Portsmouth/Heriot-Watt', 'Applied', 'Pending documents after OL', '', '', '', '', '', '', '', '', '', 1),
+(4461, '05/08/2022', 'Fahad Ali', '3314055949', '', 'UK', 'Umer', 'USW', 'Paid 5000', 'Admin', 'GCU london/USW(UOL)/Essex/Liverpool hope/DMU(OL)/Heriot-Watt(OL)/Portsmouth', 'Applied', 'Awaiting for Interview outcome', '', '', '', '', '', '', '', '', '', 1),
+(4475, '24/09/2022', 'Muhammad Hamza Ali', '3062120787', '', 'UK', 'Umer', 'Staffordshire', 'Paid 15000', 'Admin', 'DMU/Bournemouth/USW/Staffordshire/Hull/Wolverhampton', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(4539, '05/08/2022', 'Yasir', '3355047392', '', 'UK', 'Umer', 'USW', 'Paid 5000', 'Admin', 'USW(UOL)/GCU/Essex/DMU(OL)/Liverpool hope/Heriot-Watt (OL)/Portsmouth', 'Applied', 'Awaiting for Interview outcome', '', '', '', '', '', '', '', '', '', 1),
+(4582, '08/04/2023', 'Abdullah Umoodi', '3472711496', '', 'UK', 'Jannat', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(4619, '27/10/2021', 'Lakshman Lal', '3327766110', '', 'Australia', 'Mahdia', '', 'Fee Paid (Partial)', 'Soha', 'KOI', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(4804, '27/09/2021', 'Asim shah ', '3481908348', '', 'Australia', 'Umer', '', 'Fee Paid (Partial)', 'Soha', 'AIBT', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(4846, '26/10/2021', 'Hamza', '3212059581', '', 'UK', 'Umer', '', 'Fee Paid (Partial)', 'Soha', 'Stratchclyde uni, Demont Fort, Kingston, Stratchlyde ', 'Applied', '', '', '', '', '', '', '', '', '', '', 1),
+(4863, '04/10/2021', 'Arsalan Tahir ', '3312265330', '', 'Australia', 'Umer', '', 'Fee Paid (Partial)', 'Soha', 'KOI', 'Applied', 'Visa Refused', '', '', '', '', '', '', 'Sep-22', '', '', 1),
+(4909, '16/01/2023', 'Muhammad Adeel Shehzad (Mubashir Coursin)', '3443946261', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(4954, '13/08/2022', 'Salman Saleem', '3222617400', '', 'UK', 'Umer', 'on Hold for Now ', 'Paid 15000', 'Admin', 'GCU/Strathclyde (OL)/Heriot-Watt(OL)', 'On hold', 'Pending documents after OL', '', '', '', '', '', '', '', '', '', 1),
+(5070, '13/01/2022', 'Ahsaan', '3413146976 / 3343257345', '', 'UK', 'Umer', '', 'Unpaid', 'Soha', 'University Of law', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5123, '02/11/2021', 'Farrukh Hussain\n', '3453398272', '', 'UK', 'Mahdia', 'DMU', 'Fee Paid (Partial)', 'Soha', 'DMU', 'Follow up from Student', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5220, '11/11/2021', 'Shaharyar Nathani', '3013307908', '', 'USA', 'Umer', '', 'Pay after Visa', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5222, '10/12/2021', 'Affan khan', '3112527740 / 3182238603', '', 'USA', 'Mahdia', '', 'Fee Paid (Partial)', 'Soha', 'USF, OREGAN, GCU, Southwest Uni', 'On hold', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5286, '29/12/2022', 'Syed Fahad Shah', '3312137745', '', 'Italy', 'Umer', '', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5304, '09/06/2022', 'Wajahat Alam', '3111090175', '', 'UK', 'Umer', 'OL from Uni Arts (recevied)', 'Paid 10000', 'Admin', 'GCU/Southwales/LMU(OL)', 'Follow up from Uni', 'Pending documents after OL', '', '', '', '', '', '', '', '', '', 1),
+(5308, '22/12/2021', 'Hamza Khan', '3082435485', '', 'Italy', 'Umer', '', 'Fee Paid (Full)', 'Umer', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5325, '06/01/2022', 'Muhammad Hasnain', '3482530761', '', 'Italy', 'Umer', '', 'Fee Paid (Full)', 'Umer', 'Italy', 'Applied', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(5385, '12/02/2022', 'Ghulam Mujataba', '3343096618', '', 'Australia', 'Umer', '', 'Fee Paid (Partial)', 'Admin', 'AIBT College ', '', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(5463, '28/03/2022', 'Muhammad Saad Khan', '3043457270', '', 'UK', 'Umer', 'OL received from GCU (English missing)', 'Fee Paid (Partial)', 'Admin', 'GCU(Defferal in process)/Solent ', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5538, '21/03/2022', 'Huzaifa Farooqui', '3142310399 / 3202678597', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', 'Admin', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5559, '12/04/2022', 'Atif Ghani', '3493200844 / 3162245084', '', 'UK', '', '', '', 'Jannat', 'uni of Law and LOndon South Bank Uni GCU', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5568, '24/02/2022', 'Rizwan Khan', '3401932768', '', 'UK', 'Umer', 'OL rec from Law; Essex', 'Fee Paid (Partial)', 'Admin', 'Liverpole hope', 'Applied', 'Pending documents before OL', '', '', '', '', '', '', '', '', '', 1),
+(5585, '01/02/2023', 'Maaz Ahmed (Son of waseem ahmed) ', '3337495091 / 3322627036', '', 'USA', 'Abdullah', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5613, '02/03/2022', 'M Waqar Hassan', '3212151610', '', 'Australia', 'Umer', '', '', 'Admin', 'Murdoch Institute ', 'in-process', '', '', '', '', '', '', 'MIT ', 'Jul-22', 'IELTS , Financials ', '', 1),
+(5624, '02/03/2022', 'Ali Izan Nathani', '3312000874', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', 'Admin', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5652, '16/05/2022', 'Sohaib Arshad', '3343585572', '', 'UK', 'Umer', '', 'Fee Paid (Partial)', 'Admin', 'KOI; Chester; Northampton College; LMU; South Wales; Rahampton', 'Follow up from Uni', 'Awaiting for OL', 'Australia', 'Nadir', '', '', '', '', '', '', '', 1),
+(5663, '22/03/2022', 'Ghulam Mustafa', '3322040879', '', 'UK', 'Umer', '', 'Fee Paid (Partial)', 'Admin', 'Teeside, London South Bank', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5667, '27/06/2022', 'Ahmad Mustafa', '3332349666', '', 'UK', 'Umer', '', 'Pay After OL', 'Admin', '', 'Searching for options', 'Pending documents before OL', '', '', '', '', '', '', '', '', '', 1),
+(5673, '23/02/2023', 'Zohaib', '3212607256', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5678, '16/04/2022', 'Aoj Zia', '3242481426', '', 'Italy', '', '', '', '', 'REfund in process', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5695, '06/01/2023', 'Muhammad Sajjad Kaloo', '3088281391', '', 'UK', 'Umer', 'UK', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5700, '07/01/2023', 'Fatima Binte Ikhlaq (Ansar Iqbal) ', '331 3020960', '', 'UK', 'Jannat', 'Bolton Uni ', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5748, '28/04/2022', 'Syed Safi Ali / wasi', '3363101398', '', 'UK', 'Umer', 'USW', 'Paid 15000', 'Admin', 'DMU/LIverpool hope/Northampton/USW/Coventry', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5756, '28/04/2022', 'Manzar', '333 7221634', '', 'UK', 'Umer', 'OL Rec from Essex, Law', 'Unpaid', 'Admin', 'GCU(OL)/DMU/Heriot-Watt(OL)/Derby/Portsmouth', 'Applied', 'Pending documents after OL', '', '', '', '', '', '', '', '', '', 1),
+(5757, '26/04/2022', 'Rubab Nadeem', '', '', 'Italy', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5815, '26/05/2022', 'Rohaib Ahmed', '3330359759', '', 'UK', 'Umer', '', '', 'Umer', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5816, '26/05/2022', 'Rohaib Ahmed', '3330359759', '', 'UK', 'Umer', '', 'Fee Paid (Partial)', 'Admin', 'Essex(OL)/Coventry', 'Applied', 'Pending documents after OL', '', '', '', '', '', '', '', '', '', 1),
+(5819, '03/09/2022', 'Jahanzaib Jabbar', '3341324816', '', 'UK', 'Umer', 'GCU', 'Paid 15000', 'Admin', 'GCU', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5820, '22/07/2022', 'Paras Qurban', '3457975367', '', 'USA', 'Umer', '(Change of plans)', 'Fee Paid (Partial)', 'Admin', '', 'On hold', '', '', '', '', '', '', '', '', '', '', 1),
+(5824, '02/08/2022', 'Pritvi Raj Soni', '3342546772', '', 'USA', 'Umer', 'USA and CDU', 'Unpaid', 'Admin', 'Murdoch/University of the pacific/Dayton', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5859, '26/05/2022', 'Mhammad Jhanizaib', '3145817455', '', 'USA', 'Umer', '', 'Unpaid', 'Jannat', 'USA', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5908, '09/12/2022', 'Sumiya (Rohaib\'s Frnd)', '3323606379', '', 'UK', 'Umer', 'UK', 'Unpaid', 'Admin', 'ON HOLD', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5923, '02/06/2022', 'Ahsan Raza', '3201066283', '', 'Australia', '', '', 'Pay After OL', 'Admin', 'KOI', 'Follow up from Uni', 'Awaiting for GTE (more documents)', '', '', '', '', '', '', '', '', '', 1),
+(5931, '03/06/2022', 'Muhammad Ahmer Amjad', '3203075575', '', 'Australia', 'Umer', 'confirmation of expierence letter before proceeding for visa', 'Fee Paid (Partial)', 'Nadir', 'AIBT Global', 'Follow up from Student', 'Visa Refused', '', '', '', '', '', '', '', '', '', 1),
+(5932, '11/02/2023', 'Zeeshan Saeed', '345 2399529', '', 'UK', 'Abdullah', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5942, '04/02/2023', 'Sami Ur Rehman', '301 2758828', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(5955, '13/07/2022', 'Muhammd Salman Mansoor', '3223748933', '', 'UK', 'Umer', '', 'Paid 15000', 'Admin', 'Kingston/Brunel/MMU/BCU(OL)/CU London/', 'Applied', 'Pending documents before OL', '', '', '', '', '', '', '', '', '', 1),
+(5969, '16/07/2022', 'Muhammad Daniyal Iqbal', '3322398420', '', 'UK', 'Umer', '', 'Paid 15000', 'Admin', 'GCU/Staffordshire/Liverpool Hope/USW/DMU/BCU/Hull/Derby', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(5998, '14/03/2023', 'Muhammad Muneeb Ur Rehman Khan', '3341873644', '', 'Australia', 'Umer', '', 'Paid 10000', '', 'Griffith, UoW', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6001, '21/07/2022', 'Syed Ali Hussain', '315 4986875', '', 'Australia', 'Umer', 'torrens Uni', 'Paid 15000', 'Admin', 'CQU (OL)/ECU', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(6047, '15/09/2022', 'Saqlain Shafi ', '3082010443', '', 'USA', 'Umer', 'USA', 'Paid 15000', 'Admin', 'Hofstra university', 'Pending Docs', 'Pending documents before OL', '', '', '', '', '', '', '', '', '', 1),
+(6048, '15/09/2022', 'Saqlain Shafi ', '3082010443', '', 'USA', 'Umer', 'USA', 'Paid 15000', 'Admin', 'Hofstra university', 'Pending Docs', 'Pending documents before OL', '', '', '', '', '', '', '', '', '', 1),
+(6049, '15/02/2023', 'Muhammad Huzaifa', '331 2595455', '', 'UK', 'Umer', '', 'Paid 10000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6195, '01/09/2022', 'Muhammad Muneeb Khan Afridi', '333 3572553', '', 'USA', 'Umer', '', 'Paid 15000', 'Admin', 'UIC(applied)/Arizona state university(essay questions missing)', 'Pending Docs', 'Pending documents before OL', '', '', '', '', '', '', '', '', '', 1),
+(6197, '20/07/2022', 'Muhammad Haris', '3213865598 / 3352361876', '', 'UK', 'Umer', 'Need to apply for MSc Physiotherapy after he gives all documents', 'Paid 15000', 'Admin', 'UCLAN(Shortlist)/Coventry', 'Applied', 'Awaiting for Interview outcome', '', '', '', '', '', '', '', '', '', 1),
+(6202, '16/09/2022', 'Turab Ali Kadri', '3103820996 / 3332766639', '', 'USA', 'Umer', '', 'Paid 15000', 'Admin', 'RMIT/De paul/UoN(Unconditional OL)', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(6220, '09/02/2023', 'Fazal', '3218775636', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6225, '21/07/2022', 'Iqra Nazir ', '340 8383292', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6260, '30/08/2022', 'Abdul samad', '3364490904', '', 'Australia', 'Umer', '', 'Unpaid', 'Admin', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6283, '20/04/2023', 'Raja Kumar', '', '', 'Australia', '', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6296, '10/03/2023', 'Khizar Hayat Aslam', '3312909554', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6663, '19/08/2022', 'Muhammad Zeeshan', '3184490675', '', 'UK', 'Umer', '', 'Unpaid', 'Admin', 'DMU/Bournemouth/USW/GCU', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(6763, '08/04/2023', 'Aroosa', '336?2144893', '', 'UK', 'Jannat', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6764, '04/11/2022', 'Haris', '335 2485059', '', 'Australia', 'Umer', 'KOI', 'Paid 10000', 'Admin', 'KOI', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(6766, '01/09/2022', 'Aroosa Munir', '3362144893', '', 'UK', 'Umer', 'Disappeared', 'Unpaid', 'Admin', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6794, '20/09/2022', 'Zain Qureshi', '3095316405', '', 'Australia', 'Umer', 'KOI', 'Pay after Visa', 'Admin', 'KOI', 'Applied', 'Awaiting CoE/CAS/Invoice/i20', '', '', '', '', '', '', '', '', '', 1),
+(6805, '12/01/2023', 'Syed Makhdoom Alam', '3343126761', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6809, '15/09/2022', 'Sameed Ansari', '3111290881', '', 'UK', 'Umer', 'Coventry', 'Paid 15000', 'Admin', 'Swansea/coventry/Int\' college portsmouth/BCU college', 'Pending Docs', 'Pending documents before OL', '', '', '', '', '', '', '', '', '', 1),
+(6810, '15/09/2022', 'Waleed Ansari', '3128166522', '', 'Australia', 'Umer', 'KOI', 'Paid 15000', 'Admin', 'KOI', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(6823, '14/02/2023', 'Azan Khan', '3110066293', '', 'Australia', 'Abdullah', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6824, '14/02/2023', 'Haris Khan', '3330398918', '', 'Australia', 'Abdullah', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6918, '15/11/2022', 'Danial', '3422929867', '', 'Australia', 'Umer', 'KOI', 'Pay after Visa', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6941, '14/11/2022', 'Abdul Rehman', '3472161150', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(6943, '14/11/2022', 'Abdullah ', '3363987545', '', 'Italy', 'Umer', '', 'Fee Paid (Partial)', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7067, '16/11/2022', 'Usman Aslam (  UAE() ', '9.72E+11', '', 'Australia', 'Abdullah', 'UoW, ECU', 'Pay after Visa', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7094, '05/10/2022', 'Shiza', '3441254468', '', 'UK', 'Umer', 'GCU', 'Unpaid', 'Admin', 'USW/Strethclyde/Bournemouth/Bangor/Heriot-Watt', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(7139, '11/10/2022', 'Ismail  (Indus Uni) ', '322 3680847', '', 'UK', 'Umer', 'Ulster, coventry, Hull, BPP', 'Pay After OL', 'Admin', 'UWS, DemonthFord, Birmingham City Uni, ', 'On hold', '', '', '', '', '', '', '', '', '', '', 1),
+(7169, '15/10/2022', 'zaid hafeez', '3308531504', '', 'Australia', 'Umer', 'Phoenix-Curtin', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7177, '25/11/2022', 'Syed Ahmad Mustafa ', '3332349666', '', 'UK', 'Umer', 'Coventry ', 'Pay After OL', 'Admin', 'Pre Masters to Masters', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7196, '10/03/2023', 'Abdul Ahad', '3352496968', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7254, '27/03/2023', 'Sikandar Khan', '3350350495', '', 'Australia', 'Abdullah', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7263, '07/02/2023', 'Rashid Khan', '3441391497', '', 'Australia', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7277, '01/12/2022', 'Saniya', '3432020626', '', 'Italy', 'Umer', 'Italy', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7312, '10/11/2022', 'Alishba', '3452291421', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7337, '16/11/2022', 'Junaid Memon', '3313453903', '', 'UK', 'Umer', 'Coventry ', 'Pay after Visa', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7363, '28/07/2023', 'Waleed Ahsan Khan', '3122636095', '', 'UK', 'Jannat', 'Kazi frend', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7401, '24/01/2023', 'Farnaz Afshan', '3471239737', '', 'UK', 'Umer', '', 'Paid 10000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7411, '25/11/2022', 'Usama Khalil  ( in UAE) ', '971562260236/ 3337872627', '', 'Australia', 'Abdullah', 'UoW, ECU', 'Pay after Visa', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7446, '17/01/2023', 'Osama Fareed', '3172005246', '', 'Italy', 'Umer', '', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7473, '02/12/2022', 'Sabih', '3352151747', '', 'UK', 'Umer', 'UK', 'Unpaid', 'Admin', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7545, '21/12/2022', 'Abdul Samad', '3212162719', '', 'Italy', 'Umer', '', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7622, '23/12/2022', 'Waris', '3197830885', '', 'Australia', '', 'KOI', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7629, '15/12/2022', 'Ahsan Haseeb ', '3122470323', '', 'USA', 'Umer', '', 'Unpaid', 'Admin', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7631, '09/02/2023', 'Javeria', '3158450554', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7639, '21/12/2022', 'Ashhad Hussain', '3345796226', '', 'UK', 'Umer', 'uni of Law', 'Paid 15000', '', 'KOI/UK', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(7643, '09/02/2023', 'Mustafa Khan', '3452185401', '', 'UK', 'Jannat', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7672, '12/01/2023', 'Abeera Altaf', '3111201162', '', 'Italy', 'Umer', '', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7673, '21/12/2022', 'Ghulam Nabi', '3403625286', '', 'Australia', 'Umer', 'KOI', 'Pay After OL', '', 'KOI', 'Applied', 'Awaiting for OL', '', '', '', '', '', '', '', '', '', 1),
+(7705, '10/01/2023', 'Dr Anum  Naseem', '3454884749', '', 'USA', 'Abdullah', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7706, '24/12/2022', 'Kabir Karim', '344 2059935', '', 'Turkey', 'Jannat', '', 'Paid 15000', '', 'Antalya Blim', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7712, '27/12/2022', 'Nirmal Nanji', '3320394172', '', 'UK', 'Umer', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7718, '28/12/2022', 'M Zeeshan', '3462721244', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7724, '29/12/2022', 'Syed ashar', '3333463004', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7733, '16/01/2023', 'Murtaza', '3432978884', '', 'Italy', 'Umer', '', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7745, '27/03/2023', 'Ayesha', '3482404817', '', 'UK', 'Jannat', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7747, '03/01/2023', 'Deepak kumar', '3427719341', '', 'USA', 'Umer', '', 'Paid 10000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7783, '31/01/2023', 'Mohsin Raza', '315 3772084', '', 'Italy', 'Umer', '', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7793, '07/01/2023', 'Ahmer khan ', '3092581247', '', 'Australia', 'Umer', '', 'Paid 15000', '', 'KOI', 'Pending Docs', 'Awaiting for GTE (more documents)', '', '', '', '', '', '', '', '', '', 1),
+(7801, '09/01/2023', 'Abdul Hanan', '3098600090', '', 'Australia', '3rd Party', 'KOI', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7802, '09/01/2023', 'Abdul Rehman', '3117203160', '', 'Australia', '3rd Party', 'KOI', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7805, '09/01/2023', 'Maaz Nizam ', '3202083195', '', 'Australia', 'Abdullah', 'CQU', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7836, '12/01/2023', 'Mazhar Ali', '3026412276', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7897, '25/01/2023', 'shoaib abdullah', '3082524064', '', 'Australia', 'Abdullah', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7905, '13/02/2023', 'Ayaz Gul', '3464538858', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7906, '26/01/2023', 'Faris', ' 310 4987060', '', 'USA', 'Umer', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7919, '27/02/2023', 'Aves', '3072402739', '', 'UK', 'Jannat', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7922, '30/01/2023', 'M abdan farooqui', '3122678685', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7923, '29/04/2023', 'Sajjad Javed', '3360855172', '', 'USA', '', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7930, '04/02/2023', 'Zeeshan Ul Haq', '3002052852', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7945, '10/02/2023', 'Aziz Aun', '3123487267', '', 'Italy', 'Umer', '', 'Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7950, '07/02/2023', 'M Arsalan (Usama Coventry Bro)', '3133950963', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7966, '10/02/2023', 'Adress Jutt', '3127836900', '', 'Australia', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7971, '13/02/2023', 'Shane Karim', '3368212516', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7977, '10/02/2023', 'Saad A rehman', '3053223561', '', 'UK', 'Umer', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(7992, '13/02/2023', 'Ahsan ali ', '3172148137', '', 'USA', 'Abdullah', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8015, '20/03/2023', 'Ibrahim Jamil ', '3122605106', '', 'UK', 'Umer', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8037, '07/03/2023', 'Farhad Khattak', '3353866085', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8057, '04/04/2023', 'Murtaza Qasim', '3333591810', '', 'Australia', 'Abdullah', '', 'Paid 15000', '', 'UoW, Swinburne, La Trobe', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8063, '28/03/2023', 'Taimoor Ali', '3072420707', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8072, '03/03/2023', 'Syed Salman', '3323088968', '', 'Australia', 'Umer', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8094, '14/03/2023', 'Ahmad Palijo ', '3012761836', '', 'Italy', 'Umer', '', ' Initial Paid for EU', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8113, '22/03/2023', 'Zeeshan Ali', '3042651563', '', 'UK', 'Umer', '', 'Paid 15000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8143, '06/03/2023', 'Abdul Ahad', '3338532853', '', 'Australia', 'Umer', '', 'Unpaid', '', 'Swinrbune, Latrobe, Griifith', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8153, '13/03/2023', 'Asifa Naz', '3060280662', '', 'UK', 'Abdullah', '', 'Paid 5000', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8182, '22/03/2023', 'Muhammad Rafay bin Marif	', '3122129000', '', 'Australia', 'Umer', '', 'Unpaid', '', 'KOI', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8190, '28/03/2023', 'Sadaqat Ali', '3313472984', '', 'UK', 'Jannat', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8192, '25/03/2023', 'Usman Ghani chipa', '3048108744', '', 'Australia', 'Jannat', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8200, '25/03/2023', 'Haseeb/Iqra', '3218994175', '', 'UK', 'Jannat', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8221, '10/04/2023', 'Atif Aziz', '3330353906', '', 'UK', 'Jannat', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8275, '20/04/2023', 'Musaddiq Somroo ', '3183030602', '', 'Australia', '', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8311, '20/04/2023', 'Anikiet Kumar', '3053036385', '', 'Australia', '', '', 'Unpaid', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8324, '26/04/2023', 'Tahir Khan Cholyani        ', '334 2888739', '', 'UK', 'Jannat', '', 'Unpaid', '', 'UON', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8325, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8326, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8327, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8328, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8329, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8330, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8331, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8332, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8333, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8334, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8335, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8336, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8337, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8338, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8339, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8340, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8341, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8342, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8343, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8344, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(8345, 'Rejected', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1),
+(9000, '28/03/2020', 'syed Minhaj shahid', '3112120559/03330338685', '', 'Australia', 'Umer', '', '', 'Umer', 'Curtin', 'Follow up from Student', 'Pending documents after OL', '', '', '', '', '', 'MCom ( Supply Chain ) ', 'Jul-20', 'pending GTE finance', '', 1),
+(9001, 'today', 'Zia-ur-Rehman Khan', '+923355081198', 'ziakhan1198@gmail.com', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lead_priority`
 --
 
@@ -26629,9 +27036,9 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`id`, `priority_id`, `apply_date`, `full_name`, `phone_number`, `apply_source_id`, `country_id`, `visited`, `inquiry_form_location_id`, `consultant_id`, `qualification`, `comments`, `budget`, `enabled`) VALUES
-(4, 2, '12/03/2019', 'Fahad Ahmed', '3122067244', 12, 9, 'Visited 1', 8, 15, 'BS in computer science from SSUET want to do MS ', 'Client will send documents', '100000', 1),
+(4, 2, '12/03/2019', 'Fahad Ahmed', '3122067244', 12, 9, 'Visited 1', 2, 15, 'BS in computer science from SSUET want to do MS ', 'Client will send documents', '100000', 1),
 (5, 1, '', 'Syed Hamza Arif', '3332885158', 1, 2, 'Visited 1', 2, 1, 'in 5th semester of industrial electronics ', '', '', 1),
-(8, 1, '', 'Mudasir memon', '3342617613', 2, 2, 'Visited 1', 3, 2, 'Completed his BE in chemical from NED in 2018', '', '', 1),
+(8, 4, '', 'Mudasir memon', '3342617613', 2, 2, 'Visited 1', 3, 2, 'Completed his BE in chemical from NED in 2018', '', '', 1),
 (20, 1, '', 'Zeeshan Ali1', '3222731539', 2, 2, '', 3, 3, 'May I know fee structure for MBA in supply chain management or project management in universities in Ireland?', 'IELTS 6, Be in Metalurgy fromm Ehran uni', '', 1),
 (22, 1, '', 'Muhammad Imran Baloach', '3133400112', 2, 2, '', 3, 3, 'currently in NED mechanical 3rd year, ', 'follow up in 2020 May ', '', 1),
 (24, 1, '', 'Waqas Azeem', '3112774236', 2, 2, 'Visited 1  2/5/2019', 3, 4, 'B.E in industrial from NED with 3.47 CGPA in 2017', 'germany and canada', '', 1),
@@ -30990,6 +31397,12 @@ ALTER TABLE `call_outcome`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `completed`
+--
+ALTER TABLE `completed`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `config`
 --
 ALTER TABLE `config`
@@ -31026,6 +31439,12 @@ ALTER TABLE `inquiry_form_location`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `in_process`
+--
+ALTER TABLE `in_process`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `lead_priority`
 --
 ALTER TABLE `lead_priority`
@@ -31051,13 +31470,19 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `admin_info`
 --
 ALTER TABLE `admin_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `call_outcome`
 --
 ALTER TABLE `call_outcome`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
+-- AUTO_INCREMENT for table `completed`
+--
+ALTER TABLE `completed`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7805;
 
 --
 -- AUTO_INCREMENT for table `config`
@@ -31069,19 +31494,19 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `consultant`
 --
 ALTER TABLE `consultant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `country`
 --
 ALTER TABLE `country`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `follow_up_action`
 --
 ALTER TABLE `follow_up_action`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `follow_up_info`
@@ -31094,6 +31519,12 @@ ALTER TABLE `follow_up_info`
 --
 ALTER TABLE `inquiry_form_location`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `in_process`
+--
+ALTER TABLE `in_process`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9002;
 
 --
 -- AUTO_INCREMENT for table `lead_priority`
