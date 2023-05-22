@@ -994,7 +994,6 @@ function selectNumRows($table="",$where="", $data=array()) {
     {
         $update = $db->query($sql, $values);
     }
-    
     return $update->num_rows();
 }
 function checkPrivilage($check="",$required="")

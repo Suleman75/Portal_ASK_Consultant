@@ -10,7 +10,14 @@ if(isset($_POST["update_done"]))
     $new_data["apply_date"]=$_POST["date"];
     $new_data["priority_id"]=$_POST["priority_id"];
     $new_data["full_name"]=$_POST["name"];
-    $new_data["phone_number"]=$_POST["phone"];
+    if(selectNumRows("user_info","phone_number='".$_POST["phone"]."'")>1)
+    {
+        goto same_phone;
+    }
+    else
+    {
+        $new_data["phone_number"]=$_POST["phone"];
+    }
     $new_data["apply_source_id"]=$_POST["apply_source_id"];
     $new_data["country_id"]=$_POST["country_id"];
     $new_data["visited"]=$_POST["visited"];
@@ -21,6 +28,10 @@ if(isset($_POST["update_done"]))
     $new_data["budget"]=$_POST["budget"];
     updateData("user_info",$new_data,"id=".$_POST["id"]);
     header("Location:show_data.php");
+
+    same_phone:
+    echo "<script>alert('Phone Number Already Exists')</script>";
+    echo "<script>window.location.href = 'show_data.php';</script>";
 }
 if(isset($_POST["update_btn"]))
 {
@@ -28,7 +39,8 @@ if(isset($_POST["update_btn"]))
 }
 else
 {
-    header("Location:show_data.php");
+    echo "<script>alert('Phone Number Already Exists')</script>";
+    echo "<script>window.location.href = 'show_data.php';</script>";
 }
 ?>
 <form method="POST">
