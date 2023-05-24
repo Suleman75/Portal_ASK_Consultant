@@ -33,7 +33,7 @@ foreach($user_data as $rows)
     <input type="hidden" name="user_id" value="<?php echo $_POST["user_id"]    ?>">
     <label>Follow Up Number:</label><br><input type="text" name="follow_up_number" value="<?php echo $rows['follow_up_number'] ?>"><br>
     <label>Follow Up Date:</label><br><input type="text" name="follow_up_date"  value="<?php echo $rows['follow_up_date'] ?>"><br>
-    <label>Lead Priority:</label><br>
+    <label>Follow Up Outcome:</label><br>
     <select name="follow_up_outcome_id">
         <?php
             foreach($outcome as $rows1)

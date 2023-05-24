@@ -883,6 +883,14 @@ function get_single_user_data($id)
     $row=$result->result_array();
     return $row;
 }
+function get_single_inprocess($id)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT * FROM in_process where id=$id AND `enabled`=1;";
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
 function get_all_follow_up()
 {
     global $db, $dbPrefix, $list;
@@ -899,10 +907,26 @@ function get_single_follow_up($id)
     $row=$result->result_array();
     return $row;
 }
+function get_single_follow_up_inprocess($id)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT * from follow_up_inprocess WHERE user_id=$id AND enabled=1;";
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
 function get_single_follow_up_for_one($id)
 {
     global $db, $dbPrefix, $list;
     $query="SELECT follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,outcome.outcome_name,actions.action_name from follow_up_info as follow INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.id=$id AND follow.enabled=1;";
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
+function get_single_follow_up_for_one_inprocess($id)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT * from follow_up_inprocess WHERE id=$id AND `enabled`=1;";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;

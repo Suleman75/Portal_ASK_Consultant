@@ -37,6 +37,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 echo "<th>Update</th>";
 echo "<th>Delete</th>";
 }
+echo "<th>Follow Up Data</th>";
 echo "</tr>";
 
 foreach($outcome as $rows)
@@ -69,6 +70,7 @@ foreach($outcome as $rows)
     echo "<td><form method='POST' action='update_inproces.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
     echo "<td><form method='POST' action='delete_inproces.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
     }
+    echo "<td><form method='POST' action='follow_up_inprocess.php'><input type='hidden' name='follow' value='".$rows['id']."'><input type='submit' name='follow_btn' value='Follow Up'></form></td>";
     echo "</tr>";
 }
 
