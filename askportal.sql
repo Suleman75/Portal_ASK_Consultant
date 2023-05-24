@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2023 at 01:02 PM
+-- Generation Time: May 24, 2023 at 12:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -423,6 +423,18 @@ INSERT INTO `country` (`id`, `country_name`, `enabled`) VALUES
 (37, 'NZ', 1),
 (38, ' UK', 1),
 (39, 'Pakistan', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `destination`
+--
+
+CREATE TABLE `destination` (
+  `id` int(11) NOT NULL,
+  `destination_name` text NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -26602,6 +26614,31 @@ INSERT INTO `follow_up_info` (`id`, `user_id`, `follow_up_number`, `follow_up_da
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `follow_up_inprocess`
+--
+
+CREATE TABLE `follow_up_inprocess` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `follow_up_number` int(11) NOT NULL,
+  `follow_up_date` text DEFAULT NULL,
+  `follow_up_outcome` text DEFAULT NULL,
+  `additional_comment` text DEFAULT NULL,
+  `follow_up_action` text DEFAULT NULL,
+  `staff_member` text NOT NULL DEFAULT '',
+  `enabled` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `follow_up_inprocess`
+--
+
+INSERT INTO `follow_up_inprocess` (`id`, `user_id`, `follow_up_number`, `follow_up_date`, `follow_up_outcome`, `additional_comment`, `follow_up_action`, `staff_member`, `enabled`) VALUES
+(1, 3, 1, 'today1', 'nothing', 'Test by zia', 'nothing', 'zia', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inquiry_form_location`
 --
 
@@ -31421,6 +31458,12 @@ ALTER TABLE `country`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `destination`
+--
+ALTER TABLE `destination`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `follow_up_action`
 --
 ALTER TABLE `follow_up_action`
@@ -31430,6 +31473,12 @@ ALTER TABLE `follow_up_action`
 -- Indexes for table `follow_up_info`
 --
 ALTER TABLE `follow_up_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `follow_up_inprocess`
+--
+ALTER TABLE `follow_up_inprocess`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -31503,6 +31552,12 @@ ALTER TABLE `country`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
+-- AUTO_INCREMENT for table `destination`
+--
+ALTER TABLE `destination`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `follow_up_action`
 --
 ALTER TABLE `follow_up_action`
@@ -31513,6 +31568,12 @@ ALTER TABLE `follow_up_action`
 --
 ALTER TABLE `follow_up_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25981;
+
+--
+-- AUTO_INCREMENT for table `follow_up_inprocess`
+--
+ALTER TABLE `follow_up_inprocess`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25982;
 
 --
 -- AUTO_INCREMENT for table `inquiry_form_location`
@@ -31542,7 +31603,7 @@ ALTER TABLE `source`
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8412;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8413;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
