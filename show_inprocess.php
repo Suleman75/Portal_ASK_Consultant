@@ -6,7 +6,7 @@ require("menu.php");
 <?php
 if(checkLoggedin())
 {
-$outcome=selectData("in_process","enabled=1");
+$outcome=get_follow_up_data();
 
 echo "<table>";
 echo "<tr>";
@@ -48,15 +48,15 @@ foreach($outcome as $rows)
     echo "<td>".$rows['name']."</td>";
     echo "<td>".$rows['phone']."</td>";
     echo "<td>".$rows['email']."</td>";
-    echo "<td>".$rows['destination_1']."</td>";
-    echo "<td>".$rows['counselor']."</td>";
+    echo "<td>".$rows['dest_1']."</td>";
+    echo "<td>".$rows['consultant_name']."</td>";
     echo "<td>".$rows['comments']."</td>";
-    echo "<td>".$rows['fee_status']."</td>";
+    echo "<td>".$rows['status_name']."</td>";
     echo "<td>".$rows['admin']."</td>";
     echo "<td>".$rows['university_1']."</td>";
     echo "<td>".$rows['outcome_destination_1']."</td>";
     echo "<td>".$rows['case_status_1']."</td>";
-    echo "<td>".$rows['destination_2']."</td>";
+    echo "<td>".$rows['dest_2']."</td>";
     echo "<td>".$rows['case_handler_2']."</td>";
     echo "<td>".$rows['university_2']."</td>";
     echo "<td>".$rows['outcome_destination_2']."</td>";

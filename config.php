@@ -8,7 +8,7 @@ session_start();
 date_default_timezone_set('Europe/London');
 // date_default_timezone_set("Asia/Karachi");
 
-define("SUBDIRECTORY", "ASK_Consultant_Portal/Portal_ASK_Consultant/");
+define("SUBDIRECTORY", "Portal_ASK_Consultant/");
 
 // define("SITE_URL", "https://77.68.4.68/plesk-site-preview/www.pitchrmt.com/http/77.68.4.68/" . SUBDIRECTORY);
 // define("ADMIN_URL", "https://77.68.4.68/plesk-site-preview/www.pitchrmt.com/http/77.68.4.68/" . SUBDIRECTORY . "admin/");
