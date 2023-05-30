@@ -939,6 +939,22 @@ function get_follow_up_data()
     $row=$result->result_array();
     return $row;
 }
+function get_single_follow_up_data($id=0)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
+    ,des1.destination_name as dest_1,cou1.consultant_name,in_process.comments,fee1.status_name,in_process.admin,in_process.university_1,in_process.outcome_destination_1,in_process.case_status_1,des2.destination_name as dest_2,
+    in_process.case_handler_2,in_process.intake,in_process.university_2,in_process.outcome_destination_2,in_process.case_status_2,in_process.course,in_process.case_handler_2,in_process.missing_docs,in_process.final_comments 
+    FROM in_process as in_process 
+    INNER JOIN destination as des1 ON in_process.destination_1=des1.id
+    INNER JOIN destination as des2 ON in_process.destination_2=des2.id
+    INNER JOIN consultant as cou1 ON in_process.counselor=cou1.id 
+    INNER JOIN fee_status as fee1 ON in_process.fee_status=fee1.id WHERE in_process.enabled=1 AND in_process.id=$id;";
+    // echo $query;
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
 function get_single_follow_up_for_one_inprocess($id)
 {
     global $db, $dbPrefix, $list;
