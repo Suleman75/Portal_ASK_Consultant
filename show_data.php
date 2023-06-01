@@ -24,6 +24,22 @@ $user_data=get_all_data($min,$max);
 <label>Search: </label><br><input type="text" name="user_id"><br><br>
 <input type="submit" value="Search"><br>
 </form>
+
+<form method="POST" action="search_result.php">
+<label>Search With Follow Up: </label><br>
+<select name="type">
+  <option value="Follow">Follow</option>
+  <option value="Followed">Followed</option>
+  <option value="Visit">Visit</option>
+  <option value="Visited">Visited </option>
+  <option value="No Follow">No Follow</option>
+</select><br>
+<br><input type="date" name="date"><br><br>
+
+<input type="submit" value="Search With Follow Up"><br>
+</form>
+
+
 <?php
 
 $max_id=get_max_id("user_info");
