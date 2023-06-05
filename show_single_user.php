@@ -1,6 +1,7 @@
 <?php
-require("header.php");
+$page_name="Show Single Student";
 require("menu.php");
+require("header.php");
 ?>
 <form method="POST" action="show_single_user.php">
 <label>Search: </label><br><input type="text" name="user_id"><br><br>

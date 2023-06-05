@@ -1,9 +1,11 @@
 <?php
-require("header.php");
+$page_name="Show Consultants";
 require("menu.php");
+require("header.php");
 ?>
 
 <?php
+
 if(checkPrivilage($_SESSION["user_type"],"admin"))
 {
 $outcome=selectData("consultant","enabled=1");
@@ -43,6 +45,6 @@ else
 
 
 <?php
-require("footer.php")
+require("footer.php");
 
 ?>

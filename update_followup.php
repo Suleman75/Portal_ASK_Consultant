@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Follow Up";
+require("menu.php");
+require("header.php");
 $outcome=selectData("call_outcome","enabled=1");
 $action=selectData("follow_up_action","enabled=1");
 if(isset($_POST["update_done"]))
@@ -88,3 +90,8 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+<?php
+require("footer.php");
+
+?>

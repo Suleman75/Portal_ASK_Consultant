@@ -1,6 +1,7 @@
 <?php
-require("header.php");
+$page_name="Add Extra Data";
 require("menu.php");
+require("header.php");
 ?>
 <?php
     if(isset($_POST["extras"]))

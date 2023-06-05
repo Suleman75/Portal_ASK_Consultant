@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Add Inprocess Case";
+require("menu.php");
+require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["case_assign_date"]=$_POST["case_assign_date"];
@@ -63,3 +65,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
     }
 ?>
 </form>
+<?php
+require("footer.php");
+
+?>

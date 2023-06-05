@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Add Student";
+require("menu.php");
+require("header.php");
 $country=selectData("country","enabled=1");
 $source=selectData("source","enabled=1");
 $leads=selectData("lead_priority","enabled=1");
@@ -130,3 +132,7 @@ else
 
 ?>
 </form>
+
+<?php
+require("footer.php");
+?>

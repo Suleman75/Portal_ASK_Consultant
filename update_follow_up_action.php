@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Follow Up Actions";
+require("menu.php");
+require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["action_name"]=$_POST["action_name"];
@@ -30,3 +32,8 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+
+<?php
+require("footer.php");
+?>

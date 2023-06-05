@@ -1,4 +1,6 @@
 <?php
+$page_name="Add Admins";
+require("menu.php");
 require("header.php");
 if(isset($_POST["add_done"]))
 {

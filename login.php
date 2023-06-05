@@ -1,5 +1,8 @@
 <?php
+$page_name="Login";
+require("menu.php");
 require("header.php");
+
 if(isset($_SESSION["username"]))
 {
     if($_SESSION["user_type"]=="counsellor" || $_SESSION["user_type"]=="admin")

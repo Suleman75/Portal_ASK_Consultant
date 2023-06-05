@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Admins";
+require("menu.php");
+require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["user_type"]=$_POST["user_type"];
@@ -105,3 +107,7 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+<?php
+require("footer.php");
+?>

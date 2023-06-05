@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Student";
+require("menu.php");
+require("header.php");
 $country=selectData("country","enabled=1");
 $source=selectData("source","enabled=1");
 $leads=selectData("lead_priority","enabled=1");
@@ -174,3 +176,8 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+<?php
+
+require("footer.php");
+?>

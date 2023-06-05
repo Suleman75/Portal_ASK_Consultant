@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Inquiry Locations";
+require("menu.php");
+require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["inquiry_location"]=$_POST["inquiry_location"];
@@ -30,3 +32,8 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+
+<?php
+require("footer.php");
+?>

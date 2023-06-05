@@ -1,8 +1,9 @@
 <?php
-require("header.php");
+$page_name="Search Result";
 require("menu.php");
+require("header.php");
 
-$user_data=get_all_data_follow();
+
 
 ?>
 <form method="POST" action="show_single_user.php">
@@ -13,10 +14,10 @@ $user_data=get_all_data_follow();
 <form method="POST" action="search_result.php">
 <label>Search With Follow Up: </label><br>
 <select name="type">
-  <option value="Follow">Follow</option>
-  <option value="Followed">Followed</option>
-  <option value="Visit">Visit</option>
-  <option value="Visited">Visited</option>
+  <option selected="selected" value="follow">Follow</option>
+  <option value="followed">Followed</option>
+  <option value="visit">Visit</option>
+  <option value="visited">Visited</option>
   <option value="No Follow">No Follow</option>
 </select><br>
 <br><input type="date" name="date"><br><br>
@@ -37,8 +38,14 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 {
 if(isset($_POST["type"]))
 {
-    // echo $_POST["date"]."<br>";
-    $_POST["date"] = date("j/n/Y", strtotime($_POST["date"]));
+    $_SESSION["type"]=$_POST["type"];
+    $_SESSION["date"]=$_POST["date"];
+}
+if(isset($_SESSION["type"]))
+{
+    
+    $_SESSION["date"] = date("n/j/Y", strtotime($_SESSION["date"]));
+    $user_data=get_all_data_follow(strtolower($_SESSION["type"]),$_SESSION["date"]);
     echo "<table>";
     echo "<tr>";
     echo "<th>S.No</th>";
@@ -63,52 +70,31 @@ if(isset($_POST["type"]))
     echo "</tr>";
     foreach($user_data as $rows)
     {
-        $dates=explode(" ",$rows["follow_up_date"]);
-        if($dates[0]==$_POST["type"] && $dates[1]==$_POST["date"])
+        echo "<tr>";
+        echo "<td>".$rows['main_id']."</td>";
+        echo "<td>".$rows['priority_name']."</td>";
+        echo "<td style='width:10px !important;'>".$rows['apply_date']."</td>";
+        echo "<td>".$rows['full_name']."</td>";
+        echo "<td>".$rows['phone_number']."</td>";
+        echo "<td>".$rows['source_name']."</td>";
+        echo "<td>".$rows['country_name']."</td>";
+        echo "<td>".$rows['visited']."</td>";
+        echo "<td>".$rows['inquiry_location']."</td>";
+        echo "<td>".$rows['consultant_name']."</td>";
+        echo "<td>".$rows['qualification']."</td>";
+        echo "<td>".$rows['comments']."</td>";
+        echo "<td>".$rows['budget']."</td>";
+        if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
         {
-            
-            
-            
-            
-            
-            foreach($user_data as $rows)
-            {
-                // echo $i."-".$rows["full_name"]."<br>";
-                // $i++;
-            
-                
-            
-                echo "<tr>";
-                echo "<td>".$rows['main_id']."</td>";
-                echo "<td>".$rows['priority_name']."</td>";
-                echo "<td style='width:10px !important;'>".$rows['apply_date']."</td>";
-                echo "<td>".$rows['full_name']."</td>";
-                echo "<td>".$rows['phone_number']."</td>";
-                echo "<td>".$rows['source_name']."</td>";
-                echo "<td>".$rows['country_name']."</td>";
-                echo "<td>".$rows['visited']."</td>";
-                echo "<td>".$rows['inquiry_location']."</td>";
-                echo "<td>".$rows['consultant_name']."</td>";
-                echo "<td>".$rows['qualification']."</td>";
-                echo "<td>".$rows['comments']."</td>";
-                echo "<td>".$rows['budget']."</td>";
-                if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
-                {
-                    echo "<td><form method='POST' action='update_user.php'><input type='hidden' name='update' value='".$rows['main_id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
-                    echo "<td><form method='POST' action='delete_user.php'><input type='hidden' name='delete' value='".$rows['main_id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
-                }
-                echo "<td><form method='POST' action='follow_up.php'><input type='hidden' name='follow' value='".$rows['main_id']."'><input type='submit' name='follow_btn' value='Follow Up'></form></td>";
-                echo "</tr>";
-            
-            
-            
-                
-            }
-            echo "</table>";
-            
+            echo "<td><form method='POST' action='update_user.php'><input type='hidden' name='update' value='".$rows['main_id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
+            echo "<td><form method='POST' action='delete_user.php'><input type='hidden' name='delete' value='".$rows['main_id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
         }
+        echo "<td><form method='POST' action='follow_up.php'><input type='hidden' name='follow' value='".$rows['main_id']."'><input type='submit' name='follow_btn' value='Follow Up'></form></td>";
+        echo "</tr>";
     }
+    echo "</table>";
 }
+
 // $i=0;
 // $old_id=0;
 

@@ -1,6 +1,7 @@
 <?php
-require("header.php");
+$page_name="Completed Case";
 require("menu.php");
+require("header.php");
 ?>
 
 <?php

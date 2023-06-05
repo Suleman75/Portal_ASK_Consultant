@@ -4,6 +4,9 @@ require("menu.php");
 ?>
 
 <?php
+$page_name="Show Countries";
+require("menu.php");
+require("header.php");
 if(checkPrivilage($_SESSION["user_type"],"admin"))
 {
 $outcome=selectData("country","enabled=1");
@@ -43,6 +46,6 @@ else
 
 
 <?php
-require("footer.php")
+require("footer.php");
 
 ?>

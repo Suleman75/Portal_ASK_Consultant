@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Inprocess";
+require("menu.php");
+require("header.php");
 
 $desti=selectData("destination","enabled=1");
 $consu=selectData("consultant","enabled=1");
@@ -169,3 +171,8 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+
+<?php
+require("footer.php");
+?>

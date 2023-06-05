@@ -1,6 +1,7 @@
 <?php
-require("header.php");
+$page_name="Show Inquiry Locations";
 require("menu.php");
+require("header.php");
 ?>
 
 <?php
@@ -43,6 +44,6 @@ else
 
 
 <?php
-require("footer.php")
+require("footer.php");
 
 ?>

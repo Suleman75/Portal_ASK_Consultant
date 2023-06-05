@@ -1,4 +1,6 @@
 <?php
+$page_name="Student - Follow Up";
+require("menu.php");
 require("header.php");
 
 

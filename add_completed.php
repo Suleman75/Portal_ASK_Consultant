@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Add Completed Case";
+require("menu.php");
+require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["date"]=$_POST["date"];
@@ -43,3 +45,6 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 
 ?>
 </form>
+<?php
+require("footer.php");
+?>

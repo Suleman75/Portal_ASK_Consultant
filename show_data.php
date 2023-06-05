@@ -1,10 +1,12 @@
 <?php
-require("header.php");
+$page_name="Show Users";
 require("menu.php");
+require("header.php");
+
 if(!isset($_POST["min"]) || !isset($_POST["max"]))
 {
-    $_POST["min"]=1;
-    $_POST["max"]=1000;
+    $_POST["min"]=1000;
+    $_POST["max"]=2000;
 }
 if(isset($_POST["pagenumber"]))
 {
@@ -15,8 +17,12 @@ if(isset($_POST["pagenumber"]))
     }
     
 }
-$min=$_POST["min"];
-$max=$_POST["max"];
+if(isset($_POST["min"]) || isset($_POST["max"]))
+{
+    $min=$_POST["min"];
+    $max=$_POST["max"];
+}
+
 $user_data=get_all_data($min,$max);
 
 ?>
@@ -28,10 +34,10 @@ $user_data=get_all_data($min,$max);
 <form method="POST" action="search_result.php">
 <label>Search With Follow Up: </label><br>
 <select name="type">
-  <option value="Follow">Follow</option>
-  <option value="Followed">Followed</option>
-  <option value="Visit">Visit</option>
-  <option value="Visited">Visited </option>
+  <option selected="selected" value="follow">Follow</option>
+  <option value="followed">Followed</option>
+  <option value="visit">Visit</option>
+  <option value="visited">Visited </option>
   <option value="No Follow">No Follow</option>
 </select><br>
 <br><input type="date" name="date"><br><br>

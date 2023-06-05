@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Outcome";
+require("menu.php");
+require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["outcome_name"]=$_POST["outcome_name"];
@@ -30,3 +32,8 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+<?php
+require("footer.php");
+
+?>

@@ -1,5 +1,7 @@
 <?php
-require("config.php");
+$page_name="Update Priorities";
+require("menu.php");
+require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["priority_name"]=$_POST["priority_name"];
@@ -30,3 +32,7 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+
+<?php
+require("footer.php");
+?>
