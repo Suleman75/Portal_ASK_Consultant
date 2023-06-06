@@ -18,42 +18,54 @@ if(isset($_POST["follow"]))
     if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor") || checkPrivilage($_SESSION["user_type"],"case_admin"))
     {
     ?>
+    <div class="container-fluid py-4">
+      <div class="row">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Leads Follow Up</h6>
+            </div>
     <label>S.No: </label><?php echo $_POST["follow"]; ?><br>
     <label>Full Name: </label><?php echo $user_data[0]["full_name"]; ?><br>
-    <table>
-        <tr>
-            <th>Follow Up Number</th>
-            <th>Follow Up Date</th>
-            <th>Follow Up Outcome</th>
-            <th>Additional Comments</th>
-            <th>Follow Up Action</th>
-            <th>Staff Member</th>
+    <form method='POST' action='add_followup_leads.php'>
+        <input type='hidden' name='update_btn' value='<?php echo $_POST["follow"];  ?>'>
+        <label>Add Follow Up:</label><input type='submit' name='follow_btn' value='Follow Up' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'>
+    </form>
+            <div class='card-body px-0 pt-0 pb-2'>
+<div class='table-responsive p-0'><table class='table align-items-center mb-0'>
+<thead><tr>
+            <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Follow Up Number</th>
+            <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Follow Up Date</th>
+            <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Follow Up Outcome</th>
+            <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Additional Comments</th>
+            <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Follow Up Action</th>
+            <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Staff Member</th>
             <?php  
             if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
             { 
             ?>
-                <th>Update</th>
-                <th>Delete</th>
+                <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Update</th>
+                <th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Delete</th>
             <?php   
             } 
             ?>
         </tr>
+        <tbody>
         <?php
             foreach($user_follow_up_data as $rows)
             {
                 ?>
                 <tr>
-                    <td><?php echo $rows["follow_up_number"]  ?></td>
-                    <td><?php echo $rows["follow_up_date"]  ?></td>
-                    <td><?php echo $rows["outcome_name"]  ?></td>
-                    <td><?php echo $rows["additional_comment"]  ?></td>
-                    <td><?php echo $rows["action_name"]  ?></td>
-                    <td><?php echo $rows["staff_member"]  ?></td>
+                    <td class='text-center text-secondary text-xs font-weight-bold'><?php echo $rows["follow_up_number"]  ?></td>
+                    <td class='text-center text-secondary text-xs font-weight-bold'><?php echo $rows["follow_up_date"]  ?></td>
+                    <td class='text-center text-secondary text-xs font-weight-bold'><?php echo $rows["outcome_name"]  ?></td>
+                    <td class='text-center text-secondary text-xs font-weight-bold'><?php echo $rows["additional_comment"]  ?></td>
+                    <td class='text-center text-secondary text-xs font-weight-bold'><?php echo $rows["action_name"]  ?></td>
+                    <td class='text-center text-secondary text-xs font-weight-bold'><?php echo $rows["staff_member"]  ?></td>
                     <?php
                     if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
                     {
-                        echo "<td><form method='POST' action='update_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
-                        echo "<td><form method='POST' action='delete_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
+                        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+                        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
                     }
                     ?>
                 </tr>
@@ -61,7 +73,7 @@ if(isset($_POST["follow"]))
                 <?php
             }
         ?>
-    </table>
+    </tbody></table></div></div></div></div></div></div>
 
     <?php
     }
