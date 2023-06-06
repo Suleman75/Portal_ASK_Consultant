@@ -42,73 +42,265 @@
     <hr class="horizontal dark mt-0">
     <div class="  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
+
+      <?php
+    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+    {
+      ?>
         <li class="nav-item">
-          <a class="nav-link " href="pages/dashboard.html">
+          <a class="nav-link " href="show_data.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
+            <span class="nav-link-text ms-1">Show Students</span>
           </a>
         </li>
+<?php
+    }
+?>
+<?php
+    if(checkLoggedin())
+    {
+      ?>
         <li class="nav-item">
-          <a class="nav-link active" href="pages/tables.html">
+          <a class="nav-link" href="show_inprocess.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Tables</span>
+            <span class="nav-link-text ms-1">Show Inprocess</span>
           </a>
         </li>
+        <?php
+    }
+?><?php
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts"))
+{
+  ?>
         <li class="nav-item">
-          <a class="nav-link " href="pages/billing.html">
+          <a class="nav-link " href="show_completed.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Billing</span>
+            <span class="nav-link-text ms-1">Show Completed</span>
           </a>
         </li>
+
+        <?php
+}
+
+?>
+<?php
+if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"accounts")||checkPrivilage($_SESSION["user_type"],"case_admin"))
+{
+  ?>
+
         <li class="nav-item">
-          <a class="nav-link " href="pages/virtual-reality.html">
+          <a class="nav-link " href="add_inprocess.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
+            <span class="nav-link-text ms-1">Add Inprocess</span>
           </a>
         </li>
+
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"counsellor"))
+{
+  ?>
+
         <li class="nav-item">
-          <a class="nav-link " href="pages/rtl.html">
+          <a class="nav-link " href="add_inprocess.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Add Leads</span>
+          </a>
+        </li>
+
+        <?php
+}
+        ?>
+<?php
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts"))
+{
+  ?>
+
+        <li class="nav-item">
+          <a class="nav-link " href="show_users.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Add Completed</span>
+          </a>
+        </li>
+
+        <?php
+}
+        ?>
+<?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
+
+        <li class="nav-item">
+          <a class="nav-link " href="add_admin.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Add Admins</span>
+          </a>
+        </li>
+
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
+
+        <li class="nav-item">
+          <a class="nav-link " href="add_extra_data.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Add Extra Data</span>
+          </a>
+        </li>
+
+        <?php
+}
+        ?>
+<?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
+
+        <li class="nav-item">
+          <a class="nav-link " href="show_users.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Show Admins</span>
+          </a>
+        </li>
+
+        <?php
+}
+        ?>
+<?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
+        <li class="nav-item">
+          <a class="nav-link " href="show_consultant.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">RTL</span>
+            <span class="nav-link-text ms-1">Show Consultants</span>
           </a>
         </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-        </li>
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
         <li class="nav-item">
-          <a class="nav-link " href="pages/profile.html">
+          <a class="nav-link " href="show_country.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Profile</span>
+            <span class="nav-link-text ms-1">Show Country</span>
           </a>
         </li>
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
         <li class="nav-item">
-          <a class="nav-link " href="pages/sign-in.html">
+          <a class="nav-link " href="show_follow_up_action.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Sign In</span>
+            <span class="nav-link-text ms-1">Show Follow Up Actions</span>
           </a>
         </li>
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
         <li class="nav-item">
-          <a class="nav-link " href="pages/sign-up.html">
+          <a class="nav-link " href="show_inquiry_location.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
+            <span class="nav-link-text ms-1">Show Inquiry Location</span>
           </a>
         </li>
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
+        <li class="nav-item">
+          <a class="nav-link " href="show_outcome.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Show Outcome</span>
+          </a>
+        </li>
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
+        <li class="nav-item">
+          <a class="nav-link " href="show_priority.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Show Priority</span>
+          </a>
+        </li>
+        <?php
+}
+        ?>
+        <?php
+if(checkPrivilage($_SESSION["user_type"],"admin"))
+{
+  ?>
+        <li class="nav-item">
+          <a class="nav-link " href="show_source.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Show Source</span>
+          </a>
+        </li>
+        <?php
+}
+        ?>
+        
+        
+        
+        
+        
       </ul>
     </div>
     <!-- <div class="sidenav-footer mx-3 ">
