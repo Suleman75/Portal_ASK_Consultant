@@ -3,33 +3,39 @@ $page_name="Show Inquiry Locations";
 require("menu.php");
 require("header.php");
 ?>
-
+<div class="container-fluid py-4">
+      <div class="row">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Students Inquiry Location</h6>
+            </div>
 <?php
 if(checkPrivilage($_SESSION["user_type"],"admin"))
 {
 $outcome=selectData("inquiry_form_location","enabled=1");
 
-echo "<table>";
-echo "<tr>";
-echo "<th>S.No</th>";
-echo "<th>Inquiry Location</th>";
-echo "<th>Update</th>";
-echo "<th>Delete</th>";
-echo "</tr>";
+echo "<div class='card-body px-0 pt-0 pb-2'>
+<div class='table-responsive p-0'><table class='table align-items-center mb-0'>";
+    echo "<thead><tr>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>S.No</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Inquiry Location</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Update</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Delete</th>";
+echo "</tr></thead>";
 
 foreach($outcome as $rows)
 {
     echo "<tr>";
-    echo "<td>".$rows['id']."</td>";
-    echo "<td>".$rows['inquiry_location']."</td>";
-    echo "<td><form method='POST' action='update_inquiry_location.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update'></form></td>";
-    echo "<td><form method='POST' action='delete_inquiry_location.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete'></form></td>";
+    echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['id']."</td>";
+    echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['inquiry_location']."</td>";
+    echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_inquiry_location.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+    echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_inquiry_location.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
     echo "</tr>";
 }
 
 
 
-echo "</table>";
+echo "</tbody></table></div></div></div></div></div></div>";
 }
 else
 {

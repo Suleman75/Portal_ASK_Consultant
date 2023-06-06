@@ -23,9 +23,9 @@
     require("config.php");
     ?>
     <style>
-    table, th, td {
+    /* table, th, td {
         border: 1px solid black;
-    }
+    } */
     </style>
 </head>
 

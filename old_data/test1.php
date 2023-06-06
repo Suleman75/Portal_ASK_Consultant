@@ -1,6 +1,8 @@
 <?php
 $file = fopen("inquiry2.csv","r");
+require("header.php");
 $i=0;
+$remove="-!@#$%^&*()=+][{};':/.,<>";
 while (($line = fgetcsv($file)) !== FALSE) {
     //$line is an array of the csv elements
     // print_r($line);
@@ -42,50 +44,50 @@ while (($line = fgetcsv($file)) !== FALSE) {
       }
     }
 
-    $query6="SELECT COUNT(1) FROM source WHERE source_name = '$line[5]'";
+    $query6="SELECT COUNT(1) FROM source WHERE source_name = '$line[6]'";
     $result6=$db->query($query6);
     $row6=$result6->result_array();
     foreach($row6 as $rows6)
     {
       if($rows6["COUNT(1)"]==0)
       {
-        $data1["source_name"]=$line[5];
+        $data1["source_name"]=$line[6];
         $user_id = insertData('source', $data1);
       }
     }
 
-    $query7="SELECT COUNT(1) FROM inquiry_form_location WHERE inquiry_location = '$line[8]'";
+    $query7="SELECT COUNT(1) FROM inquiry_form_location WHERE inquiry_location = '$line[9]'";
     $result7=$db->query($query7);
     $row7=$result7->result_array();
     foreach($row7 as $rows7)
     {
       if($rows7["COUNT(1)"]==0)
       {
-        $data2["inquiry_location"]=$line[8];
+        $data2["inquiry_location"]=$line[9];
         $user_id = insertData('inquiry_form_location', $data2);
       }
     }
 
-    $query8="SELECT COUNT(1) FROM country WHERE country_name = '$line[6]'";
+    $query8="SELECT COUNT(1) FROM country WHERE country_name = '$line[7]'";
     $result8=$db->query($query8);
     $row8=$result8->result_array();
     foreach($row8 as $rows8)
     {
       if($rows8["COUNT(1)"]==0)
       {
-        $data3["country_name"]=$line[6];
+        $data3["country_name"]=$line[7];
         $user_id = insertData('country', $data3);
       }
     }
 
-    $query9="SELECT COUNT(1) FROM consultant WHERE consultant_name = '$line[9]'";
+    $query9="SELECT COUNT(1) FROM consultant WHERE consultant_name = '$line[10]'";
     $result9=$db->query($query9);
     $row9=$result9->result_array();
     foreach($row9 as $rows9)
     {
       if($rows9["COUNT(1)"]==0)
       {
-        $data4["consultant_name"]=$line[9];
+        $data4["consultant_name"]=$line[10];
         $user_id = insertData('consultant', $data4);
       }
     }
@@ -123,10 +125,11 @@ while (($line = fgetcsv($file)) !== FALSE) {
     $userData["apply_date"]=$line[2];
     $userData["full_name"]=$line[3];
     $userData["phone_number"]=$line[4];
+    $userData["email"]=$line[5];
     $userData["visited"]=$line[7];
     foreach($row1 as $rows1)
     {
-        if($line[5]==$rows1["source_name"])
+        if($line[6]==$rows1["source_name"])
         {
             $userData["apply_source_id"]=$rows1["id"];
         }
@@ -134,28 +137,28 @@ while (($line = fgetcsv($file)) !== FALSE) {
     foreach($row3 as $rows3)
     {
       // echo $line[6];
-        if($line[6]==$rows3["country_name"])
+        if($line[7]==$rows3["country_name"])
         {
             $userData["country_id"]=$rows3["id"];
         }
     }
     foreach($row2 as $rows2)
     {
-        if($line[8]==$rows2["inquiry_location"])
+        if($line[9]==$rows2["inquiry_location"])
         {
             $userData["inquiry_form_location_id"]=$rows2["id"];
         }
     }
     foreach($row4 as $rows4)
     {
-        if($line[9]==$rows4["consultant_name"])
+        if($line[10]==$rows4["consultant_name"])
         {
             $userData["consultant_id"]=$rows4["id"];
         }
     }
-    $userData["qualification"]=$line[10];
-    $userData["comments"]=$line[11];
-    $userData["budget"]=$line[12];
+    $userData["qualification"]=$line[11];
+    $userData["comments"]=$line[12];
+    $userData["budget"]=$line[13];
     $user_id = insertData('user_info', $userData);
 
 
@@ -168,28 +171,28 @@ while (($line = fgetcsv($file)) !== FALSE) {
     // 
     // 
     
-    $line[21]=str_replace($remove,"",$line[21]);
-    $line[19]=str_replace($remove,"",$line[19]);
-    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[19]'";
+    $line[20]=str_replace($remove,"",$line[20]);
+    $line[22]=str_replace($remove,"",$line[22]);
+    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[20]'";
     $result11=$db->query($query11);
     $row11=$result11->result_array();
     foreach($row11 as $rows11)
     {
       if($rows11["COUNT(1)"]==0)
       {
-        $data5["outcome_name"]=$line[19];
+        $data5["outcome_name"]=$line[20];
         $user_id = insertData('call_outcome', $data5);
       }
     }
     
-    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[21]'";
+    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[22]'";
     $result13=$db->query($query13);
     $row13=$result13->result_array();
     foreach($row13 as $rows13)
     {
       if($rows13["COUNT(1)"]==0)
       {
-        $data6["action_name"]=$line[21];
+        $data6["action_name"]=$line[22];
         $user_id = insertData('follow_up_action', $data6);
       }
     }
@@ -203,30 +206,30 @@ while (($line = fgetcsv($file)) !== FALSE) {
     
     foreach($row10 as $rows10)
     {
-        if($line[19]==$rows10["outcome_name"])
+        if($line[20]==$rows10["outcome_name"])
         {
             $followupdata["follow_up_outcome_id"]=$rows10["id"];
         }
     }
     foreach($row12 as $rows12)
     {
-        if($line[21]==$rows12["action_name"])
+        if($line[22]==$rows12["action_name"])
         {
             $followupdata["follow_up_action_id"]=$rows12["id"];
         }
     }
     $followupdata["user_id"]=$line[0];
-    $followupdata["staff_member"]=$line[17];
+    $followupdata["staff_member"]=$line[18];
     
     $followupdata["follow_up_number"]=1;
-    $followupdata["follow_up_date"]=$line[16];
-    $followupdata["additional_comment"]=$line[20];
+    $followupdata["follow_up_date"]=$line[17];
+    $followupdata["additional_comment"]=$line[21];
     $follow_up_id = insertData('follow_up_info', $followupdata);
 
 
 
 
-    //Insert 1st Follow Up Info,  Last index was 21
+    //Insert 2nd Follow Up Info,  Last index was 22
     //
     //
     // 
@@ -235,28 +238,27 @@ while (($line = fgetcsv($file)) !== FALSE) {
     // 
     
     $line[26]=str_replace($remove,"",$line[26]);
-    $line[25]=str_replace($remove,"",$line[25]);
-    // echo $line[25]."<br>";
-    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[25]'";
+    $line[27]=str_replace($remove,"",$line[27]);
+    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[26]'";
     $result11=$db->query($query11);
     $row11=$result11->result_array();
     foreach($row11 as $rows11)
     {
       if($rows11["COUNT(1)"]==0)
       {
-        $data5["outcome_name"]=$line[25];
+        $data5["outcome_name"]=$line[26];
         $user_id = insertData('call_outcome', $data5);
       }
     }
     
-    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[26]'";
+    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[27]'";
     $result13=$db->query($query13);
     $row13=$result13->result_array();
     foreach($row13 as $rows13)
     {
       if($rows13["COUNT(1)"]==0)
       {
-        $data6["action_name"]=$line[26];
+        $data6["action_name"]=$line[27];
         $user_id = insertData('follow_up_action', $data6);
       }
     }
@@ -270,21 +272,21 @@ while (($line = fgetcsv($file)) !== FALSE) {
     
     
     $followupdata["user_id"]=$line[0];
-    $followupdata["additional_comment"]=$line[22];
-    $followupdata["staff_member"]=$line[23];
+    $followupdata["additional_comment"]=$line[25];
+    $followupdata["staff_member"]=$line[24];
     
     $followupdata["follow_up_number"]=2;
-    $followupdata["follow_up_date"]=$line[24];
+    $followupdata["follow_up_date"]=$line[23];
     foreach($row10 as $rows10)
     {
-        if($line[25]==$rows10["outcome_name"])
+        if($line[26]==$rows10["outcome_name"])
         {
             $followupdata["follow_up_outcome_id"]=$rows10["id"];
         }
     }
     foreach($row12 as $rows12)
     {
-        if($line[26]==$rows12["action_name"])
+        if($line[27]==$rows12["action_name"])
         {
             $followupdata["follow_up_action_id"]=$rows12["id"];
         }
@@ -298,7 +300,7 @@ while (($line = fgetcsv($file)) !== FALSE) {
 
 
 
-    //Insert 1st Follow Up Info,  Last index was 26
+    //Insert 3rd Follow Up Info,  Last index was 27
     //
     //
     // 
@@ -307,27 +309,27 @@ while (($line = fgetcsv($file)) !== FALSE) {
     // 
     
     $line[31]=str_replace($remove,"",$line[31]);
-    $line[30]=str_replace($remove,"",$line[30]);
-    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[30]'";
+    $line[32]=str_replace($remove,"",$line[32]);
+    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[31]'";
     $result11=$db->query($query11);
     $row11=$result11->result_array();
     foreach($row11 as $rows11)
     {
       if($rows11["COUNT(1)"]==0)
       {
-        $data5["outcome_name"]=$line[30];
+        $data5["outcome_name"]=$line[31];
         $user_id = insertData('call_outcome', $data5);
       }
     }
     
-    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[31]'";
+    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[32]'";
     $result13=$db->query($query13);
     $row13=$result13->result_array();
     foreach($row13 as $rows13)
     {
       if($rows13["COUNT(1)"]==0)
       {
-        $data6["action_name"]=$line[31];
+        $data6["action_name"]=$line[32];
         $user_id = insertData('follow_up_action', $data6);
       }
     }
@@ -341,28 +343,28 @@ while (($line = fgetcsv($file)) !== FALSE) {
     
     foreach($row10 as $rows10)
     {
-        if($line[30]==$rows10["outcome_name"])
+        if($line[31]==$rows10["outcome_name"])
         {
             $followupdata["follow_up_outcome_id"]=$rows10["id"];
         }
     }
     foreach($row12 as $rows12)
     {
-        if($line[31]==$rows12["action_name"])
+        if($line[32]==$rows12["action_name"])
         {
             $followupdata["follow_up_action_id"]=$rows12["id"];
         }
     }
     $followupdata["user_id"]=$line[0];
-    $followupdata["staff_member"]=$line[28];
+    $followupdata["staff_member"]=$line[29];
     
     $followupdata["follow_up_number"]=3;
-    $followupdata["follow_up_date"]=$line[29];
-    $followupdata["additional_comment"]=$line[27];
+    $followupdata["follow_up_date"]=$line[28];
+    $followupdata["additional_comment"]=$line[30];
     $follow_up_id = insertData('follow_up_info', $followupdata);
 
 
-    //Insert 1st Follow Up Info,  Last index was 31
+    //Insert 4th Follow Up Info,  Last index was 32
     //
     //
     // 
@@ -371,27 +373,27 @@ while (($line = fgetcsv($file)) !== FALSE) {
     // 
     
     $line[36]=str_replace($remove,"",$line[36]);
-    $line[35]=str_replace($remove,"",$line[35]);
-    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[35]'";
+    $line[37]=str_replace($remove,"",$line[37]);
+    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[36]'";
     $result11=$db->query($query11);
     $row11=$result11->result_array();
     foreach($row11 as $rows11)
     {
       if($rows11["COUNT(1)"]==0)
       {
-        $data5["outcome_name"]=$line[35];
+        $data5["outcome_name"]=$line[36];
         $user_id = insertData('call_outcome', $data5);
       }
     }
     
-    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[36]'";
+    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[37]'";
     $result13=$db->query($query13);
     $row13=$result13->result_array();
     foreach($row13 as $rows13)
     {
       if($rows13["COUNT(1)"]==0)
       {
-        $data6["action_name"]=$line[36];
+        $data6["action_name"]=$line[37];
         $user_id = insertData('follow_up_action', $data6);
       }
     }
@@ -405,21 +407,21 @@ while (($line = fgetcsv($file)) !== FALSE) {
     
     
     $followupdata["user_id"]=$line[0];
-    $followupdata["additional_comment"]=$line[32];
-    $followupdata["staff_member"]=$line[33];
+    $followupdata["additional_comment"]=$line[35];
+    $followupdata["staff_member"]=$line[34];
     
     $followupdata["follow_up_number"]=4;
-    $followupdata["follow_up_date"]=$line[34];
+    $followupdata["follow_up_date"]=$line[33];
     foreach($row10 as $rows10)
     {
-        if($line[35]==$rows10["outcome_name"])
+        if($line[36]==$rows10["outcome_name"])
         {
             $followupdata["follow_up_outcome_id"]=$rows10["id"];
         }
     }
     foreach($row12 as $rows12)
     {
-        if($line[36]==$rows12["action_name"])
+        if($line[37]==$rows12["action_name"])
         {
             $followupdata["follow_up_action_id"]=$rows12["id"];
         }
@@ -427,7 +429,7 @@ while (($line = fgetcsv($file)) !== FALSE) {
     $follow_up_id = insertData('follow_up_info', $followupdata);
 
 
-    //Insert 1st Follow Up Info,  Last index was 36
+    //Insert 5th Follow Up Info,  Last index was 37
     //
     //
     // 
@@ -436,27 +438,27 @@ while (($line = fgetcsv($file)) !== FALSE) {
     // 
     
     $line[41]=str_replace($remove,"",$line[41]);
-    $line[40]=str_replace($remove,"",$line[40]);
-    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[40]'";
+    $line[42]=str_replace($remove,"",$line[42]);
+    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[41]'";
     $result11=$db->query($query11);
     $row11=$result11->result_array();
     foreach($row11 as $rows11)
     {
       if($rows11["COUNT(1)"]==0)
       {
-        $data5["outcome_name"]=$line[40];
+        $data5["outcome_name"]=$line[41];
         $user_id = insertData('call_outcome', $data5);
       }
     }
     
-    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[41]'";
+    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[42]'";
     $result13=$db->query($query13);
     $row13=$result13->result_array();
     foreach($row13 as $rows13)
     {
       if($rows13["COUNT(1)"]==0)
       {
-        $data6["action_name"]=$line[41];
+        $data6["action_name"]=$line[42];
         $user_id = insertData('follow_up_action', $data6);
       }
     }
@@ -470,21 +472,21 @@ while (($line = fgetcsv($file)) !== FALSE) {
     
     
     $followupdata["user_id"]=$line[0];
-    $followupdata["additional_comment"]=$line[37];
-    $followupdata["staff_member"]=$line[38];
+    $followupdata["additional_comment"]=$line[40];
+    $followupdata["staff_member"]=$line[39];
     
     $followupdata["follow_up_number"]=5;
-    $followupdata["follow_up_date"]=$line[39];
+    $followupdata["follow_up_date"]=$line[38];
     foreach($row10 as $rows10)
     {
-        if($line[40]==$rows10["outcome_name"])
+        if($line[41]==$rows10["outcome_name"])
         {
             $followupdata["follow_up_outcome_id"]=$rows10["id"];
         }
     }
     foreach($row12 as $rows12)
     {
-        if($line[41]==$rows12["action_name"])
+        if($line[42]==$rows12["action_name"])
         {
             $followupdata["follow_up_action_id"]=$rows12["id"];
         }
@@ -492,7 +494,7 @@ while (($line = fgetcsv($file)) !== FALSE) {
     $follow_up_id = insertData('follow_up_info', $followupdata);
 
 
-    //Insert 1st Follow Up Info,  Last index was 41
+    //Insert 6th Follow Up Info,  Last index was 42
     //
     //
     // 
@@ -501,27 +503,27 @@ while (($line = fgetcsv($file)) !== FALSE) {
     // 
     
     $line[46]=str_replace($remove,"",$line[46]);
-    $line[45]=str_replace($remove,"",$line[45]);
-    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[45]'";
+    $line[47]=str_replace($remove,"",$line[47]);
+    $query11="SELECT COUNT(1) FROM call_outcome WHERE outcome_name = '$line[46]'";
     $result11=$db->query($query11);
     $row11=$result11->result_array();
     foreach($row11 as $rows11)
     {
       if($rows11["COUNT(1)"]==0)
       {
-        $data5["outcome_name"]=$line[45];
+        $data5["outcome_name"]=$line[46];
         $user_id = insertData('call_outcome', $data5);
       }
     }
     
-    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[46]'";
+    $query13="SELECT COUNT(1) FROM follow_up_action WHERE action_name = '$line[47]'";
     $result13=$db->query($query13);
     $row13=$result13->result_array();
     foreach($row13 as $rows13)
     {
       if($rows13["COUNT(1)"]==0)
       {
-        $data6["action_name"]=$line[46];
+        $data6["action_name"]=$line[47];
         $user_id = insertData('follow_up_action', $data6);
       }
     }
@@ -535,21 +537,21 @@ while (($line = fgetcsv($file)) !== FALSE) {
     
     
     $followupdata["user_id"]=$line[0];
-    $followupdata["additional_comment"]=$line[42];
-    $followupdata["staff_member"]=$line[43];
+    $followupdata["additional_comment"]=$line[45];
+    $followupdata["staff_member"]=$line[44];
     
     $followupdata["follow_up_number"]=6;
-    $followupdata["follow_up_date"]=$line[44];
+    $followupdata["follow_up_date"]=$line[43];
     foreach($row10 as $rows10)
     {
-        if($line[45]==$rows10["outcome_name"])
+        if($line[46]==$rows10["outcome_name"])
         {
             $followupdata["follow_up_outcome_id"]=$rows10["id"];
         }
     }
     foreach($row12 as $rows12)
     {
-        if($line[46]==$rows12["action_name"])
+        if($line[47]==$rows12["action_name"])
         {
             $followupdata["follow_up_action_id"]=$rows12["id"];
         }

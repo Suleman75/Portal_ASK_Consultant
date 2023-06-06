@@ -1,6 +1,6 @@
 <?php
 require("config.php");
-$file = fopen("inprocess.csv","r");
+$file = fopen("new_inprocess.csv","r");
 $i=0;
 while (($line = fgetcsv($file)) !== FALSE) 
 {
