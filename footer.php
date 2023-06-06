@@ -14,7 +14,7 @@
             <div class="col-lg-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="https://www.blossomheaven.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                  <a href="https://www.blossomheaven.com" class="nav-link text-muted" target="_blank">Blossom Heaven</a>
                 </li>
                 <li class="nav-item">
                   <a href="https://blossomheaven.com/about/" class="nav-link text-muted" target="_blank">About Us</a>

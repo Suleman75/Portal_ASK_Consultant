@@ -20,7 +20,7 @@ else
     header("Location:show_users.php");
 }
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <?php
 foreach($user_data as $rows)
 {
@@ -30,7 +30,7 @@ foreach($user_data as $rows)
     <input type="hidden" name="id" value="<?php echo $_POST["update"]    ?>">
 
     <label>User Type:</label><br>
-    <select name="user_type">
+    <select class="form-control form-control-lg" name="user_type">
         <?php
         
             if($rows["user_type"]=="admin")
@@ -98,10 +98,10 @@ foreach($user_data as $rows)
     </select><br><br>
 
 
-    <label>Username:</label><br><input type="text" name="username" value="<?php echo $rows['username'] ?>"><br><br>
-    <label>Password:</label><br><input type="text" name="password" value="<?php echo $rows['password'] ?>"><br><br>
-    <label>Full Name:</label><br><input type="text" name="full_name" value="<?php echo $rows['full_name'] ?>"><br><br>
-    <input type="submit" value="Update" name="update_done">
+    <label>Username:</label><br><input class="form-control form-control-lg" type="text" name="username" value="<?php echo $rows['username'] ?>"><br><br>
+    <label>Password:</label><br><input class="form-control form-control-lg" type="text" name="password" value="<?php echo $rows['password'] ?>"><br><br>
+    <label>Full Name:</label><br><input class="form-control form-control-lg" type="text" name="full_name" value="<?php echo $rows['full_name'] ?>"><br><br>
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Update" name="update_done">
 <?php
 }
 

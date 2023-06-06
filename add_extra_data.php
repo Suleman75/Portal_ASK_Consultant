@@ -15,11 +15,11 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
 {
 
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <label>Enter Value: </label><br>
-<input type="text" name="extra_value"><br>
+<input type="text" name="extra_value" class="form-control form-control-lg"><br>
 <label>Select Type: </label><br>
-<select name="extras">
+<select name="extras" class="form-control form-control-lg">
         
     <option value="consultant">Consultant Name</option>
     <option value="country">Country</option>
@@ -30,7 +30,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
     <option value="call_outcome">Call Outcome</option>    
     <option value="follow_up_action">Follow Up Action</option>
 </select><br><br>
-<input type="submit" name="submit" value="Save">
+<input type="submit" name="submit" value="Save" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">
 </form>
 <?php
 }

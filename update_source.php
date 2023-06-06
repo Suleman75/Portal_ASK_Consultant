@@ -17,7 +17,7 @@ else
     header("Location:show_source.php");
 }
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <?php
 foreach($user_data as $rows)
 {
@@ -25,8 +25,8 @@ foreach($user_data as $rows)
 ?>
     <label>S.No:</label><?php echo $_POST["update"];?><br>
     <input type="hidden" name="id" value="<?php echo $_POST["update"]    ?>">
-    <label>source Name:</label><br><input type="text" name="source_name" value="<?php echo $rows['source_name'] ?>"><br><br>
-    <input type="submit" value="Update" name="update_done">
+    <label>source Name:</label><br><input class="form-control form-control-lg" type="text" name="source_name" value="<?php echo $rows['source_name'] ?>"><br><br>
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Update" name="update_done">
 <?php
 }
 

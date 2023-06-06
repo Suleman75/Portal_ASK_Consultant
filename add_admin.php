@@ -18,18 +18,18 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
 {
 
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <label>User Type:</label><br>
-    <select name="user_type">
+    <select name="user_type" class="form-control form-control-lg">
         <option value="admin">Admin</option>
         <option value="accounts">Accounts</option>
         <option value="case_admin">Case Admin</option>
         <option value="counsellor">Counsellor</option>
     </select><br><br>
-    <label>Username:</label><br><input type="text" name="username"><br><br>
-    <label>Password:</label><br><input type="text" name="password"><br><br>
-    <label>Full Name:</label><br><input type="text" name="full_name"><br><br>
-    <input type="submit" value="Insert" name="add_done">
+    <label>Username:</label><br><input class="form-control form-control-lg" type="text" name="username"><br><br>
+    <label>Password:</label><br><input class="form-control form-control-lg" type="text" name="password"><br><br>
+    <label>Full Name:</label><br><input class="form-control form-control-lg" type="text" name="full_name"><br><br>
+    <input type="submit" value="Insert" name="add_done" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">
 </form>
 <?php
 }

@@ -47,7 +47,7 @@ else
     header("Location:show_inprocess.php");
 }
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <?php
 foreach($user_data as $rows)
 {
@@ -55,12 +55,12 @@ foreach($user_data as $rows)
     <label>S.No:</label><?php echo $_POST["update"];?><br>
     <input type="hidden" name="id" value="<?php echo $_POST["update"]    ?>">
     <input type="hidden" name="user_id" value="<?php echo $_POST["update"]    ?>">
-    <label>Case Assign Date:</label><br><input type="text" name="case_assign_date" value="<?php echo $rows['case_assign_date'] ?>"><br>
-    <label>Name:</label><br><input type="text" name="name" value="<?php echo $rows['name'] ?>"><br>
-    <label>Phone Number:</label><br><input type="text" name="phone" value="<?php echo $rows['phone'] ?>"><br>
-    <label>Email:</label><br><input type="text" name="email" value="<?php echo $rows['email'] ?>"><br>
+    <label>Case Assign Date:</label><br><input class="form-control form-control-lg" type="text" name="case_assign_date" value="<?php echo $rows['case_assign_date'] ?>"><br>
+    <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name" value="<?php echo $rows['name'] ?>"><br>
+    <label>Phone Number:</label><br><input class="form-control form-control-lg" type="text" name="phone" value="<?php echo $rows['phone'] ?>"><br>
+    <label>Email:</label><br><input class="form-control form-control-lg" type="text" name="email" value="<?php echo $rows['email'] ?>"><br>
     <label for="destination_1">Destination 1:</label><br>
-    <select name="destination_1">
+    <select name="destination_1" class="form-control form-control-lg">
         <?php
             foreach($desti as $rows1)
             {
@@ -84,7 +84,7 @@ foreach($user_data as $rows)
 
 
     <label for="counselor">Counselor:</label><br>
-    <select name="counselor">
+    <select name="counselor" class="form-control form-control-lg">
         <?php
             foreach($consu as $rows1)
             {
@@ -105,9 +105,9 @@ foreach($user_data as $rows)
             }
         ?>
     </select><br>
-    <label>Comments:</label><br><input type="text" name="comments" value="<?php echo $rows['comments'] ?>"><br>
+    <label>Comments:</label><br><input class="form-control form-control-lg" type="text" name="comments" value="<?php echo $rows['comments'] ?>"><br>
     <label for="fee_status">fee_status:</label><br>
-    <select name="fee_status">
+    <select name="fee_status" class="form-control form-control-lg">
         <?php
             foreach($fees as $rows1)
             {
@@ -128,12 +128,12 @@ foreach($user_data as $rows)
             }
         ?>
     </select><br>
-    <label>Case Handler 1:</label><br><input type="text" name="admin" value="<?php echo $rows['admin'] ?>"><br>
-    <label>University 1:</label><br><input type="text" name="university_1" value="<?php echo $rows['university_1'] ?>"><br>
-    <label>Outcome Destination 1:</label><br><input type="text" name="outcome_destination_1" value="<?php echo $rows['outcome_destination_1'] ?>"><br>
-    <label>Case Status 1:</label><br><input type="text" name="case_status_1" value="<?php echo $rows['case_status_1'] ?>"><br>
+    <label>Case Handler 1:</label><br><input class="form-control form-control-lg" type="text" name="admin" value="<?php echo $rows['admin'] ?>"><br>
+    <label>University 1:</label><br><input class="form-control form-control-lg" type="text" name="university_1" value="<?php echo $rows['university_1'] ?>"><br>
+    <label>Outcome Destination 1:</label><br><input class="form-control form-control-lg" type="text" name="outcome_destination_1" value="<?php echo $rows['outcome_destination_1'] ?>"><br>
+    <label>Case Status 1:</label><br><input class="form-control form-control-lg" type="text" name="case_status_1" value="<?php echo $rows['case_status_1'] ?>"><br>
     <label for="destination_2">Destination 2:</label><br>
-    <select name="destination_2">
+    <select name="destination_2" class="form-control form-control-lg">
         <?php
             foreach($destinat as $rows1)
             {
@@ -154,18 +154,18 @@ foreach($user_data as $rows)
             }
         ?>
     </select><br>
-    <label>Case Handler 2:</label><br><input type="text" name="case_handler_2" value="<?php echo $rows['case_handler_2'] ?>"><br>
-    <label>University 2:</label><br><input type="text" name="university_2" value="<?php echo $rows['university_2'] ?>"><br>
-    <label>Outcome Destination 2:</label><br><input type="text" name="outcome_destination_2" value="<?php echo $rows['outcome_destination_2'] ?>"><br>
-    <label>Case Status 2:</label><br><input type="text" name="case_status_2" value="<?php echo $rows['case_status_2'] ?>"><br>
-    <label>Course:</label><br><input type="text" name="course" value="<?php echo $rows['course'] ?>"><br>
-    <label>Intake:</label><br><input type="text" name="intake" value="<?php echo $rows['intake'] ?>"><br>
-    <label>Missing Docs:</label><br><input type="text" name="missing_docs" value="<?php echo $rows['missing_docs'] ?>"><br>
-    <label>Final Comments:</label><br><input type="text" name="final_comments" value="<?php echo $rows['final_comments'] ?>"><br>
+    <label>Case Handler 2:</label><br><input class="form-control form-control-lg" type="text" name="case_handler_2" value="<?php echo $rows['case_handler_2'] ?>"><br>
+    <label>University 2:</label><br><input class="form-control form-control-lg" type="text" name="university_2" value="<?php echo $rows['university_2'] ?>"><br>
+    <label>Outcome Destination 2:</label><br><input class="form-control form-control-lg" type="text" name="outcome_destination_2" value="<?php echo $rows['outcome_destination_2'] ?>"><br>
+    <label>Case Status 2:</label><br><input class="form-control form-control-lg" type="text" name="case_status_2" value="<?php echo $rows['case_status_2'] ?>"><br>
+    <label>Course:</label><br><input class="form-control form-control-lg" type="text" name="course" value="<?php echo $rows['course'] ?>"><br>
+    <label>Intake:</label><br><input class="form-control form-control-lg" type="text" name="intake" value="<?php echo $rows['intake'] ?>"><br>
+    <label>Missing Docs:</label><br><input class="form-control form-control-lg" type="text" name="missing_docs" value="<?php echo $rows['missing_docs'] ?>"><br>
+    <label>Final Comments:</label><br><input class="form-control form-control-lg" type="text" name="final_comments" value="<?php echo $rows['final_comments'] ?>"><br>
     
     
     <br>
-    <input type="submit" value="Update" name="update_done">
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Update" name="update_done">
 <?php
 }
 

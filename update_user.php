@@ -45,7 +45,7 @@ else
     echo "<script>window.location.href = 'show_data.php';</script>";
 }
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <?php
 foreach($user_data as $rows)
 {
@@ -54,7 +54,7 @@ foreach($user_data as $rows)
     <label>S.No:</label><?php echo $_POST["update"];
     echo "<input type='hidden' name='id' value='".$_POST["update"]."'>"?><br>
     <label>Lead Priority:</label><br>
-    <select name="priority_id">
+    <select name="priority_id" class="form-control form-control-lg">
         <?php
             foreach($leads as $rows1)
             {
@@ -75,11 +75,11 @@ foreach($user_data as $rows)
             }
         ?>
     </select><br>
-    <label>Date:</label><br><input type="text" name="date" value="<?php echo $rows['apply_date'] ?>"><br>
-    <label>Name:</label><br><input type="text" name="name"  value="<?php echo $rows['full_name'] ?>"><br>
-    <label>Phone Number:</label><br><input type="text" name="phone" value="<?php echo $rows['phone_number'] ?>"><br>
+    <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date" value="<?php echo $rows['apply_date'] ?>"><br>
+    <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name"  value="<?php echo $rows['full_name'] ?>"><br>
+    <label>Phone Number:</label><br><input class="form-control form-control-lg" type="text" name="phone" value="<?php echo $rows['phone_number'] ?>"><br>
     <label>Source:</label><br>
-    <select name="apply_source_id">
+    <select name="apply_source_id" class="form-control form-control-lg">
         <?php
             foreach($source as $rows2)
             {
@@ -101,7 +101,7 @@ foreach($user_data as $rows)
         ?>
     </select><br>
     <label>Country:</label><br>
-    <select name="country_id">
+    <select name="country_id" class="form-control form-control-lg">
         <?php
             foreach($country as $rows3)
             {
@@ -122,9 +122,9 @@ foreach($user_data as $rows)
             }
         ?>
     </select><br>
-    <label>Visited:</label><br><input type="text" name="visited" value="<?php echo $rows['visited'] ?>"><br>
+    <label>Visited:</label><br><input class="form-control form-control-lg" type="text" name="visited" value="<?php echo $rows['visited'] ?>"><br>
     <label>Inquiry Form Location:</label><br>
-    <select name="inquiry_form_location_id">
+    <select name="inquiry_form_location_id" class="form-control form-control-lg">
         <?php
             foreach($inquiry as $rows4)
             {
@@ -146,7 +146,7 @@ foreach($user_data as $rows)
     </select><br>
 
     <label>Consultant:</label><br>
-    <select name="consultant_id">
+    <select name="consultant_id" class="form-control form-control-lg">
         <?php
             foreach($consultant as $rows5)
             {
@@ -167,10 +167,10 @@ foreach($user_data as $rows)
         ?>
     </select><br>
 
-    <label>Qualification:</label><br><input type="text" name="qualification" value="<?php echo $rows['qualification'] ?>"><br>
-    <label>Comments/Inquiry:</label><br><input type="text" name="comment" value="<?php echo $rows['comments'] ?>"><br>
-    <label>Expected Budget:</label><br><input type="text" name="budget" value="<?php echo $rows['budget'] ?>"><br>
-    <input type="submit" value="Update" name="update_done">
+    <label>Qualification:</label><br><input class="form-control form-control-lg" type="text" name="qualification" value="<?php echo $rows['qualification'] ?>"><br>
+    <label>Comments/Inquiry:</label><br><input class="form-control form-control-lg" type="text" name="comment" value="<?php echo $rows['comments'] ?>"><br>
+    <label>Expected Budget:</label><br><input class="form-control form-control-lg" type="text" name="budget" value="<?php echo $rows['budget'] ?>"><br>
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Update" name="update_done">
 <?php
 }
 

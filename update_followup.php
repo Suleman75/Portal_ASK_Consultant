@@ -24,7 +24,7 @@ else
     header("Location:follow_up.php?user_id=".$_POST["user_id"]);
 }
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <?php
 foreach($user_data as $rows)
 {
@@ -33,10 +33,10 @@ foreach($user_data as $rows)
     <label>S.No:</label><?php echo $_POST["user_id"];?><br>
     <input type="hidden" name="id" value="<?php echo $_POST["update"]    ?>">
     <input type="hidden" name="user_id" value="<?php echo $_POST["user_id"]    ?>">
-    <label>Follow Up Number:</label><br><input type="text" name="follow_up_number" value="<?php echo $rows['follow_up_number'] ?>"><br>
-    <label>Follow Up Date:</label><br><input type="text" name="follow_up_date"  value="<?php echo $rows['follow_up_date'] ?>"><br>
+    <label>Follow Up Number:</label><br><input class="form-control form-control-lg" type="text" name="follow_up_number" value="<?php echo $rows['follow_up_number'] ?>"><br>
+    <label>Follow Up Date:</label><br><input class="form-control form-control-lg" type="text" name="follow_up_date"  value="<?php echo $rows['follow_up_date'] ?>"><br>
     <label>Follow Up Outcome:</label><br>
-    <select name="follow_up_outcome_id">
+    <select name="follow_up_outcome_id" class="form-control form-control-lg">
         <?php
             foreach($outcome as $rows1)
             {
@@ -59,9 +59,9 @@ foreach($user_data as $rows)
     </select><br>
     
     
-    <label>Additional Comments:</label><br><input type="text" name="additional_comment" value="<?php echo $rows['additional_comment'] ?>"><br>
+    <label>Additional Comments:</label><br><input class="form-control form-control-lg" type="text" name="additional_comment" value="<?php echo $rows['additional_comment'] ?>"><br>
     <label>Follow Up Action:</label><br>
-    <select name="follow_up_action_id">
+    <select name="follow_up_action_id" class="form-control form-control-lg">
         <?php
             foreach($action as $rows2)
             {
@@ -82,9 +82,9 @@ foreach($user_data as $rows)
             }
         ?>
     </select><br>
-    <label>Staff Member:</label><br><input type="text" name="staff_member" value="<?php echo $rows['staff_member'] ?>"><br>
+    <label>Staff Member:</label><br><input class="form-control form-control-lg" type="text" name="staff_member" value="<?php echo $rows['staff_member'] ?>"><br>
     <br>
-    <input type="submit" value="Update" name="update_done">
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Update" name="update_done">
 <?php
 }
 

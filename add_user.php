@@ -36,7 +36,7 @@ if(isset($_POST["update_done"]))
     echo "<script>window.location.href = 'add_user.php';</script>";
 }
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <?php
 if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
 {
@@ -44,7 +44,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 
 ?>
     <label>Lead Priority:</label><br>
-    <select name="priority_id">
+    <select name="priority_id" class="form-control form-control-lg">
         <?php
             foreach($leads as $rows1)
             {
@@ -58,11 +58,11 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
             }
         ?>
     </select><br>
-    <label>Date:</label><br><input type="text" name="date" value=""><br>
-    <label>Name:</label><br><input type="text" name="name"  value=""><br>
-    <label>Phone Number:</label><br><input type="text" name="phone" value=""><br>
+    <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date" value=""><br>
+    <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name"  value=""><br>
+    <label>Phone Number:</label><br><input class="form-control form-control-lg" type="text" name="phone" value=""><br>
     <label>Source:</label><br>
-    <select name="apply_source_id">
+    <select name="apply_source_id" class="form-control form-control-lg">
         <?php
             foreach($source as $rows2)
             {
@@ -77,7 +77,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
         ?>
     </select><br>
     <label>Country:</label><br>
-    <select name="country_id">
+    <select name="country_id" class="form-control form-control-lg">
         <?php
             foreach($country as $rows3)
             {
@@ -89,9 +89,9 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
             }
         ?>
     </select><br>
-    <label>Visited:</label><br><input type="text" name="visited" value=""><br>
+    <label>Visited:</label><br><input class="form-control form-control-lg" type="text" name="visited" value=""><br>
     <label>Inquiry Form Location:</label><br>
-    <select name="inquiry_form_location_id">
+    <select name="inquiry_form_location_id" class="form-control form-control-lg">
         <?php
             foreach($inquiry as $rows4)
             {
@@ -105,7 +105,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
     </select><br>
 
     <label>Consultant:</label><br>
-    <select name="consultant_id">
+    <select name="consultant_id" class="form-control form-control-lg">
         <?php
             foreach($consultant as $rows5)
             {
@@ -118,10 +118,10 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
         ?>
     </select><br>
 
-    <label>Qualification:</label><br><input type="text" name="qualification" value=""><br>
-    <label>Comments/Inquiry:</label><br><input type="text" name="comment" value=""><br>
-    <label>Expected Budget:</label><br><input type="text" name="budget" value=""><br>
-    <input type="submit" value="Insert" name="update_done">
+    <label>Qualification:</label><br><input class="form-control form-control-lg" type="text" name="qualification" value=""><br>
+    <label>Comments/Inquiry:</label><br><input class="form-control form-control-lg" type="text" name="comment" value=""><br>
+    <label>Expected Budget:</label><br><input class="form-control form-control-lg" type="text" name="budget" value=""><br>
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Insert" name="update_done">
 <?php
 }
 

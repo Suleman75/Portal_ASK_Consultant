@@ -28,7 +28,7 @@ else
     header("Location:show_completed.php");
 }
 ?>
-<form method="POST">
+<form method="POST" style="margin-top:220px !important;">
 <?php
 foreach($user_data as $rows)
 {
@@ -37,20 +37,20 @@ foreach($user_data as $rows)
     <label>S.No:</label><?php echo $_POST["update"];?><br>
     <input type="hidden" name="id" value="<?php echo $_POST["update"]    ?>">
     <input type="hidden" name="user_id" value="<?php echo $_POST["update"]    ?>">
-    <label>Date:</label><br><input type="text" name="date" value="<?php echo $rows['date'] ?>"><br>
-    <label>Name:</label><br><input type="text" name="full_name" value="<?php echo $rows['full_name'] ?>"><br>
-    <label>Phone Number:</label><br><input type="text" name="phone" value="<?php echo $rows['phone'] ?>"><br>
-    <label>Country:</label><br><input type="text" name="country" value="<?php echo $rows['country'] ?>"><br>
-    <label>Course:</label><br><input type="text" name="course" value="<?php echo $rows['course'] ?>"><br>
-    <label>University:</label><br><input type="text" name="university" value="<?php echo $rows['university'] ?>"><br>
-    <label>Consultant:</label><br><input type="text" name="consultant" value="<?php echo $rows['consultant'] ?>"><br>
-    <label>Brand:</label><br><input type="text" name="brand" value="<?php echo $rows['brand'] ?>"><br>
-    <label>Intake:</label><br><input type="text" name="intake" value="<?php echo $rows['intake'] ?>"><br>
-    <label>Notes:</label><br><input type="text" name="notes" value="<?php echo $rows['notes'] ?>"><br>
-    <label>Visa Status:</label><br><input type="text" name="visa_status" value="<?php echo $rows['visa_status'] ?>"><br>
-    <label>Comments:</label><br><input type="text" name="comments" value="<?php echo $rows['comments'] ?>"><br>
+    <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date" value="<?php echo $rows['date'] ?>"><br>
+    <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="full_name" value="<?php echo $rows['full_name'] ?>"><br>
+    <label>Phone Number:</label><br><input class="form-control form-control-lg" type="text" name="phone" value="<?php echo $rows['phone'] ?>"><br>
+    <label>Country:</label><br><input class="form-control form-control-lg" type="text" name="country" value="<?php echo $rows['country'] ?>"><br>
+    <label>Course:</label><br><input class="form-control form-control-lg" type="text" name="course" value="<?php echo $rows['course'] ?>"><br>
+    <label>University:</label><br><input class="form-control form-control-lg" type="text" name="university" value="<?php echo $rows['university'] ?>"><br>
+    <label>Consultant:</label><br><input class="form-control form-control-lg" type="text" name="consultant" value="<?php echo $rows['consultant'] ?>"><br>
+    <label>Brand:</label><br><input class="form-control form-control-lg" type="text" name="brand" value="<?php echo $rows['brand'] ?>"><br>
+    <label>Intake:</label><br><input class="form-control form-control-lg" type="text" name="intake" value="<?php echo $rows['intake'] ?>"><br>
+    <label>Notes:</label><br><input class="form-control form-control-lg" type="text" name="notes" value="<?php echo $rows['notes'] ?>"><br>
+    <label>Visa Status:</label><br><input class="form-control form-control-lg" type="text" name="visa_status" value="<?php echo $rows['visa_status'] ?>"><br>
+    <label>Comments:</label><br><input class="form-control form-control-lg" type="text" name="comments" value="<?php echo $rows['comments'] ?>"><br>
     <br>
-    <input type="submit" value="Update" name="update_done">
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Update" name="update_done">
 <?php
 }
 
