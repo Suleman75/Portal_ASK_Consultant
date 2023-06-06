@@ -107,7 +107,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["use
 }
         ?>
         <?php
-if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"counsellor"))
+if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"accounts")||checkPrivilage($_SESSION["user_type"],"case_admin"))
 {
   ?>
 
