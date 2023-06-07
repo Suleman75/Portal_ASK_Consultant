@@ -44,6 +44,9 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 
 
 ?>
+<div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
     <label>Lead Priority:</label><br>
     <select name="priority_id" class="form-control form-control-lg">
         <?php
@@ -133,6 +136,7 @@ else
 }
 
 ?>
+</div></div></div>
 </form>
 
 <?php

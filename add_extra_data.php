@@ -16,6 +16,9 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
 
 ?>
 <form method="POST" style="margin-top:220px !important;">
+<div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
 <label>Enter Value: </label><br>
 <input type="text" name="extra_value" class="form-control form-control-lg"><br>
 <label>Select Type: </label><br>
@@ -31,6 +34,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
     <option value="follow_up_action">Follow Up Action</option>
 </select><br><br>
 <input type="submit" name="submit" value="Save" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">
+</div></div></div>
 </form>
 <?php
 }

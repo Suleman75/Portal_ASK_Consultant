@@ -22,6 +22,9 @@ if(isset($_POST["insert_done"]))
 
 
 ?>
+<div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
     <label>S.No:</label><?php echo $_POST["update_btn"];?><br>
     <input type="hidden" name="user_id" value="<?php echo $_POST["update_btn"];    ?>">
     <label>Follow Up Number:</label><br><input class="form-control form-control-lg" type="text" name="follow_up_number"><br>
@@ -62,6 +65,7 @@ if(isset($_POST["insert_done"]))
 
 
 ?>
+</div></div></div>
 </form>
 
 <?php
