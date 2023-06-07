@@ -44,7 +44,7 @@
       <ul class="navbar-nav">
 
       <?php
-    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor") || checkPrivilage($_SESSION["user_type"],"case_admin"))
     {
       ?>
         <li class="nav-item">
@@ -90,7 +90,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 
 ?>
 <?php
-if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"accounts")||checkPrivilage($_SESSION["user_type"],"case_admin"))
+if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"case_admin"))
 {
   ?>
 
@@ -107,12 +107,12 @@ if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["use
 }
         ?>
         <?php
-if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"accounts")||checkPrivilage($_SESSION["user_type"],"case_admin"))
+if(checkPrivilage($_SESSION["user_type"],"admin")||checkPrivilage($_SESSION["user_type"],"counsellor"))
 {
   ?>
 
         <li class="nav-item">
-          <a class="nav-link " href="add_inprocess.php">
+          <a class="nav-link " href="add_user.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>
@@ -129,7 +129,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
   ?>
 
         <li class="nav-item">
-          <a class="nav-link " href="show_users.php">
+          <a class="nav-link " href="add_completed.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>

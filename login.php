@@ -1,8 +1,7 @@
 <?php
 $page_name="Login";
-require("menu.php");
+require("login_menu.php");
 require("header.php");
-
 if(isset($_SESSION["username"]))
 {
     if($_SESSION["user_type"]=="counsellor" || $_SESSION["user_type"]=="admin")
@@ -14,7 +13,7 @@ if(isset($_SESSION["username"]))
         header("Location:show_inprocess.php");
     }
 }
-if($_SERVER["REQUEST_METHOD"] == "POST")
+if(isset($_POST["username"]))
 {
     
     $rows=selectNumRows("admin_info", " username='".$_POST["username"]."' AND password='".$_POST["password"]."'");
@@ -44,10 +43,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 ?>
 
-<form method="POST">
-    <label>Username:</label><br><input type="text" name="username"><br><br>
-    <label>Password:</label><br><input type="text" name="password"><br><br>
-    <input type="submit" value="Login" name="login">
+<form method="POST" style="margin-top:220px !important;">
+    <label>Username:</label><br><input class="form-control form-control-lg" type="text" name="username"><br><br>
+    <label>Password:</label><br><input class="form-control form-control-lg" type="password" name="password"><br><br>
+    <input class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0" type="submit" value="Login" name="login">
 </form>
 
 

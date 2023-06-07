@@ -37,7 +37,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 ?>
     <label>Case Assign Date:</label><br><input class="form-control form-control-lg" type="text" name="case_assign_date" ><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name" ><br>
-    <label>Phone Number:</label><br><input class="form-control form-control-lg" type="text" name="phone"><br>
+    <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone"><br>
     <label>Email:</label><br><input class="form-control form-control-lg" type="text" name="email" ><br>
     <label>Destination 1:</label><br><input class="form-control form-control-lg" type="text" name="destination_1"><br>
     <label>Counselor:</label><br><input class="form-control form-control-lg" type="text" name="counselor" ><br>

@@ -12,6 +12,7 @@ if(isset($_POST["update_done"]))
     $new_data["apply_date"]=$_POST["date"];
     $new_data["priority_id"]=$_POST["priority_id"];
     $new_data["full_name"]=$_POST["name"];
+    $new_data["email"]=$_POST["email"];
     if(selectNumRows("user_info","phone_number='".$_POST["phone"]."'")>0)
     {
         goto same_phone;
@@ -60,7 +61,8 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
     </select><br>
     <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date" value=""><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name"  value=""><br>
-    <label>Phone Number:</label><br><input class="form-control form-control-lg" type="text" name="phone" value=""><br>
+    <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone" value=""><br>
+    <label>Email:</label><br><input class="form-control form-control-lg" type="text" name="email"  value=""><br>
     <label>Source:</label><br>
     <select name="apply_source_id" class="form-control form-control-lg">
         <?php

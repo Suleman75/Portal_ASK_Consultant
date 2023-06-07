@@ -28,7 +28,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 ?>
     <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date"><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="full_name" ><br>
-    <label>Phone Number:</label><br><input class="form-control form-control-lg" type="text" name="phone" ><br>
+    <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone" ><br>
     <label>Country:</label><br><input class="form-control form-control-lg" type="text" name="country" ><br>
     <label>Course:</label><br><input class="form-control form-control-lg" type="text" name="course" ><br>
     <label>University:</label><br><input class="form-control form-control-lg" type="text" name="university" ><br>

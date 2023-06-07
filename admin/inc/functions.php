@@ -853,7 +853,7 @@ function time_elapsed_string($datetime, $full = false) {
 function get_all_data_follow($type,$date)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.follow_up_date LIKE '%$type%' AND follow.follow_up_date LIKE '%$date%';";
+    $query="SELECT users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.email,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.follow_up_date LIKE '%$type%' AND follow.follow_up_date LIKE '%$date%';";
     $result=$db->query($query);
     $row=$result->result_array();
     // fix_arrays($row);
@@ -871,7 +871,7 @@ function get_all_data_follow($type,$date)
 function get_all_data($min=0,$max=1000)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id WHERE users.enabled=1  AND users.id BETWEEN $min AND $max;";
+    $query="SELECT users.email,users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id WHERE users.enabled=1  AND users.id BETWEEN $min AND $max;";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;
@@ -887,7 +887,7 @@ function get_all_users()
 function get_single_user_data($id)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id where users.id=$id AND users.enabled=1;";
+    $query="SELECT users.email,users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id where users.id=$id AND users.enabled=1;";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;
@@ -1091,5 +1091,150 @@ function checkLoggedin()
         return false;
     }
     return false;
+}
+function show_leads_table()
+{
+    echo "<div class='card-body px-0 pt-0 pb-2'>
+    <div class='table-responsive p-0'><table class='table align-items-center mb-0'>";
+    echo "<thead><tr>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>S.No</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Lead priority</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Date</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Name</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Phone Number</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Email</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Sources</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Country</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Visited</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Inquiry Form Location</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Consultant</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Qualification</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Comments/Inquiry</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Expected Budget</th>";
+    
+    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+    {
+        echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Update</th>";
+        echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Delete</th>";
+    }
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Follow Up Data</th>";
+    echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Send to Inprocess</th>";
+    echo "</tr></thead><tbody>";
+}
+function show_leads_data($user_data)
+{
+    foreach($user_data as $rows)
+    {
+        // echo $i."-".$rows["full_name"]."<br>";
+        // $i++;
+    
+        
+    
+        echo "<tr>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['main_id']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['priority_name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold' style='width:10px !important;'>".$rows['apply_date']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['full_name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['phone_number']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['email']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['source_name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['country_name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['visited']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['inquiry_location']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['consultant_name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['qualification']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['comments']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['budget']."</td>";
+        if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+        {
+            echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_user.php'><input type='hidden' name='update' value='".$rows['main_id']."'><input style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs' type='submit' name='update_btn' value='Update'></form></td>";
+            echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_user.php'><input type='hidden' name='delete' value='".$rows['main_id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        }
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='follow_up.php'><input type='hidden' name='follow' value='".$rows['main_id']."'><input type='submit' name='follow_btn' value='Follow Up' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_inprocess.php'><input type='hidden' name='inprocess' value='".$rows['main_id']."'><input type='submit' name='inprocess_btn' value='Send to Inprocess' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        echo "</tr>";
+    
+    
+    
+        
+    }
+    echo "</tbody></table></div></div></div></div></div></div>";
+}
+function show_inprocess_table()
+{
+    echo "<div class='card-body px-0 pt-0 pb-2'>
+<div class='table-responsive p-0'><table class='table align-items-center mb-0'>";
+    echo "<thead><tr>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>S.No</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Case Assign Date</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Name</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Phone</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Email</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Destination 1</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Counseller</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Comments</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Fee Status</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Case Handler 1</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>University 1</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Outcome Destination 1</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Case Status 1</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Destination 2</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Case Handler 2</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>University 2</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Outcome Destination 2</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Case Status 2</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Course</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Intake</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Missing Documents</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Final Comments</th>";
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
+{
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Update</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Delete</th>";
+}
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Follow Up Data</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Send to Completed</th>";
+echo "</tr></thead>";
+}
+function show_inprocess_data($user_data)
+{
+    foreach($user_data as $rows)
+    {
+        echo "<tr>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['id']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['case_assign_date']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['phone']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['email']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['dest_1']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['consultant_name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['comments']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['status_name']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['admin']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['university_1']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['outcome_destination_1']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['case_status_1']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['dest_2']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['case_handler_2']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['university_2']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['outcome_destination_2']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['case_status_2']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['course']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['intake']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['missing_docs']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['final_comments']."</td>";
+        if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
+        {
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_inproces.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_inproces.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        }
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='follow_up_inprocess.php'><input type='hidden' name='follow' value='".$rows['id']."'><input type='submit' name='follow_btn' value='Follow Up' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_completed.php'><input type='hidden' name='completed' value='".$rows['id']."'><input type='submit' name='completed_btn' value='Send to Completed' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        echo "</tr>";
+    }
+    
+    
+    
+    echo "</tbody></table></div></div></div></div></div></div>";
 }
 ?>
