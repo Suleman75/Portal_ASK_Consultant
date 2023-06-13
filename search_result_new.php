@@ -17,23 +17,22 @@ if(isset($_POST["type"]))
 {
     $_SESSION["type"]=$_POST["type"];
     $_SESSION["date"]=$_POST["date"];
-    $_SESSION["date"] = date("j/n/Y", strtotime($_SESSION["date"]));
-}
-if(isset($_SESSION["type"]))
-{
-    
-    
-    // echo $_SESSION["date"];
-    $combined=$_SESSION["type"]." ".$_SESSION["date"];
-    $user_data=get_all_data_follow_new(strtolower($combined));
-    show_leads_table();
-
-    show_leads_data($user_data);
 }
 else
 {
     header("Location:show_data.php");
 }
+if(isset($_SESSION["type"]))
+{
+    
+    $_SESSION["date"] = date("j/n/Y", strtotime($_SESSION["date"]));
+    $combined=$_SESSION["date"]." ".$_SESSION["date"];
+    $user_data=get_all_data_follow_new(strtolower($combined));
+    show_leads_table();
+
+    show_leads_data($user_data);
+}
+
 // $i=0;
 // $old_id=0;
 

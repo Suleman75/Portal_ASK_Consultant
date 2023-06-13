@@ -17,19 +17,23 @@ if(checkLoggedin())
     {
         $_SESSION["type"]=$_POST["type"];
         $_SESSION["date"]=$_POST["date"];
+        
+        $_SESSION["date"] = date("j/n/Y", strtotime($_SESSION["date"]));
+        // echo $_SESSION["date"]."here";
+    }
+    
+    if(isset($_SESSION["type"]))
+    {
+    
+        $combined=$_SESSION["type"]." ".$_SESSION["date"];
+        $user_data=get_follow_inprocess_new(strtolower($combined));
+        show_inprocess_table();
+
+        show_inprocess_data($user_data);
     }
     else
     {
         header("Location:show_inprocess.php");
-    }
-    if(isset($_SESSION["type"]))
-    {
-    
-        $_SESSION["date"] = date("j/n/Y", strtotime($_SESSION["date"]));
-        $user_data=get_follow_inprocess(strtolower($_SESSION["type"]),$_SESSION["date"]);
-        show_inprocess_table();
-
-        show_inprocess_data($user_data);
     }
     // if(isset($_POST["user_id"]))
     // {

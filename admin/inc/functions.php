@@ -894,7 +894,17 @@ function get_all_data_follow($type,$date)
 {
     global $db, $dbPrefix, $list;
     $query="SELECT users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.email,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.follow_up_date LIKE '%$type%' AND follow.follow_up_date LIKE '%$date%';";
-    echo $query;
+    // echo $query;
+    $result=$db->query($query);
+    $row=$result->result_array();
+    // fix_arrays($row);
+    return $row;
+}
+function get_all_data_follow_new($date)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.email,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.follow_up_date ='$date'";
+    // echo $query;
     $result=$db->query($query);
     $row=$result->result_array();
     // fix_arrays($row);
@@ -915,6 +925,26 @@ function get_follow_inprocess($type,$date)
     INNER JOIN fee_status as fee1 ON in_process.fee_status=fee1.id
     LEFT JOIN follow_up_inprocess as follow ON in_process.id=follow.user_id
     WHERE in_process.enabled=1 AND follow.follow_up_date LIKE '%$type%' AND follow.follow_up_date LIKE '%$date%';";
+    // echo $query;
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
+function get_follow_inprocess_new($combined)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
+    ,des1.destination_name as dest_1,cou1.consultant_name,in_process.comments,fee1.status_name,in_process.admin,in_process.university_1,in_process.outcome_destination_1,case_status1.status_name as case_status_1,des2.destination_name as dest_2,
+    in_process.case_handler_2,in_process.intake,in_process.university_2,in_process.outcome_destination_2,case_status2.status_name as case_status_2,in_process.course,in_process.case_handler_2,in_process.missing_docs,in_process.final_comments 
+    FROM in_process as in_process 
+    INNER JOIN destination as des1 ON in_process.destination_1=des1.id
+    INNER JOIN destination as des2 ON in_process.destination_2=des2.id
+    INNER JOIN consultant as cou1 ON in_process.counselor=cou1.id 
+    INNER JOIN case_status as case_status1 ON in_process.case_status_1=case_status1.id 
+    INNER JOIN case_status as case_status2 ON in_process.case_status_2=case_status2.id 
+    INNER JOIN fee_status as fee1 ON in_process.fee_status=fee1.id
+    LEFT JOIN follow_up_inprocess as follow ON in_process.id=follow.user_id
+    WHERE in_process.enabled=1 AND follow.follow_up_date = '$combined';";
     // echo $query;
     $result=$db->query($query);
     $row=$result->result_array();
