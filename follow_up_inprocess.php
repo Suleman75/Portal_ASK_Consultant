@@ -1,20 +1,30 @@
+
 <?php
 $page_name="Inprocess Case - Follow Up";
 require("menu.php");
 require("header.php");
 
 
-
-
-if(isset($_GET["user_id"]))
-{
-    $_POST["follow"]=$_GET["user_id"];
-}
 if(isset($_POST["follow"]))
 {
+    $_SESSION["follow"]=$_POST["follow"];
+}
+?>
+<script>
+    if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<?php
+// if(isset($_GET["user_id"]))
+// {
+//     $_POST["follow"]=$_GET["user_id"];
+// }
+if(isset($_SESSION["follow"]))
+{
     
-    $user_data=get_single_inprocess($_POST["follow"]);    
-    $user_follow_up_data=get_single_follow_up_inprocess($_POST["follow"]);
+    $user_data=get_single_inprocess($_SESSION["follow"]);    
+    $user_follow_up_data=get_single_follow_up_inprocess($_SESSION["follow"]);
     if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor") || checkPrivilage($_SESSION["user_type"],"case_admin"))
     {
     ?>
@@ -24,10 +34,10 @@ if(isset($_POST["follow"]))
             <div class="card-header pb-0">
               <h6>Students Inprocess Follow Up</h6>
             </div>
-    <label>S.No: </label><?php echo $_POST["follow"]; ?><br>
+    <label>S.No: </label><?php echo $_SESSION["follow"]; ?><br>
     <label>Full Name: </label><?php echo $user_data[0]["name"]; ?><br>
     <form method='POST' action='add_followup_inprocess.php'>
-        <input type='hidden' name='update_btn' value='<?php echo $_POST["follow"];  ?>'>
+        <input type='hidden' name='update_btn' value='<?php echo $_SESSION["follow"];  ?>'>
         <label>Add Follow Up:</label><input type='submit' name='follow_btn' value='Follow Up' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'>
     </form>
     
@@ -65,8 +75,8 @@ if(isset($_POST["follow"]))
                     <?php
                     if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
                     {
-                        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
-                        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_followup.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+                        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_followup_inprocess.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+                        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_followup_inprocess.php'><input type='hidden' name='user_id' value='".$rows['user_id']."'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
                     }
                     ?>
                 </tr>

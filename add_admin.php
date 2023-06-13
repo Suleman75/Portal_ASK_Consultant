@@ -22,6 +22,10 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
 <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
+        <?php
+                echo "<label class='form-control-lg'>Seriel Number: ".(get_max_id("admin_info")+1)."</label>";
+            ?>
+            <br>
 <label>User Type:</label><br>
     <select name="user_type" class="form-control form-control-lg">
         <option value="admin">Admin</option>

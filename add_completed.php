@@ -4,6 +4,7 @@ require("menu.php");
 require("header.php");
 if(isset($_POST["update_done"]))
 {
+    $new_data["id"]=$_POST["id"];
     $new_data["date"]=$_POST["date"];
     $new_data["full_name"]=$_POST["full_name"];
     $new_data["phone"]=$_POST["phone"];
@@ -30,6 +31,12 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
+        <?php
+        $max=maxId("user_info")+1;
+                echo "<label class='form-control-lg'>Seriel Number: ".(maxId("completed")+1)."</label>";
+            ?>
+            <br>
+            <input type="hidden" name="id" value="<?php echo $max; ?>">
     <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date"><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="full_name" ><br>
     <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone" ><br>

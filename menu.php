@@ -22,11 +22,26 @@
     <?php
     require("config.php");
     ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
-    /* table, th, td {
-        border: 1px solid black;
-    } */
+    table, th, td {
+        border: 1px solid black !important;
+    }
+    .clickedrow
+    {
+      background-color: #EEEEEE;
+    }
     </style>
+    <script>
+      $(document).ready(function() {
+      $('.table td').on('click', function() 
+      {
+        $(this).closest('table').find('tr.clickedrow').removeClass('clickedrow');
+        // add highlight to the parent tr of the clicked td
+        $(this).closest('tr').addClass("clickedrow");
+      });
+    });
+    </script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">

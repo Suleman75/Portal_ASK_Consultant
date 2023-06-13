@@ -23,13 +23,17 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
 <input type="text" name="extra_value" class="form-control form-control-lg"><br>
 <label>Select Type: </label><br>
 <select name="extras" class="form-control form-control-lg">
-        
+        <!-- Leads  -->
     <option value="consultant">Consultant Name</option>
     <option value="country">Country</option>
     <option value="inquiry_form_location">Inquiry Form Location</option>
     <option value="lead_priority">Lead Priority Name</option>
     <option value="source">Source Name</option>
-
+        <!-- In Process  -->
+    <option value="case_status">Case Status</option>
+    <option value="destination">Destination</option>
+    <option value="fee_status">Fee Status</option>
+        <!-- Follow Up -->
     <option value="call_outcome">Call Outcome</option>    
     <option value="follow_up_action">Follow Up Action</option>
 </select><br><br>

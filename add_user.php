@@ -9,6 +9,7 @@ $inquiry=selectData("inquiry_form_location","enabled=1");
 $consultant=selectData("consultant","enabled=1");
 if(isset($_POST["update_done"]))
 {
+    $new_data["id"]=$_POST["id"];
     $new_data["apply_date"]=$_POST["date"];
     $new_data["priority_id"]=$_POST["priority_id"];
     $new_data["full_name"]=$_POST["name"];
@@ -47,6 +48,11 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
+            <?php
+            $max=maxId("user_info")+1;
+                echo "<label class='form-control-lg'>Seriel Number: ".(maxId("user_info")+1)."</label>";
+            ?>
+            <br>
     <label>Lead Priority:</label><br>
     <select name="priority_id" class="form-control form-control-lg">
         <?php
@@ -62,7 +68,8 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
             }
         ?>
     </select><br>
-    <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date" value=""><br>
+    <input type="hidden" name="id" value="<?php echo $max; ?>">
+    <label>Date:</label><br><input class="form-control form-control-lg" type="date" name="date" value=""><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name"  value=""><br>
     <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone" value=""><br>
     <label>Email:</label><br><input class="form-control form-control-lg" type="text" name="email"  value=""><br>

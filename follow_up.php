@@ -4,17 +4,22 @@ require("menu.php");
 require("header.php");
 
 
-
-
-if(isset($_GET["user_id"]))
-{
-    $_POST["follow"]=$_GET["user_id"];
-}
 if(isset($_POST["follow"]))
 {
+    $_SESSION["follow"]=$_POST["follow"];
+}
+?>
+<script>
+    if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<?php
+if(isset($_SESSION["follow"]))
+{
     
-    $user_data=get_single_user_data($_POST["follow"]);    
-    $user_follow_up_data=get_single_follow_up($_POST["follow"]);
+    $user_data=get_single_user_data($_SESSION["follow"]);    
+    $user_follow_up_data=get_single_follow_up($_SESSION["follow"]);
     if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor") || checkPrivilage($_SESSION["user_type"],"case_admin"))
     {
     ?>
@@ -24,10 +29,10 @@ if(isset($_POST["follow"]))
             <div class="card-header pb-0">
               <h6>Leads Follow Up</h6>
             </div>
-    <label>S.No: </label><?php echo $_POST["follow"]; ?><br>
+    <label>S.No: </label><?php echo $_SESSION["follow"]; ?><br>
     <label>Full Name: </label><?php echo $user_data[0]["full_name"]; ?><br>
     <form method='POST' action='add_followup_leads.php'>
-        <input type='hidden' name='update_btn' value='<?php echo $_POST["follow"];  ?>'>
+        <input type='hidden' name='update_btn' value='<?php echo $_SESSION["follow"];  ?>'>
         <label>Add Follow Up:</label><input type='submit' name='follow_btn' value='Follow Up' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'>
     </form>
             <div class='card-body px-0 pt-0 pb-2'>
