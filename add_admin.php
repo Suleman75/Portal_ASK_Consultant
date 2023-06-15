@@ -23,7 +23,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin"))
       <div class="row">
         <div class="col-12">
         <?php
-                echo "<label class='form-control-lg'>Seriel Number: ".(get_max_id("admin_info")+1)."</label>";
+                echo "<label class='form-control-lg'>Serial Number: ".(get_max_id("admin_info")+1)."</label>";
             ?>
             <br>
 <label>User Type:</label><br>

@@ -13,7 +13,7 @@ require("header.php");
 if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts"))
 {
 $outcome=selectData("completed","enabled=1");
-
+create_forms_completed($page_name);
 show_completed_table();
 
 show_completed_data($outcome);

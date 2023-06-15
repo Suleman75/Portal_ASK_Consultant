@@ -1,5 +1,5 @@
 <?php
-$page_name="Show Inprocess Case";
+$page_name="Show Completed Case";
 require("menu.php");
 require("header.php");
 ?>
@@ -20,18 +20,18 @@ if(checkLoggedin())
 {
     if(isset($_SESSION["user_id"]))
     {
-        create_forms_inprocess($page_name);
+        create_forms_completed($page_name);
         // $outcome=get_follow_up_data();
-        $user_data=get_single_inprocess_new($_SESSION["user_id"]);
-        show_inprocess_table();
+        $user_data=get_single_completed_new($_SESSION["user_id"]);
+        show_completed_table();
         
 
-        show_inprocess_data($user_data);
+        show_completed_data($user_data);
 
     }
     else
     {
-        header("Location:show_inprocess.php");
+        header("Location:show_completed.php");
     }
 
 }

@@ -983,6 +983,14 @@ function get_single_user_data($id)
     $row=$result->result_array();
     return $row;
 }
+function get_single_user_data_new($id)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT users.email,users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id where (users.id LIKE '%$id%' OR users.full_name LIKE '%$id%' OR users.email LIKE '%$id%' OR users.apply_date LIKE '%$id%' OR users.phone_number LIKE '%$id%') AND users.enabled=1;";
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
 function get_single_inprocess($id)
 {
     global $db, $dbPrefix, $list;
@@ -996,6 +1004,33 @@ function get_single_inprocess($id)
     INNER JOIN case_status as case_status2 ON in_process.case_status_2=case_status2.id 
     INNER JOIN consultant as cou1 ON in_process.counselor=cou1.id 
     INNER JOIN fee_status as fee1 ON in_process.fee_status=fee1.id WHERE in_process.enabled=1 AND in_process.id=$id;";
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
+function get_single_inprocess_new($id)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
+    ,des1.destination_name as dest_1,cou1.consultant_name,in_process.comments,fee1.status_name,in_process.admin,in_process.university_1,in_process.outcome_destination_1,case_status1.status_name as case_status_1,des2.destination_name as dest_2,
+    in_process.case_handler_2,in_process.intake,in_process.university_2,in_process.outcome_destination_2,case_status2.status_name as case_status_2,in_process.course,in_process.case_handler_2,in_process.missing_docs,in_process.final_comments 
+    FROM in_process as in_process 
+    INNER JOIN destination as des1 ON in_process.destination_1=des1.id
+    INNER JOIN destination as des2 ON in_process.destination_2=des2.id
+    INNER JOIN case_status as case_status1 ON in_process.case_status_1=case_status1.id 
+    INNER JOIN case_status as case_status2 ON in_process.case_status_2=case_status2.id 
+    INNER JOIN consultant as cou1 ON in_process.counselor=cou1.id 
+    INNER JOIN fee_status as fee1 ON in_process.fee_status=fee1.id WHERE in_process.enabled=1 AND (in_process.id LIKE '%$id%' OR in_process.ask_email LIKE '%$id%' OR in_process.case_assign_date LIKE '%$id%' OR in_process.name LIKE '%$id%' OR in_process.phone LIKE '%$id%' OR in_process.email LIKE '%$id%' OR fee1.status_name LIKE '%$id%' OR case_status1.status_name LIKE '%$id%' OR case_status2.status_name LIKE '%$id%');";
+    $result=$db->query($query);
+    $row=$result->result_array();
+    return $row;
+}
+function get_single_completed_new($id)
+{
+    global $db, $dbPrefix, $list;
+    $query="SELECT * FROM completed 
+    WHERE `enabled`=1 AND 
+    (id LIKE '%$id%' OR phone LIKE '%$id%' OR `date` LIKE '%$id%' OR full_name LIKE '%$id%' OR country LIKE '%$id%' OR university LIKE '%$id%' OR consultant LIKE '%$id%' OR visa_status LIKE '%$id%' OR intake LIKE '%$id%');";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;
@@ -1205,10 +1240,10 @@ function show_leads_table()
     if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
     {
         echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Update</th>";
-        echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
+        
     }
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Follow Up Data</th>";
-    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send to Inprocess</th>";
+    
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Lead priority</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Date</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Name</th>";
@@ -1222,8 +1257,11 @@ function show_leads_table()
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Qualification</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Comments/Inquiry</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Expected Budget</th>";
-    
-    
+    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send to Inprocess</th>";
+    if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+    {
+        echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
+    }
     echo "</tr></thead><tbody>";
 }
 function show_leads_data($user_data)
@@ -1240,10 +1278,10 @@ function show_leads_data($user_data)
         if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
         {
             echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_user.php'><input type='hidden' name='update' value='".$rows['main_id']."'><input style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs' type='submit' name='update_btn' value='Update'></form></td>";
-            echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_user.php'><input type='hidden' name='delete' value='".$rows['main_id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+            
         }
         echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='follow_up.php'><input type='hidden' name='follow' value='".$rows['main_id']."'><input type='submit' name='follow_btn' value='Follow Up' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_inprocess.php'><input type='hidden' name='inprocess' value='".$rows['main_id']."'><input type='submit' name='inprocess_btn' value='Send to Inprocess' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['priority_name']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold' style='width:10px !important;'>".$rows['apply_date']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['full_name']."</td>";
@@ -1257,7 +1295,11 @@ function show_leads_data($user_data)
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['qualification']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['comments']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['budget']."</td>";
-        
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_inprocess.php'><input type='hidden' name='inprocess' value='".$rows['main_id']."'><input type='submit' name='inprocess_btn' value='Send to Inprocess' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+        {
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_user.php'><input type='hidden' name='delete' value='".$rows['main_id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        }
         echo "</tr>";
     
     
@@ -1275,10 +1317,10 @@ echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-1
 if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
 {
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Update</th>";
-echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
+
 }
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Follow Up Data</th>";
-echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send to Completed</th>";
+
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Case Assign Date</th>";
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Name</th>";
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Phone</th>";
@@ -1302,6 +1344,11 @@ echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-1
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Missing Documents</th>";
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Final Comments</th>";
 
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
+{
+    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
+}
+echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send to Completed</th>";
 echo "</tr></thead>";
 }
 function show_inprocess_data($user_data)
@@ -1313,10 +1360,10 @@ function show_inprocess_data($user_data)
         if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
         {
         echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_inproces.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_inproces.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        
         }
         echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='follow_up_inprocess.php'><input type='hidden' name='follow' value='".$rows['id']."'><input type='submit' name='follow_btn' value='Follow Up' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
-        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_completed.php'><input type='hidden' name='completed' value='".$rows['id']."'><input type='submit' name='completed_btn' value='Send to Completed' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['case_assign_date']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['name']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['phone']."</td>";
@@ -1339,7 +1386,11 @@ function show_inprocess_data($user_data)
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['intake']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['missing_docs']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['final_comments']."</td>";
-        
+        if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
+        {
+            echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_inproces.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        }
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_completed.php'><input type='hidden' name='completed' value='".$rows['id']."'><input type='submit' name='completed_btn' value='Send to Completed' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
         echo "</tr>";
     }
     
@@ -1354,7 +1405,7 @@ function show_completed_table()
         echo "<thead><tr>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>S.No</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Update</th>";
-    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
+    
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Date</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Name</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Phone</th>";
@@ -1367,7 +1418,7 @@ function show_completed_table()
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Notes</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Visa Status</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Comments</th>";
-    
+    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
     
     
     echo "</tr></thead>";
@@ -1379,7 +1430,7 @@ function show_completed_data($user_data)
     echo "<tr>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['id']."</td>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_completed.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
-    echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_completed.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";   
+    
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['date']."</td>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['full_name']."</td>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['phone']."</td>";
@@ -1392,7 +1443,7 @@ function show_completed_data($user_data)
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['notes']."</td>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['visa_status']."</td>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['comments']."</td>";
-    
+    echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_completed.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";   
     echo "</tr>";
 }
 echo "</tbody></table></div></div></div></div></div></div>";
@@ -1477,6 +1528,53 @@ function create_forms_inprocess($page)
 
 <div class="text-center d-flex justify-content-center">
 
+<br><br><br>
+</div></div></div></div>
+<div class="container-fluid py-4">
+      <div class="row">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6><?php echo $page;   ?></h6>
+            </div>
+
+<?php
+}
+function create_extra_data_table()
+{
+    echo "<table class='table align-items-center mb-0'>";
+    echo "<thead><tr>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>S.No</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Value</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Update</th>";
+echo "<th class='text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7'>Delete</th>";
+echo "</tr>";
+}
+function create_extra_data_table_data($row)
+{
+    foreach($row as $rows)
+    {
+        $vals=array_values($rows);
+        echo "<tr>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$vals[0]."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$vals[1]."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='update_extra_data.php'><input type='hidden' name='update' value='".$rows['id']."'><input type='submit' name='update_btn' value='Update' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_extra_data.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        echo "</tr>";
+    }
+}
+function create_forms_completed($page)
+{
+    ?>
+<div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+<form method="POST" action="show_single_completed.php" style="margin-top:50px !important;">
+<label>Search: </label><br><input class="form-control form-control-sm" type="text" name="user_id"><br><br>
+<div class="text-center d-flex justify-content-center">
+<input class="btn btn-sm btn-primary btn-lg w-40 mt-4 mb-0" type="submit" value="Search"><br>
+</div>
+</form>
+<div class="text-center d-flex justify-content-center">
 <br><br><br>
 </div></div></div></div>
 <div class="container-fluid py-4">

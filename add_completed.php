@@ -33,7 +33,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
         <div class="col-12">
         <?php
         $max=maxId("user_info")+1;
-                echo "<label class='form-control-lg'>Seriel Number: ".(maxId("completed")+1)."</label>";
+                echo "<label class='form-control-lg'>Serial Number: ".(maxId("completed")+1)."</label>";
             ?>
             <br>
             <input type="hidden" name="id" value="<?php echo $max; ?>">

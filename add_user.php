@@ -10,6 +10,7 @@ $consultant=selectData("consultant","enabled=1");
 if(isset($_POST["update_done"]))
 {
     $new_data["id"]=$_POST["id"];
+    $_POST["date"] = date("j/n/Y", strtotime($_POST["date"]));
     $new_data["apply_date"]=$_POST["date"];
     $new_data["priority_id"]=$_POST["priority_id"];
     $new_data["full_name"]=$_POST["name"];
@@ -50,7 +51,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
         <div class="col-12">
             <?php
             $max=maxId("user_info")+1;
-                echo "<label class='form-control-lg'>Seriel Number: ".(maxId("user_info")+1)."</label>";
+                echo "<label class='form-control-lg'>Serial Number: ".(maxId("user_info")+1)."</label>";
             ?>
             <br>
     <label>Lead Priority:</label><br>

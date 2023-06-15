@@ -20,7 +20,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
 {
 if(isset($_SESSION["user_id"]))
 {
-    $user_data=get_single_user_data($_SESSION["user_id"]);
+    $user_data=get_single_user_data_new($_SESSION["user_id"]);
     show_leads_table();
     
 

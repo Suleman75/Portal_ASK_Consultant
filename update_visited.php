@@ -1,5 +1,5 @@
 <?php
-$file = fopen("test1.csv","r");
+$file = fopen("test3.csv","r");
 require("config.php");
 $i=0;
 $remove="-!@#$%^&*()=+][{};':/.,<>";
@@ -12,8 +12,6 @@ while (($line = fgetcsv($file)) !== FALSE) {
         $i++;
         continue;
     }
-    $followupdata["user_id"]=$line[0];
-    $followupdata["follow_up_date"]=$line[48];
-    $followupdata["follow_up_number"]=7;
-    $follow_up_id = insertData('follow_up_info', $followupdata);
+    $followupdata["visited"]=$line[8];
+    $follow_up_id = updateData('user_info', $followupdata,"id=".$line[0]);
 }
