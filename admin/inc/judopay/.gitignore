@@ -1,9 +1,0 @@
-
-bin
-doc
-vendor
-composer.phar
-*.log
-.idea
-
-php-cs-fixer.phar

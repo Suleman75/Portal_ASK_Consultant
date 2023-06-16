@@ -2,25 +2,33 @@
 $page_name="Show Students";
 require("menu.php");
 require("header.php");
-
-if(!isset($_POST["min"]) || !isset($_POST["max"]))
+?>
+<script>
+    if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<?php
+if(!isset($_SESSION["min"]) || !isset($_SESSION["max"]))
 {
-    $_POST["min"]=1000;
-    $_POST["max"]=2000;
+    $_SESSION["min"]=1000;
+    $_SESSION["max"]=2000;
 }
 if(isset($_POST["pagenumber"]))
 {
+    $_SESSION["min"]=1000;
+    $_SESSION["max"]=2000;
     for($i=1;$i<$_POST["pagenumber"];$i++)
     {
-        $_POST["min"]=$_POST["min"]+1000;
-        $_POST["max"]=$_POST["max"]+1000;
+        $_SESSION["min"]=$_SESSION["min"]+1000;
+        $_SESSION["max"]=$_SESSION["max"]+1000;
     }
     
 }
-if(isset($_POST["min"]) || isset($_POST["max"]))
+if(isset($_SESSION["min"]) || isset($_SESSION["max"]))
 {
-    $min=$_POST["min"];
-    $max=$_POST["max"];
+    $min=$_SESSION["min"];
+    $max=$_SESSION["max"];
 }
 
 $user_data=get_all_data($min,$max);
