@@ -24,6 +24,7 @@ if(isset($_POST["username"]))
         {
             $_SESSION["user_type"]=$rows["user_type"];
             $_SESSION["username"]=$rows["username"];
+            $_SESSION["full_name"]=$rows["full_name"];
         }
         if($_SESSION["user_type"]=="counsellor" || $_SESSION["user_type"]=="admin")
         {

@@ -903,7 +903,7 @@ function get_all_data_follow($type,$date)
 function get_all_data_follow_new($date)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.email,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.follow_up_date ='$date'";
+    $query="SELECT users.insert_admin,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.email,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name, follow.id,follow.user_id,follow.follow_up_number,follow.follow_up_date,follow.additional_comment,follow.staff_member,actions.action_name,outcome.outcome_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id LEFT JOIN follow_up_info as follow ON users.id=follow.user_id INNER JOIN call_outcome as outcome on follow.follow_up_outcome_id=outcome.id INNER JOIN follow_up_action as actions ON follow.follow_up_action_id=actions.id WHERE follow.follow_up_date ='$date'";
     // echo $query;
     $result=$db->query($query);
     $row=$result->result_array();
@@ -933,7 +933,7 @@ function get_follow_inprocess($type,$date)
 function get_follow_inprocess_new($combined)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
+    $query="SELECT in_process.insert_admin,in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
     ,des1.destination_name as dest_1,cou1.consultant_name,in_process.comments,fee1.status_name,in_process.admin,in_process.university_1,in_process.outcome_destination_1,case_status1.status_name as case_status_1,des2.destination_name as dest_2,
     in_process.case_handler_2,in_process.intake,in_process.university_2,in_process.outcome_destination_2,case_status2.status_name as case_status_2,in_process.course,in_process.case_handler_2,in_process.missing_docs,in_process.final_comments 
     FROM in_process as in_process 
@@ -962,7 +962,7 @@ function get_follow_inprocess_new($combined)
 function get_all_data($min=0,$max=1000)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.email,users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id WHERE users.enabled=1  AND users.id BETWEEN $min AND $max;";
+    $query="SELECT users.insert_admin,users.email,users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id WHERE users.enabled=1  AND users.id BETWEEN $min AND $max;";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;
@@ -986,7 +986,7 @@ function get_single_user_data($id)
 function get_single_user_data_new($id)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT users.email,users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id where (users.id LIKE '%$id%' OR users.full_name LIKE '%$id%' OR users.email LIKE '%$id%' OR users.apply_date LIKE '%$id%' OR users.phone_number LIKE '%$id%') AND users.enabled=1;";
+    $query="SELECT users.insert_admin,users.email,users.enabled,users.id as main_id,users.apply_date, users.full_name,users.phone_number,users.visited,users.qualification,users.comments,users.budget,lead.priority_name,sources.source_name,countries.country_name,inquiry.inquiry_location,consultants.consultant_name FROM user_info as users INNER JOIN lead_priority as lead on users.priority_id=lead.id INNER JOIN source as sources on users.apply_source_id=sources.id INNER JOIN country as countries ON users.country_id=countries.id INNER JOIN inquiry_form_location as inquiry ON users.inquiry_form_location_id=inquiry.id INNER JOIN consultant as consultants ON users.consultant_id=consultants.id where (users.id LIKE '%$id%' OR users.full_name LIKE '%$id%' OR users.email LIKE '%$id%' OR users.apply_date LIKE '%$id%' OR users.phone_number LIKE '%$id%') AND users.enabled=1;";
     $result=$db->query($query);
     $row=$result->result_array();
     return $row;
@@ -1011,7 +1011,7 @@ function get_single_inprocess($id)
 function get_single_inprocess_new($id)
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
+    $query="SELECT in_process.insert_admin,in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
     ,des1.destination_name as dest_1,cou1.consultant_name,in_process.comments,fee1.status_name,in_process.admin,in_process.university_1,in_process.outcome_destination_1,case_status1.status_name as case_status_1,des2.destination_name as dest_2,
     in_process.case_handler_2,in_process.intake,in_process.university_2,in_process.outcome_destination_2,case_status2.status_name as case_status_2,in_process.course,in_process.case_handler_2,in_process.missing_docs,in_process.final_comments 
     FROM in_process as in_process 
@@ -1070,7 +1070,7 @@ function get_single_follow_up_for_one($id)
 function get_follow_up_data()
 {
     global $db, $dbPrefix, $list;
-    $query="SELECT in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
+    $query="SELECT in_process.insert_admin,in_process.ask_email,in_process.id,in_process.case_assign_date,in_process.name,in_process.phone,in_process.email
     ,des1.destination_name as dest_1,cou1.consultant_name,in_process.comments,fee1.status_name,in_process.admin,in_process.university_1,in_process.outcome_destination_1,case_status1.status_name as case_status_1,des2.destination_name as dest_2,
     in_process.case_handler_2,in_process.intake,in_process.university_2,in_process.outcome_destination_2,case_status2.status_name as case_status_2,in_process.course,in_process.case_handler_2,in_process.missing_docs,in_process.final_comments 
     FROM in_process as in_process 
@@ -1135,6 +1135,43 @@ function get_max_id($table="")
         $count=$rows["maxid"];
     }
     return $count;
+}
+function selectCount($table="",$where="", $data=array()) {
+    global $db, $dbPrefix, $list;
+    
+    if ($table == "") {
+        return false;
+    }
+    if($data!=null)
+    {
+        $columns = array();
+        $values = array_values($data);
+        foreach ($data as $key=>$value) {
+            $columns[] = $key . ' = ?';
+        }
+        $columns = implode(', ', $columns);
+    }
+    $sql = 'SELECT COUNT(*) as amount FROM ' . $dbPrefix . $table;
+    
+    if ($where != "") {
+        $sql .= ' WHERE ' . $where; 
+    }
+    if($data==null)
+    {
+        $update = $db->query($sql);
+    }
+    else
+    {
+        $update = $db->query($sql, $values);
+    }
+    echo $sql;
+    //echo $db->last_query();
+    $row=$update->result_array();
+    foreach($row as $rows)
+    {
+        return $rows["amount"];
+    }
+    // return $row;
 }
 function selectData($table="",$where="", $data=array()) {
     global $db, $dbPrefix, $list;
@@ -1257,6 +1294,7 @@ function show_leads_table()
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Qualification</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Comments/Inquiry</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Expected Budget</th>";
+    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Insertion Admin</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send to Inprocess</th>";
     if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
     {
@@ -1295,6 +1333,7 @@ function show_leads_data($user_data)
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['qualification']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['comments']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['budget']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['insert_admin']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_inprocess.php'><input type='hidden' name='inprocess' value='".$rows['main_id']."'><input type='submit' name='inprocess_btn' value='Send to Inprocess' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
         if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
         {
@@ -1343,10 +1382,11 @@ echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-1
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Intake</th>";
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Missing Documents</th>";
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Final Comments</th>";
-
+echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Insertion Admin</th>";
 if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
 {
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
+    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send Back to Leads</th>";
 }
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send to Completed</th>";
 echo "</tr></thead>";
@@ -1386,9 +1426,11 @@ function show_inprocess_data($user_data)
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['intake']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['missing_docs']."</td>";
         echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['final_comments']."</td>";
+        echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['insert_admin']."</td>";
         if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
         {
             echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_inproces.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+            echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_back_to_leads.php'><input type='hidden' name='send_back' value='".$rows['id']."'><input type='submit' name='send_back_btn' value='Send Back to Leads' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
         }
         echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_completed.php'><input type='hidden' name='completed' value='".$rows['id']."'><input type='submit' name='completed_btn' value='Send to Completed' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
         echo "</tr>";
@@ -1418,8 +1460,9 @@ function show_completed_table()
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Notes</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Visa Status</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Comments</th>";
+    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Insertion Admin</th>";
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
-    
+    echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send Back To Inprocess</th>";
     
     echo "</tr></thead>";
 }
@@ -1443,7 +1486,10 @@ function show_completed_data($user_data)
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['notes']."</td>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['visa_status']."</td>";
     echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['comments']."</td>";
+    echo "<td class='text-center text-secondary text-xs font-weight-bold'>".$rows['insert_admin']."</td>";
+    
     echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_completed.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";   
+    echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_back_to_inprocess.php'><input type='hidden' name='send_back' value='".$rows['id']."'><input type='submit' name='send_back_btn' value='Send Back To Inprocess' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";   
     echo "</tr>";
 }
 echo "</tbody></table></div></div></div></div></div></div>";

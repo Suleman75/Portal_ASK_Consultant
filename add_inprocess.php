@@ -10,6 +10,10 @@ $status=selectData("case_status","enabled=1");
 if(isset($_POST["update_done"]))
 {
     $new_data["id"]=$_POST["id"];
+    if(isset($_POST["manual_id"]) || $_POST["manual_id"]!="" || $_POST["manual_id"]!=0)
+    {
+        $new_data["id"]=$_POST["manual_id"];
+    }
     $new_data["case_assign_date"]=$_POST["case_assign_date"];
     $new_data["name"]=$_POST["name"];
     $new_data["phone"]=$_POST["phone"];
@@ -32,6 +36,7 @@ if(isset($_POST["update_done"]))
     $new_data["intake"]=$_POST["intake"];
     $new_data["missing_docs"]=$_POST["missing_docs"];
     $new_data["final_comments"]=$_POST["final_comments"];
+    $new_data["insert_admin"]=$_SESSION["full_name"];
     insertData("in_process",$new_data,"id=".$_POST["id"]);
     header("Location:show_inprocess.php");
 }
@@ -50,7 +55,8 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
                 echo "<label class='form-control-lg'>Serial Number: ".(maxId("in_process")+1)."</label>";
             ?>
             <br>
-            <input type="hidden" name="id" value="<?php echo $max; ?>">
+    <input type="hidden" name="id" value="<?php echo $max; ?>">
+    <label>Serial Number:</label><br><input class="form-control form-control-lg" type="number" name="manual_id" value=""><br>
     <label>Case Assign Date:</label><br><input class="form-control form-control-lg" type="text" name="case_assign_date" ><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name" ><br>
     <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone"><br>

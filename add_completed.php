@@ -5,6 +5,10 @@ require("header.php");
 if(isset($_POST["update_done"]))
 {
     $new_data["id"]=$_POST["id"];
+    if(isset($_POST["manual_id"]) || $_POST["manual_id"]!="" || $_POST["manual_id"]!=0)
+    {
+        $new_data["id"]=$_POST["manual_id"];
+    }
     $new_data["date"]=$_POST["date"];
     $new_data["full_name"]=$_POST["full_name"];
     $new_data["phone"]=$_POST["phone"];
@@ -17,6 +21,7 @@ if(isset($_POST["update_done"]))
     $new_data["notes"]=$_POST["notes"];
     $new_data["visa_status"]=$_POST["visa_status"];
     $new_data["comments"]=$_POST["comments"];
+    $new_data["insert_admin"]=$_POST["full_name"];
     insertData("completed",$new_data,"id=".$_POST["id"]);
     header("Location:show_completed.php");
 }
@@ -36,7 +41,8 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
                 echo "<label class='form-control-lg'>Serial Number: ".(maxId("completed")+1)."</label>";
             ?>
             <br>
-            <input type="hidden" name="id" value="<?php echo $max; ?>">
+    <input type="hidden" name="id" value="<?php echo $max; ?>">
+    <label>Serial Number:</label><br><input class="form-control form-control-lg" type="number" name="manual_id" value=""><br>
     <label>Date:</label><br><input class="form-control form-control-lg" type="text" name="date"><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="full_name" ><br>
     <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone" ><br>

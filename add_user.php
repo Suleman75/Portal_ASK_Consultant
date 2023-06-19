@@ -10,6 +10,10 @@ $consultant=selectData("consultant","enabled=1");
 if(isset($_POST["update_done"]))
 {
     $new_data["id"]=$_POST["id"];
+    if(isset($_POST["manual_id"]) || $_POST["manual_id"]!="" || $_POST["manual_id"]!=0)
+    {
+        $new_data["id"]=$_POST["manual_id"];
+    }
     $_POST["date"] = date("j/n/Y", strtotime($_POST["date"]));
     $new_data["apply_date"]=$_POST["date"];
     $new_data["priority_id"]=$_POST["priority_id"];
@@ -31,6 +35,7 @@ if(isset($_POST["update_done"]))
     $new_data["qualification"]=$_POST["qualification"];
     $new_data["comments"]=$_POST["comment"];
     $new_data["budget"]=$_POST["budget"];
+    $new_data["insert_admin"]=$_SESSION["full_name"];
     insertData("user_info",$new_data);
     header("Location:show_data.php");
 
@@ -70,6 +75,7 @@ if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["u
         ?>
     </select><br>
     <input type="hidden" name="id" value="<?php echo $max; ?>">
+    <label>Serial Number:</label><br><input class="form-control form-control-lg" type="number" name="manual_id" value=""><br>
     <label>Date:</label><br><input class="form-control form-control-lg" type="date" name="date" value=""><br>
     <label>Name:</label><br><input class="form-control form-control-lg" type="text" name="name"  value=""><br>
     <label>Phone Number:</label><br><input required class="form-control form-control-lg" type="text" name="phone" value=""><br>

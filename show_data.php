@@ -11,13 +11,13 @@ require("header.php");
 <?php
 if(!isset($_SESSION["min"]) || !isset($_SESSION["max"]))
 {
-    $_SESSION["min"]=1000;
+    $_SESSION["min"]=0;
     $_SESSION["max"]=2000;
 }
 if(isset($_POST["pagenumber"]))
 {
-    $_SESSION["min"]=1000;
-    $_SESSION["max"]=2000;
+    $_SESSION["min"]=0;
+    $_SESSION["max"]=1000;
     for($i=1;$i<$_POST["pagenumber"];$i++)
     {
         $_SESSION["min"]=$_SESSION["min"]+1000;

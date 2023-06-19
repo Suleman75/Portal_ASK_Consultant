@@ -1,14 +1,14 @@
 <?php
 
-if(isset($_POST["inprocess"]))
+if(isset($_POST["send_back"]))
 {
     require("config.php");
     $data12["enabled"]=0;
-    $user_data=selectData("user_info","id=".$_POST["inprocess"]);
-    if(selectCount("in_process","id=".$_POST["inprocess"])>0)
+    $user_data=selectData("completed","id=".$_POST["send_back"]);
+    if(selectCount("in_process","id=".$_POST["send_back"])>0)
     {
         $data["enabled"]=1;
-        disableData("in_process",$data,"id=".$_POST["inprocess"]);
+        disableData("in_process",$data,"id=".$_POST["send_back"]);
     }
     else
     {
@@ -30,12 +30,12 @@ if(isset($_POST["inprocess"]))
         }
     }
     
-    disableData("user_info",$data12,"id=".$_POST["inprocess"]);
-    header("Location:show_data.php");
+    disableData("completed",$data12,"id=".$_POST["send_back"]);
+    header("Location:show_completed.php");
 }
 else
 {
-    header("Location:show_data.php");
+    header("Location:show_completed.php");
 }
 
 
