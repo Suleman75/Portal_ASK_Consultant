@@ -10,7 +10,7 @@ require("header.php");
               <h6>Students Completed Cases</h6>
             </div>
 <?php
-if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts"))
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
 {
 $outcome=selectData("completed","enabled=1");
 create_forms_completed($page_name);

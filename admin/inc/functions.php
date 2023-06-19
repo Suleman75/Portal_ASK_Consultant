@@ -1386,6 +1386,10 @@ echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-1
 if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
 {
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Delete</th>";
+    
+}
+if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+{
     echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send Back to Leads</th>";
 }
 echo "<th class='text-center text-uppercase text-xs font-weight-bolder opacity-10'>Send to Completed</th>";
@@ -1430,6 +1434,10 @@ function show_inprocess_data($user_data)
         if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"accounts") || checkPrivilage($_SESSION["user_type"],"case_admin"))
         {
             echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='delete_inproces.php'><input type='hidden' name='delete' value='".$rows['id']."'><input type='submit' name='delete_btn' value='Delete' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+            echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_back_to_leads.php'><input type='hidden' name='send_back' value='".$rows['id']."'><input type='submit' name='send_back_btn' value='Send Back to Leads' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
+        }
+        if(checkPrivilage($_SESSION["user_type"],"admin") || checkPrivilage($_SESSION["user_type"],"counsellor"))
+        {
             echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_back_to_leads.php'><input type='hidden' name='send_back' value='".$rows['id']."'><input type='submit' name='send_back_btn' value='Send Back to Leads' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
         }
         echo "<td class='text-center text-secondary text-xs font-weight-bold'><form method='POST' action='send_to_completed.php'><input type='hidden' name='completed' value='".$rows['id']."'><input type='submit' name='completed_btn' value='Send to Completed' style='background-color:transparent;border:none;' class='text-secondary font-weight-bold text-xs'></form></td>";
