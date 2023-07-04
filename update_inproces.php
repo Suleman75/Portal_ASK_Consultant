@@ -215,7 +215,10 @@ foreach($user_data as $rows)
 
 ?>
 </form>
+<?php
+  header("Cache-Control: no cache");
 
+?>
 
 <?php
 require("footer.php");
