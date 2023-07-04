@@ -31,6 +31,17 @@
     {
       background-color: #EEEEEE;
     }
+
+    .btn:not([class*="btn-outline-"]) {
+    border: 0;
+    margin-left: 20px;
+    
+}
+
+
+
+
+
     </style>
     <script>
       $(document).ready(function() {
